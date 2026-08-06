@@ -337,18 +337,76 @@
     cineStats.forEach(el => el.classList.add('is-active'));
   }
 
-  /* ---------- Gallery carousel (prev/next scroll) ---------- */
+  /* ---------- Gallery carousel (auto-scroll + center highlight) ---------- */
   const galleryGrid = document.getElementById('galleryGrid');
   const galleryPrev = document.getElementById('galleryPrev');
   const galleryNext = document.getElementById('galleryNext');
-  if (galleryGrid && galleryPrev && galleryNext) {
+
+  if (galleryGrid) {
+    const galleryCards = Array.from(galleryGrid.querySelectorAll('.gallery-item'));
+    let centerRAFPending = false;
+
+    const updateCenteredCard = () => {
+      centerRAFPending = false;
+      const gridRect = galleryGrid.getBoundingClientRect();
+      const centerX = gridRect.left + gridRect.width / 2;
+      let closest = null;
+      let closestDist = Infinity;
+      galleryCards.forEach((card) => {
+        const r = card.getBoundingClientRect();
+        const dist = Math.abs((r.left + r.width / 2) - centerX);
+        if (dist < closestDist) { closestDist = dist; closest = card; }
+      });
+      galleryCards.forEach((card) => card.classList.toggle('is-centered', card === closest));
+    };
+
+    const scheduleCenterUpdate = () => {
+      if (!centerRAFPending) {
+        centerRAFPending = true;
+        requestAnimationFrame(updateCenteredCard);
+      }
+    };
+
+    galleryGrid.addEventListener('scroll', scheduleCenterUpdate, { passive: true });
+    updateCenteredCard();
+
     const scrollByCard = (dir) => {
       const card = galleryGrid.querySelector('.gallery-item');
       const step = card ? card.getBoundingClientRect().width + 20 : 280;
       galleryGrid.scrollBy({ left: dir * step, behavior: reduceMotion ? 'auto' : 'smooth' });
     };
-    galleryPrev.addEventListener('click', () => scrollByCard(-1));
-    galleryNext.addEventListener('click', () => scrollByCard(1));
+    if (galleryPrev) galleryPrev.addEventListener('click', () => { pauseAutoScroll(4000); scrollByCard(-1); });
+    if (galleryNext) galleryNext.addEventListener('click', () => { pauseAutoScroll(4000); scrollByCard(1); });
+
+    /* Continuous auto-scroll, paused on hover/touch/focus/manual nav */
+    let autoPaused = false;
+    let autoPauseTimer = null;
+    function pauseAutoScroll(resumeAfterMs) {
+      autoPaused = true;
+      if (autoPauseTimer) clearTimeout(autoPauseTimer);
+      if (resumeAfterMs) autoPauseTimer = setTimeout(() => { autoPaused = false; }, resumeAfterMs);
+    }
+
+    if (!reduceMotion && galleryCards.length > 1) {
+      const AUTO_SCROLL_SPEED = 0.55; // px per frame, ~33px/s at 60fps
+      const step = () => {
+        if (!autoPaused) {
+          const maxScroll = galleryGrid.scrollWidth - galleryGrid.clientWidth;
+          if (galleryGrid.scrollLeft >= maxScroll - 1) {
+            galleryGrid.scrollLeft = 0;
+          } else {
+            galleryGrid.scrollLeft += AUTO_SCROLL_SPEED;
+          }
+        }
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+
+      ['mouseenter', 'touchstart', 'focusin'].forEach((evt) =>
+        galleryGrid.addEventListener(evt, () => pauseAutoScroll(0), { passive: true }));
+      ['mouseleave', 'touchend', 'focusout'].forEach((evt) =>
+        galleryGrid.addEventListener(evt, () => { autoPaused = false; }, { passive: true }));
+    }
   }
 
   /* ---------- Lightbox gallery ---------- */
