@@ -153,20 +153,37 @@
     counters.forEach(el => counterObserver.observe(el));
   }
 
-  /* ---------- Timeline filter ---------- */
-  const filterButtons = document.querySelectorAll('.filter-btn');
+  /* ---------- Timeline filter (type + year, combined) ---------- */
+  const typeFilterButtons = document.querySelectorAll('[data-filter]');
+  const yearFilterButtons = document.querySelectorAll('[data-year-filter]');
   const timelineItems = document.querySelectorAll('.timeline-item');
 
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const filter = btn.getAttribute('data-filter');
+  let activeType = 'all';
+  let activeYear = 'all';
 
-      timelineItems.forEach(item => {
-        const match = filter === 'all' || item.getAttribute('data-type') === filter;
-        item.style.display = match ? '' : 'none';
-      });
+  const applyTimelineFilters = () => {
+    timelineItems.forEach(item => {
+      const typeMatch = activeType === 'all' || item.getAttribute('data-type') === activeType;
+      const yearMatch = activeYear === 'all' || item.getAttribute('data-year') === activeYear;
+      item.style.display = (typeMatch && yearMatch) ? '' : 'none';
+    });
+  };
+
+  typeFilterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      typeFilterButtons.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      activeType = btn.getAttribute('data-filter');
+      applyTimelineFilters();
+    });
+  });
+
+  yearFilterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      yearFilterButtons.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      activeYear = btn.getAttribute('data-year-filter');
+      applyTimelineFilters();
     });
   });
 
@@ -318,6 +335,20 @@
     updatePin();
   } else {
     cineStats.forEach(el => el.classList.add('is-active'));
+  }
+
+  /* ---------- Gallery carousel (prev/next scroll) ---------- */
+  const galleryGrid = document.getElementById('galleryGrid');
+  const galleryPrev = document.getElementById('galleryPrev');
+  const galleryNext = document.getElementById('galleryNext');
+  if (galleryGrid && galleryPrev && galleryNext) {
+    const scrollByCard = (dir) => {
+      const card = galleryGrid.querySelector('.gallery-item');
+      const step = card ? card.getBoundingClientRect().width + 20 : 280;
+      galleryGrid.scrollBy({ left: dir * step, behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+    galleryPrev.addEventListener('click', () => scrollByCard(-1));
+    galleryNext.addEventListener('click', () => scrollByCard(1));
   }
 
   /* ---------- Lightbox gallery ---------- */

@@ -479,15 +479,20 @@
         <p class="i18n-en" lang="en">A snapshot of what we're building — from recurring technical projects to events with the community.</p>
       </div>
 
-      <div class="filter-row reveal" role="group" aria-label="Filtrar atividades">
+      <div class="filter-row reveal" role="group" aria-label="Filtrar atividades por tipo">
         <button class="filter-btn is-active" data-filter="all"><span class="i18n-pt">Todos</span><span class="i18n-en" lang="en">All</span></button>
         <button class="filter-btn" data-filter="projeto"><span class="i18n-pt">Projetos</span><span class="i18n-en" lang="en">Projects</span></button>
         <button class="filter-btn" data-filter="evento"><span class="i18n-pt">Eventos</span><span class="i18n-en" lang="en">Events</span></button>
       </div>
+      <div class="filter-row filter-row-year reveal" role="group" aria-label="Filtrar atividades por ano">
+        <button class="filter-btn is-active" data-year-filter="all"><span class="i18n-pt">Todos os anos</span><span class="i18n-en" lang="en">All years</span></button>
+        <button class="filter-btn" data-year-filter="2026">2026</button>
+        <button class="filter-btn" data-year-filter="2025">2025</button>
+      </div>
 
       <div class="timeline" id="timeline">
 
-        <div class="timeline-item reveal" data-type="projeto">
+        <div class="timeline-item reveal" data-type="projeto" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -502,7 +507,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="projeto">
+        <div class="timeline-item reveal" data-type="projeto" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -517,7 +522,7 @@
           </div>
         </div>
 
-<div class="timeline-item reveal" data-type="projeto">
+<div class="timeline-item reveal" data-type="projeto" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -532,7 +537,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="projeto">
+        <div class="timeline-item reveal" data-type="projeto" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -547,7 +552,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="projeto">
+        <div class="timeline-item reveal" data-type="projeto" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -564,7 +569,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="evento">
+        <div class="timeline-item reveal" data-type="evento" data-year="2025">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -580,7 +585,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="evento">
+        <div class="timeline-item reveal" data-type="evento" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -597,7 +602,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="evento">
+        <div class="timeline-item reveal" data-type="evento" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -614,7 +619,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="evento">
+        <div class="timeline-item reveal" data-type="evento" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -631,7 +636,7 @@
           </div>
         </div>
 
-        <div class="timeline-item reveal" data-type="evento">
+        <div class="timeline-item reveal" data-type="evento" data-year="2026">
           <span class="timeline-dot"></span>
           <div class="timeline-card">
             <div class="timeline-meta">
@@ -700,29 +705,52 @@
         <p class="i18n-en" lang="en">Real records of our activities — click any photo to enlarge it.</p>
       </div>
 
-      <div class="gallery-grid">
-        <div class="gallery-item reveal reveal-scale tilt" style="--delay:0s" data-caption="Capítulo representado com a bandeira PELS em evento acadêmico" tabindex="0" role="button" aria-label="Ampliar foto: Representando o capítulo">
-          <img src="assets/img/gallery/momento-01.jpg" alt="Membros do capítulo PELS UFMS segurando a bandeira do capítulo em um evento" loading="lazy">
-          <div class="gallery-overlay"><span class="i18n-pt">Representando o capítulo</span><span class="i18n-en" lang="en">Representing the chapter</span></div>
-          <span class="gallery-expand" aria-hidden="true">⤢</span>
+      <div class="gallery-carousel">
+        <button class="gallery-nav gallery-nav-prev" id="galleryPrev" type="button" aria-label="Fotos anteriores">‹</button>
+        <div class="gallery-grid" id="galleryGrid">
+          <div class="gallery-item reveal reveal-scale" style="--delay:0s" data-caption="Capítulo representado com a bandeira PELS em evento acadêmico" tabindex="0" role="button" aria-label="Ampliar foto: Representando o capítulo">
+            <img src="assets/img/gallery/momento-01.jpg" alt="Membros do capítulo PELS UFMS segurando a bandeira do capítulo em um evento" loading="lazy">
+            <div class="gallery-overlay"><span class="i18n-pt">Representando o capítulo</span><span class="i18n-en" lang="en">Representing the chapter</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
+          <div class="gallery-item reveal reveal-scale" style="--delay:.08s" data-caption="Webinar com Mariana Espinola Ribeiro, ex-membro e doutoranda na UTK" tabindex="0" role="button" aria-label="Ampliar foto: Webinar com egressa (UTK)">
+            <img src="assets/img/gallery/momento-02.jpg" alt="Webinar por videochamada com ex-membro do capítulo" loading="lazy">
+            <div class="gallery-overlay"><span class="i18n-pt">Webinar com egressa (UTK)</span><span class="i18n-en" lang="en">Webinar with alumna (UTK)</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
+          <div class="gallery-item reveal reveal-scale" style="--delay:.16s" data-caption="Ação social SolIEEEdário com crianças da Comunidade Mandela" tabindex="0" role="button" aria-label="Ampliar foto: SolIEEEdário">
+            <img src="assets/img/gallery/momento-03.jpg" alt="Voluntários do capítulo em ação social SolIEEEdário com crianças" loading="lazy">
+            <div class="gallery-overlay"><span>SolIEEEdário</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
+          <div class="gallery-item reveal reveal-scale" style="--delay:.24s" data-caption="Apresentação de membro do capítulo em evento acadêmico da UFMS" tabindex="0" role="button" aria-label="Ampliar foto: No palco, representando a PELS">
+            <img src="assets/img/gallery/momento-04.jpg" alt="Membro do capítulo apresentando em palco de evento acadêmico" loading="lazy">
+            <div class="gallery-overlay"><span class="i18n-pt">No palco, representando a PELS</span><span class="i18n-en" lang="en">On stage, representing PELS</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
+          <div class="gallery-item reveal reveal-scale" style="--delay:.32s" data-caption="Membros do capítulo no COBEP 2025" tabindex="0" role="button" aria-label="Ampliar foto: COBEP 2025 — foto 1">
+            <img src="assets/img/projetos/cobep/foto-1.jpg" alt="Membros do capítulo PELS UFMS no COBEP 2025" loading="lazy">
+            <div class="gallery-overlay"><span>COBEP 2025</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
+          <div class="gallery-item reveal reveal-scale" style="--delay:.36s" data-caption="Membros do capítulo no COBEP 2025" tabindex="0" role="button" aria-label="Ampliar foto: COBEP 2025 — foto 2">
+            <img src="assets/img/projetos/cobep/foto-2.jpg" alt="Membros do capítulo PELS UFMS no COBEP 2025" loading="lazy">
+            <div class="gallery-overlay"><span>COBEP 2025</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
+          <div class="gallery-item reveal reveal-scale" style="--delay:.4s" data-caption="Membros do capítulo no COBEP 2025" tabindex="0" role="button" aria-label="Ampliar foto: COBEP 2025 — foto 3">
+            <img src="assets/img/projetos/cobep/foto-3.jpg" alt="Membros do capítulo PELS UFMS no COBEP 2025" loading="lazy">
+            <div class="gallery-overlay"><span>COBEP 2025</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
+          <div class="gallery-item reveal reveal-scale" style="--delay:.44s" data-caption="Membros do capítulo no COBEP 2025" tabindex="0" role="button" aria-label="Ampliar foto: COBEP 2025 — foto 4">
+            <img src="assets/img/projetos/cobep/foto-4.jpg" alt="Membros do capítulo PELS UFMS no COBEP 2025" loading="lazy">
+            <div class="gallery-overlay"><span>COBEP 2025</span></div>
+            <span class="gallery-expand" aria-hidden="true">⤢</span>
+          </div>
         </div>
-        <div class="gallery-item reveal reveal-scale tilt" style="--delay:.08s" data-caption="Webinar com Mariana Espinola Ribeiro, ex-membro e doutoranda na UTK" tabindex="0" role="button" aria-label="Ampliar foto: Webinar com egressa (UTK)">
-          <img src="assets/img/gallery/momento-02.jpg" alt="Webinar por videochamada com ex-membro do capítulo" loading="lazy">
-          <div class="gallery-overlay"><span class="i18n-pt">Webinar com egressa (UTK)</span><span class="i18n-en" lang="en">Webinar with alumna (UTK)</span></div>
-          <span class="gallery-expand" aria-hidden="true">⤢</span>
-        </div>
-        <div class="gallery-item reveal reveal-scale tilt" style="--delay:.16s" data-caption="Ação social SolIEEEdário com crianças da Comunidade Mandela" tabindex="0" role="button" aria-label="Ampliar foto: SolIEEEdário">
-          <img src="assets/img/gallery/momento-03.jpg" alt="Voluntários do capítulo em ação social SolIEEEdário com crianças" loading="lazy">
-          <div class="gallery-overlay"><span>SolIEEEdário</span></div>
-          <span class="gallery-expand" aria-hidden="true">⤢</span>
-        </div>
-        <div class="gallery-item reveal reveal-scale tilt" style="--delay:.24s" data-caption="Apresentação de membro do capítulo em evento acadêmico da UFMS" tabindex="0" role="button" aria-label="Ampliar foto: No palco, representando a PELS">
-          <img src="assets/img/gallery/momento-04.jpg" alt="Membro do capítulo apresentando em palco de evento acadêmico" loading="lazy">
-          <div class="gallery-overlay"><span class="i18n-pt">No palco, representando a PELS</span><span class="i18n-en" lang="en">On stage, representing PELS</span></div>
-          <span class="gallery-expand" aria-hidden="true">⤢</span>
-        </div>
+        <button class="gallery-nav gallery-nav-next" id="galleryNext" type="button" aria-label="Próximas fotos">›</button>
       </div>
-      <!-- TODO: substituir/completar com fotos de confraternizações e do PELS Day fornecidas pela diretoria -->
 
       <div class="insta-embeds reveal" style="margin-top:56px;">
         <div class="section-head center" style="margin-bottom:32px;">
