@@ -1377,14 +1377,17 @@ section { padding: 108px 0; perspective: 1200px; }
   .store-copy > p { margin-inline: auto; }
   .store-points { text-align: left; max-width: 520px; margin-inline: auto; }
 }
-@media (max-width: 1180px) {
+.brand, .lang-toggle, .theme-toggle, .site-header .btn-outline, .nav-toggle {
+  flex-shrink: 0;
+}
+@media (max-width: 1360px) {
   .nav-desktop { gap: 14px; }
   .nav-desktop a { font-size: 0.85rem; }
 }
-@media (max-width: 1080px) {
+@media (max-width: 1260px) {
   .brand-text span:not(strong) { display: none; }
 }
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
   .nav-desktop, .site-header .btn-outline { display: none; }
   .nav-toggle { display: block; }
 }
