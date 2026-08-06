@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palestra — BEM Inteligência de Dados — IEEE PELS UFMS Chapter</title>
+<meta name="description" content="Palestra do Capítulo Estudantil IEEE PELS UFMS com a BEM Inteligência de Dados, empresa incubada na PIME que desenvolve soluções de IoT para eficiência energética.">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script>
+  (function () {
+    var stored = localStorage.getItem('pels-theme');
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+
+    var storedLang = localStorage.getItem('pels-lang');
+    if (storedLang === 'en') document.documentElement.setAttribute('lang', 'en');
+  })();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="../index.html" class="brand">
+      <img src="../assets/img/logo.png" alt="Logo IEEE PELS UFMS Chapter">
+      <span class="brand-text">
+        <strong>IEEE PELS UFMS</strong>
+        <span>Student Chapter</span>
+      </span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <a href="../index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+      <a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+      <a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+      <a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+      <a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+      <a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+      <a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+      <a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+    </nav>
+
+    <div class="lang-toggle" role="group" aria-label="Idioma do site / Site language">
+      <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+      <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+      <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+      <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+      <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    </button>
+
+    <a href="../index.html#membros" class="btn btn-outline"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="navMobile" aria-label="Navegação mobile">
+  <a href="../index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+  <a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+  <a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+  <a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+  <a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+  <a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+  <a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+  <a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+  <a href="../index.html#membros" class="btn btn-primary"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+  <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Idioma do site / Site language">
+    <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+    <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+    <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+  </div>
+  <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+    <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+    <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    <span class="theme-toggle-label" id="themeToggleLabel">Tema escuro</span>
+  </button>
+</nav>
+
+<main id="conteudo">
+
+  <section class="page-hero">
+    <div class="container">
+      <a href="../index.html#projetos" class="page-back"><span class="i18n-pt">← Voltar para Projetos &amp; Eventos</span><span class="i18n-en" lang="en">← Back to Projects &amp; Events</span></a>
+      <span class="kicker i18n-pt">Evento · 2 de abril de 2026</span>
+      <span class="kicker i18n-en" lang="en">Event · April 2, 2026</span>
+      <h1>Palestra — BEM Inteligência de Dados</h1>
+      <p class="page-lead i18n-pt">Palestra com a empresa BEM Inteligência de Dados, aproximando os membros do capítulo do mercado de dados e tecnologia.</p>
+      <p class="page-lead i18n-en" lang="en">A talk with the company BEM Inteligência de Dados, bringing chapter members closer to the data and technology market.</p>
+      <span class="opp-tag i18n-pt">Desenvolvimento Profissional</span>
+      <span class="opp-tag i18n-en" lang="en">Professional Development</span>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Quem é a BEM Inteligência de Dados</h2>
+      <h2 class="i18n-en" lang="en">Who BEM Inteligência de Dados is</h2>
+      <p class="i18n-pt">
+        A BEM – Inteligência de Dados é uma empresa de Campo Grande (MS), incubada na <strong>PIME (Pantanal
+        Incubadora Mista de Empresas)</strong>. A empresa desenvolve soluções de IoT (Internet das Coisas) para
+        monitoramento e otimização de energia, unindo ferramentas próprias de datamining a sensores em campo
+        para trazer eficiência operacional e energética por meio de um sistema de gestão de ativos.
+      </p>
+      <p class="i18n-en" lang="en">
+        BEM – Inteligência de Dados is a company from Campo Grande (MS), incubated at <strong>PIME (Pantanal
+        Mixed Business Incubator)</strong>. The company develops IoT (Internet of Things) solutions for energy
+        monitoring and optimization, combining proprietary data-mining tools with field sensors to bring
+        operational and energy efficiency through an asset management system.
+      </p>
+      <p class="i18n-pt">
+        A BEM foi a única empresa de Mato Grosso do Sul selecionada para o <strong>Catalisa ICT</strong>, uma
+        iniciativa do Sebrae voltada a aproximar academia e mercado — o que torna a experiência da empresa
+        especialmente relevante para estudantes de engenharia que querem entender como a pesquisa em eletrônica
+        de potência e instrumentação vira produto real.
+      </p>
+      <p class="i18n-en" lang="en">
+        BEM was the only company from Mato Grosso do Sul selected for <strong>Catalisa ICT</strong>, a Sebrae
+        initiative focused on bringing academia and the market closer together — which makes the company's
+        experience especially relevant for engineering students who want to understand how power electronics
+        and instrumentation research becomes a real product.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Sobre a palestra</h2>
+      <h2 class="i18n-en" lang="en">About the talk</h2>
+      <p class="i18n-pt">
+        No encontro, a BEM apresentou aos membros do capítulo como uma startup de base tecnológica nasce dentro
+        de uma incubadora, os desafios de levar um projeto de instrumentação e IoT do laboratório até o mercado,
+        e como a formação em engenharia elétrica se conecta com oportunidades no setor de dados e eficiência
+        energética.
+      </p>
+      <p class="i18n-en" lang="en">
+        In the session, BEM showed chapter members how a technology-based startup is born inside an incubator,
+        the challenges of taking an instrumentation and IoT project from the lab to the market, and how an
+        electrical engineering background connects to opportunities in the data and energy efficiency sector.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Registros do evento</h2>
+      <h2 class="i18n-en" lang="en">Event records</h2>
+      <p class="i18n-pt">Fotos da palestra com a BEM Inteligência de Dados.</p>
+      <p class="i18n-en" lang="en">Photos from the talk with BEM Inteligência de Dados.</p>
+      <!-- Fotos: substituir os placeholders abaixo por <img src="../assets/img/projetos/palestra-bem/foto-N.jpg" alt="..."> -->
+      <div class="photo-placeholder-grid">
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/palestra-bem/foto-1.jpg</span></div>
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/palestra-bem/foto-2.jpg</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="../assets/img/logo.png" alt="Logo IEEE PELS UFMS">
+        <strong>IEEE PELS UFMS Chapter</strong>
+      </div>
+      <p class="i18n-pt">Capítulo Estudantil IEEE Power Electronics Society da Universidade Federal de Mato Grosso do
+        Sul. Vinculado ao Ramo Estudantil IEEE UFMS.</p>
+      <p class="i18n-en" lang="en">IEEE Power Electronics Society Student Chapter at the Federal University of
+        Mato Grosso do Sul. Affiliated with the IEEE UFMS Student Branch.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://youtube.com/@pelsufms8757" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21 12c0 3.5-.4 5.7-1.1 6.7-.7.9-2.2 1.3-4.8 1.3H8.9c-2.6 0-4.1-.4-4.8-1.3C3.4 17.7 3 15.5 3 12s.4-5.7 1.1-6.7C4.8 4.4 6.3 4 8.9 4h6.2c2.6 0 4.1.4 4.8 1.3.7 1 1.1 3.2 1.1 6.7Z"/><path d="m10 8.8 5.3 3.2-5.3 3.2Z" class="fill"/></svg></a>
+        <a href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20 11.8a8 8 0 0 1-11.8 7L4 20l1.3-4.1A8 8 0 1 1 20 11.8Z"/><path d="M9.1 8.3c.2-.4.3-.4.6-.4h.5c.1 0 .3 0 .4.3l.8 1.9c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.4.9 1.4 2 1.9.3.2.5.2.7 0l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.3.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.2.6-1.5.6-.4 0-1.5-.1-3.1-.8a10.7 10.7 0 0 1-3.5-3.1c-.9-1.2-1.2-2.3-1.2-3.1 0-.8.4-1.3.7-1.7Z" class="fill"/></svg></a>
+        <a href="mailto:pelsufms@gmail.com" aria-label="E-mail"><svg viewBox="0 0 24 24"><path d="M3.5 5.5h17v13h-17zM4 6l8 6 8-6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Navegação</span><span class="i18n-en" lang="en">Navigation</span></h4>
+      <ul>
+        <li><a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a></li>
+        <li><a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a></li>
+        <li><a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a></li>
+        <li><a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a></li>
+        <li><a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a></li>
+        <li><a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Capítulo</span><span class="i18n-en" lang="en">Chapter</span></h4>
+      <ul>
+        <li><a href="../index.html#membros"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a></li>
+        <li><a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a></li>
+        <li><a href="https://www.ieee-pels.org" target="_blank" rel="noopener"><span class="i18n-pt">IEEE PELS Internacional</span><span class="i18n-en" lang="en">IEEE PELS International</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>IEEE</h4>
+      <ul>
+        <li><a href="https://www.ieee.org" target="_blank" rel="noopener">IEEE.org</a></li>
+        <li><a href="https://r9.ieee.org/sac" target="_blank" rel="noopener">IEEE Region 9 SAC</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span><span class="i18n-pt">© <span id="year"></span> IEEE PELS UFMS Chapter. Site estudantil, sem fins lucrativos.</span><span class="i18n-en" lang="en">© <span id="yearEn"></span> IEEE PELS UFMS Chapter. Student-run, non-profit website.</span></span>
+    <span class="footer-updated"><span class="i18n-pt">Última atualização em <span id="lastUpdated">—</span></span><span class="i18n-en" lang="en">Last updated on <span id="lastUpdatedEn">—</span></span></span>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="../js/i18n.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper Club — IEEE PELS UFMS Chapter</title>
+<meta name="description" content="Paper Club: encontros semanais do Capítulo Estudantil IEEE PELS UFMS para ler, discutir e aprender com artigos científicos em inglês, para todos os níveis.">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script>
+  (function () {
+    var stored = localStorage.getItem('pels-theme');
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+
+    var storedLang = localStorage.getItem('pels-lang');
+    if (storedLang === 'en') document.documentElement.setAttribute('lang', 'en');
+  })();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="../index.html" class="brand">
+      <img src="../assets/img/logo.png" alt="Logo IEEE PELS UFMS Chapter">
+      <span class="brand-text">
+        <strong>IEEE PELS UFMS</strong>
+        <span>Student Chapter</span>
+      </span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <a href="../index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+      <a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+      <a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+      <a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+      <a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+      <a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+      <a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+      <a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+    </nav>
+
+    <div class="lang-toggle" role="group" aria-label="Idioma do site / Site language">
+      <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+      <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+      <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+      <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+      <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    </button>
+
+    <a href="../index.html#membros" class="btn btn-outline"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="navMobile" aria-label="Navegação mobile">
+  <a href="../index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+  <a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+  <a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+  <a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+  <a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+  <a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+  <a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+  <a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+  <a href="../index.html#membros" class="btn btn-primary"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+  <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Idioma do site / Site language">
+    <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+    <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+    <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+  </div>
+  <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+    <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+    <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    <span class="theme-toggle-label" id="themeToggleLabel">Tema escuro</span>
+  </button>
+</nav>
+
+<main id="conteudo">
+
+  <section class="page-hero">
+    <div class="container">
+      <a href="../index.html#projetos" class="page-back"><span class="i18n-pt">← Voltar para Projetos &amp; Eventos</span><span class="i18n-en" lang="en">← Back to Projects &amp; Events</span></a>
+      <span class="kicker i18n-pt">Projeto · Contínuo</span>
+      <span class="kicker i18n-en" lang="en">Project · Ongoing</span>
+      <h1 lang="en">Paper Club</h1>
+      <p class="page-lead i18n-pt" lang="pt-BR">Leia · Entenda · Discuta · Aprenda.</p>
+      <p class="page-lead i18n-en" lang="en">Read · Understand · Discuss · Learn.</p>
+      <p class="page-lead i18n-pt">Encontros para ler, discutir e analisar criticamente artigos científicos de eletrônica de potência — de forma colaborativa e descomplicada, para todos os níveis de inglês.</p>
+      <p class="page-lead i18n-en" lang="en">Meetings to read, discuss and critically analyze power electronics scientific papers — collaboratively and without the pressure, for every level of English.</p>
+      <span class="opp-tag i18n-pt">Desenvolvimento Profissional</span>
+      <span class="opp-tag i18n-en" lang="en">Professional Development</span>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Como funciona</h2>
+      <h2 class="i18n-en" lang="en">How it works</h2>
+      <p class="i18n-pt">
+        O Paper Club é focado em aprender a ler artigos científicos, entender a estrutura de um texto acadêmico
+        e desenvolver inglês técnico — sem exigir fluência prévia. A dinâmica do encontro é simples:
+      </p>
+      <p class="i18n-en" lang="en">
+        Paper Club is focused on learning to read scientific papers, understanding the structure of an academic
+        text, and developing technical English — with no prior fluency required. The meeting works like this:
+      </p>
+      <ol class="i18n-pt">
+        <li>Escolhemos um artigo científico.</li>
+        <li>Cada um lê um pequeno trecho em voz alta.</li>
+        <li>Fazemos perguntas em inglês, do nível fácil ao intermediário.</li>
+        <li>Você responde em inglês ou português — o que for mais confortável.</li>
+        <li>Discutimos, aprendemos juntos e evoluímos.</li>
+      </ol>
+      <ol class="i18n-en" lang="en">
+        <li>We pick a scientific paper.</li>
+        <li>Everyone reads a short excerpt out loud.</li>
+        <li>We ask questions in English, from easy to intermediate level.</li>
+        <li>You answer in English or Portuguese — whichever is more comfortable.</li>
+        <li>We discuss, learn together and grow.</li>
+      </ol>
+      <p class="i18n-pt">
+        O objetivo não é testar ninguém: é desenvolver leitura de artigos, inglês técnico, interpretação
+        científica e confiança para falar. Do nível iniciante ao avançado, todos são bem-vindos — aqui o
+        importante é aprender juntos.
+      </p>
+      <p class="i18n-en" lang="en">
+        The goal isn't to test anyone: it's to build paper-reading skills, technical English, scientific
+        interpretation and confidence to speak up. From beginner to advanced, everyone is welcome — here, what
+        matters is learning together.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Quando e onde</h2>
+      <h2 class="i18n-en" lang="en">When and where</h2>
+      <p class="i18n-pt">
+        Os encontros costumam acontecer às <strong>quartas-feiras, por volta das 18h30</strong>, no
+        <strong>Batlab</strong>, intercalando semana sim, semana não com o Power English. Confira sempre o grupo
+        do WhatsApp para confirmar data, horário e artigo da semana.
+      </p>
+      <p class="i18n-en" lang="en">
+        Meetings usually happen on <strong>Wednesdays, around 6:30 PM</strong>, at <strong>Batlab</strong>,
+        alternating weekly with Power English. Always check the WhatsApp group to confirm the date, time and
+        the week's paper.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Como participar</h2>
+      <h2 class="i18n-en" lang="en">How to join</h2>
+      <div class="page-cta">
+        <p class="i18n-pt">Entre no grupo do WhatsApp do Power English e Paper Club para receber os avisos de cada encontro.</p>
+        <p class="i18n-en" lang="en">Join the Power English and Paper Club WhatsApp group to get notified about each meeting.</p>
+        <a href="https://chat.whatsapp.com/L0XDdYdBZkR9xxgY0qkixv" target="_blank" rel="noopener" class="btn btn-primary"><span class="i18n-pt">Entrar no grupo do Paper Club</span><span class="i18n-en" lang="en">Join the Paper Club group</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Edições anteriores</h2>
+      <h2 class="i18n-en" lang="en">Past editions</h2>
+      <p class="i18n-pt">Registros de encontros passados do Paper Club.</p>
+      <p class="i18n-en" lang="en">Records of past Paper Club meetings.</p>
+      <!-- Fotos: substituir os placeholders abaixo por <img src="../assets/img/projetos/paper-club/foto-N.jpg" alt="..."> -->
+      <div class="photo-placeholder-grid">
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/paper-club/foto-1.jpg</span></div>
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/paper-club/foto-2.jpg</span></div>
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/paper-club/foto-3.jpg</span></div>
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/paper-club/foto-4.jpg</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="../assets/img/logo.png" alt="Logo IEEE PELS UFMS">
+        <strong>IEEE PELS UFMS Chapter</strong>
+      </div>
+      <p class="i18n-pt">Capítulo Estudantil IEEE Power Electronics Society da Universidade Federal de Mato Grosso do
+        Sul. Vinculado ao Ramo Estudantil IEEE UFMS.</p>
+      <p class="i18n-en" lang="en">IEEE Power Electronics Society Student Chapter at the Federal University of
+        Mato Grosso do Sul. Affiliated with the IEEE UFMS Student Branch.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://youtube.com/@pelsufms8757" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21 12c0 3.5-.4 5.7-1.1 6.7-.7.9-2.2 1.3-4.8 1.3H8.9c-2.6 0-4.1-.4-4.8-1.3C3.4 17.7 3 15.5 3 12s.4-5.7 1.1-6.7C4.8 4.4 6.3 4 8.9 4h6.2c2.6 0 4.1.4 4.8 1.3.7 1 1.1 3.2 1.1 6.7Z"/><path d="m10 8.8 5.3 3.2-5.3 3.2Z" class="fill"/></svg></a>
+        <a href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20 11.8a8 8 0 0 1-11.8 7L4 20l1.3-4.1A8 8 0 1 1 20 11.8Z"/><path d="M9.1 8.3c.2-.4.3-.4.6-.4h.5c.1 0 .3 0 .4.3l.8 1.9c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.4.9 1.4 2 1.9.3.2.5.2.7 0l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.3.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.2.6-1.5.6-.4 0-1.5-.1-3.1-.8a10.7 10.7 0 0 1-3.5-3.1c-.9-1.2-1.2-2.3-1.2-3.1 0-.8.4-1.3.7-1.7Z" class="fill"/></svg></a>
+        <a href="mailto:pelsufms@gmail.com" aria-label="E-mail"><svg viewBox="0 0 24 24"><path d="M3.5 5.5h17v13h-17zM4 6l8 6 8-6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Navegação</span><span class="i18n-en" lang="en">Navigation</span></h4>
+      <ul>
+        <li><a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a></li>
+        <li><a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a></li>
+        <li><a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a></li>
+        <li><a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a></li>
+        <li><a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a></li>
+        <li><a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Capítulo</span><span class="i18n-en" lang="en">Chapter</span></h4>
+      <ul>
+        <li><a href="../index.html#membros"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a></li>
+        <li><a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a></li>
+        <li><a href="https://www.ieee-pels.org" target="_blank" rel="noopener"><span class="i18n-pt">IEEE PELS Internacional</span><span class="i18n-en" lang="en">IEEE PELS International</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>IEEE</h4>
+      <ul>
+        <li><a href="https://www.ieee.org" target="_blank" rel="noopener">IEEE.org</a></li>
+        <li><a href="https://r9.ieee.org/sac" target="_blank" rel="noopener">IEEE Region 9 SAC</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span><span class="i18n-pt">© <span id="year"></span> IEEE PELS UFMS Chapter. Site estudantil, sem fins lucrativos.</span><span class="i18n-en" lang="en">© <span id="yearEn"></span> IEEE PELS UFMS Chapter. Student-run, non-profit website.</span></span>
+    <span class="footer-updated"><span class="i18n-pt">Última atualização em <span id="lastUpdated">—</span></span><span class="i18n-en" lang="en">Last updated on <span id="lastUpdatedEn">—</span></span></span>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="../js/i18n.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1022 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEEE PELS UFMS Chapter</title>
+<meta name="description" content="Capítulo Estudantil IEEE Power Electronics Society (PELS) da UFMS — eventos, projetos, oportunidades e como participar da eletrônica de potência na prática.">
+<meta property="og:title" content="IEEE PELS UFMS Chapter">
+<meta property="og:description" content="Capítulo Estudantil IEEE Power Electronics Society (PELS) da UFMS — eventos, projetos e oportunidades para estudantes de Engenharia Elétrica.">
+<meta property="og:image" content="assets/img/favicon-512.png">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  (function () {
+    var stored = localStorage.getItem('pels-theme');
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+
+    var storedLang = localStorage.getItem('pels-lang');
+    if (storedLang === 'en') document.documentElement.setAttribute('lang', 'en');
+  })();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="#inicio" class="brand">
+      <img src="assets/img/logo.png" alt="Logo IEEE PELS UFMS Chapter">
+      <span class="brand-text">
+        <strong>IEEE PELS UFMS</strong>
+        <span>Student Chapter</span>
+      </span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <a href="#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+      <a href="#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+      <a href="#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+      <a href="#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+      <a href="#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+      <a href="#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+      <a href="#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+      <a href="#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+    </nav>
+
+    <div class="lang-toggle" role="group" aria-label="Idioma do site / Site language">
+      <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+      <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+      <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+      <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+      <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    </button>
+
+    <a href="#membros" class="btn btn-outline"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="navMobile" aria-label="Navegação mobile">
+  <a href="#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+  <a href="#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+  <a href="#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+  <a href="#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+  <a href="#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+  <a href="#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+  <a href="#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+  <a href="#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+  <a href="#membros" class="btn btn-primary"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+  <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Idioma do site / Site language">
+    <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+    <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+    <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+  </div>
+  <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+    <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+    <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    <span class="theme-toggle-label" id="themeToggleLabel">Tema escuro</span>
+  </button>
+</nav>
+
+<main id="conteudo">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow i18n-pt">🦇 Capítulo Estudantil IEEE PELS</span>
+        <span class="eyebrow i18n-en" lang="en">🦇 IEEE PELS Student Chapter</span>
+        <h1 class="i18n-pt">Eletrônica de potência, <em>na prática</em>, na UFMS.</h1>
+        <h1 class="i18n-en" lang="en">Power electronics, <em>in practice</em>, at UFMS.</h1>
+        <p class="hero-lead i18n-pt">
+          Somos o Capítulo Estudantil IEEE Power Electronics Society (PELS) da Universidade Federal de
+          Mato Grosso do Sul. Desenvolvemos projetos, eventos e oportunidades para aproximar teoria,
+          indústria e comunidade na área de conversão e controle de energia elétrica.
+        </p>
+        <p class="hero-lead i18n-en" lang="en">
+          We are the IEEE Power Electronics Society (PELS) Student Chapter at the Federal University of
+          Mato Grosso do Sul. We build projects, events and opportunities that bring theory, industry and
+          community closer together in the field of power conversion and control.
+        </p>
+        <div class="hero-actions">
+          <a href="#projetos" class="btn btn-primary"><span class="i18n-pt">Ver projetos e eventos</span><span class="i18n-en" lang="en">See projects and events</span></a>
+          <a href="#membros" class="btn btn-outline"><span class="i18n-pt">Como participar</span><span class="i18n-en" lang="en">How to join</span></a>
+        </div>
+        <div class="hero-badge hero-badge-award reveal" style="--delay:.15s">
+          <span class="award-icon">🏆</span>
+          <span class="i18n-pt"><strong>Capítulo Estudantil Exemplar</strong><br>IEEE R9 SAC Awards 2025</span>
+          <span class="i18n-en" lang="en"><strong>Exemplary Student Chapter</strong><br>IEEE R9 SAC Awards 2025</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="glow-ring" aria-hidden="true"></div>
+        <div class="logo-3d-canvas" id="logo3dCanvas" role="img" aria-label="Mascote do capítulo: morcego estilizado com o símbolo PELS, extrudado em 3D — arraste para girar" tabindex="0">
+          <img class="logo-3d-fallback" src="assets/img/hero-mark-icon.png" alt="Mascote do capítulo: morcego estilizado com o símbolo PELS">
+        </div>
+        <span class="logo-3d-hint i18n-pt" aria-hidden="true">Arraste para girar</span>
+        <span class="logo-3d-hint i18n-en" lang="en" aria-hidden="true">Drag to rotate</span>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span class="i18n-pt">Role para explorar</span>
+      <span class="i18n-en" lang="en">Scroll to explore</span>
+      <span class="wheel"></span>
+    </div>
+  </section>
+
+  <!-- ================= STATS (cena fixa ao rolar) ================= -->
+  <div class="pin-wrap" id="pinWrap">
+    <div class="pin-inner">
+      <div class="starfield" aria-hidden="true"></div>
+      <span class="pin-kicker i18n-pt">Impacto em números</span>
+      <span class="pin-kicker i18n-en" lang="en">Impact in numbers</span>
+      <div class="stats-grid">
+        <div class="stat-cine">
+          <div class="stat-num" data-count="16" data-suffix="+">0</div>
+          <div class="stat-label i18n-pt">Membros ativos</div>
+          <div class="stat-label i18n-en" lang="en">Active members</div>
+        </div>
+        <div class="stat-cine">
+          <div class="stat-num" data-count="417" data-suffix="+">0</div>
+          <div class="stat-label i18n-pt">Seguidores no Instagram</div>
+          <div class="stat-label i18n-en" lang="en">Instagram followers</div>
+        </div>
+        <div class="stat-cine">
+          <div class="stat-num" data-count="5" data-suffix="+">0</div>
+          <div class="stat-label i18n-pt">Projetos em andamento</div>
+          <div class="stat-label i18n-en" lang="en">Ongoing projects</div>
+        </div>
+        <div class="stat-cine">
+          <div class="stat-num" data-count="1">0</div>
+          <div class="stat-label i18n-pt">Prêmio IEEE R9 em 2025</div>
+          <div class="stat-label i18n-en" lang="en">IEEE R9 Award in 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SOBRE ================= -->
+  <section id="sobre">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker i18n-pt">Quem somos</span>
+        <span class="kicker i18n-en" lang="en">Who we are</span>
+        <h2 class="i18n-pt">O Capítulo Estudantil IEEE PELS UFMS</h2>
+        <h2 class="i18n-en" lang="en">The IEEE PELS UFMS Student Chapter</h2>
+        <p class="i18n-pt">Parte integrante do IEEE na UFMS, com o objetivo de divulgar a Eletrônica de Potência e
+          desenvolver projetos de engenharia relacionados à área.</p>
+        <p class="i18n-en" lang="en">Part of IEEE at UFMS, with the goal of promoting Power Electronics and
+          developing engineering projects related to the field.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy reveal reveal-left">
+          <p class="i18n-pt">
+            O Capítulo Estudantil <strong>IEEE Power Electronics Society (PELS) UFMS</strong> mantém seus
+            membros atualizados com os avanços tecnológicos e oferece ferramentas que promovem
+            crescimento acadêmico e profissional dentro e fora da sala de aula.
+          </p>
+          <p class="i18n-en" lang="en">
+            The <strong>IEEE Power Electronics Society (PELS) UFMS</strong> Student Chapter keeps its
+            members up to date with technological advances and offers tools that promote academic and
+            professional growth inside and outside the classroom.
+          </p>
+          <p class="i18n-pt">
+            <strong>O que é Eletrônica de Potência?</strong> É a área da Engenharia Elétrica que estuda e
+            viabiliza conversores de potência para o controle de energia elétrica — um campo
+            interdisciplinar que abrange Sistemas de Potência, Eletrônica e Controle.
+          </p>
+          <p class="i18n-en" lang="en">
+            <strong>What is Power Electronics?</strong> It is the field of Electrical Engineering that studies
+            and enables power converters for electrical energy control — an interdisciplinary field spanning
+            Power Systems, Electronics and Control.
+          </p>
+          <p class="i18n-pt">
+            Somos vinculados ao <a href="https://www.ieee-pels.org" target="_blank" rel="noopener">IEEE PELS
+            internacional</a> e ao <strong>Ramo Estudantil IEEE UFMS</strong>, promovendo atividades técnicas,
+            humanitárias, sociais e de desenvolvimento profissional.
+          </p>
+          <p class="i18n-en" lang="en">
+            We are affiliated with <a href="https://www.ieee-pels.org" target="_blank" rel="noopener">IEEE PELS
+            International</a> and the <strong>IEEE UFMS Student Branch</strong>, promoting technical,
+            humanitarian, social and professional development activities.
+          </p>
+          <div class="pill-row i18n-pt">
+            <span class="pill">Inovação tecnológica</span>
+            <span class="pill">Educação de excelência</span>
+            <span class="pill">Inclusão e diversidade</span>
+            <span class="pill">Networking</span>
+            <span class="pill">Voluntariado</span>
+          </div>
+          <div class="pill-row i18n-en" lang="en">
+            <span class="pill">Technological innovation</span>
+            <span class="pill">Educational excellence</span>
+            <span class="pill">Inclusion &amp; diversity</span>
+            <span class="pill">Networking</span>
+            <span class="pill">Volunteering</span>
+          </div>
+        </div>
+
+        <div class="mvv reveal reveal-right">
+          <div class="mvv-card">
+            <h3 class="i18n-pt">Missão</h3>
+            <h3 class="i18n-en" lang="en">Mission</h3>
+            <p class="i18n-pt">Promover o avanço da eletrônica de potência e suas aplicações, incentivando o crescimento
+              acadêmico e profissional dos membros.</p>
+            <p class="i18n-en" lang="en">To promote the advancement of power electronics and its applications,
+              encouraging the academic and professional growth of our members.</p>
+          </div>
+          <div class="mvv-card">
+            <h3 class="i18n-pt">Visão</h3>
+            <h3 class="i18n-en" lang="en">Vision</h3>
+            <p class="i18n-pt">Ser referência em iniciativas estudantis de eletrônica de potência, desenvolvendo sistemas
+              e tecnologias.</p>
+            <p class="i18n-en" lang="en">To be a reference among student initiatives in power electronics,
+              developing systems and technologies.</p>
+          </div>
+          <div class="mvv-card">
+            <h3 class="i18n-pt">Valores</h3>
+            <h3 class="i18n-en" lang="en">Values</h3>
+            <p class="i18n-pt">Inovação, educação de excelência, inclusão e diversidade, equilíbrio entre academia e
+              indústria, networking, profissionalismo e voluntariado.</p>
+            <p class="i18n-en" lang="en">Innovation, educational excellence, inclusion and diversity, balance
+              between academia and industry, networking, professionalism and volunteering.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= APOIADORES ================= -->
+  <section class="supporters">
+    <div class="container">
+      <span class="supporters-label i18n-pt">Apoio institucional</span>
+      <span class="supporters-label i18n-en" lang="en">Institutional support</span>
+      <div class="supporters-row">
+        <span class="supporter-mark">IEEE</span>
+        <span class="supporter-mark">BATLAB</span>
+        <span class="supporter-mark">PPGEE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DIRETORIA ================= -->
+  <section id="diretoria" class="section-alt">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="kicker i18n-pt">Gestão 2026</span>
+        <span class="kicker i18n-en" lang="en">2026 Term</span>
+        <h2 class="i18n-pt">Nossa Diretoria</h2>
+        <h2 class="i18n-en" lang="en">Our Board</h2>
+        <p class="i18n-pt">Time responsável por planejar, organizar e sustentar as atividades do capítulo ao longo do ano.</p>
+        <p class="i18n-en" lang="en">The team responsible for planning, organizing and sustaining the chapter's activities throughout the year.</p>
+      </div>
+
+      <div class="board-grid">
+        <div class="board-card reveal" style="--delay:.05s">
+          <div class="member-photo"><img src="assets/img/members/worthon.jpg" alt="Foto de Worthon"><span>W</span></div>
+          <h3>Worthon</h3>
+          <span class="role">Chair</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.1s">
+          <div class="member-photo"><img src="assets/img/members/fabricio.jpg" alt="Foto de Fabricio"><span>F</span></div>
+          <h3>Fabrício</h3>
+          <span class="role">Vice-Chair</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.15s">
+          <div class="member-photo"><img src="assets/img/members/luigi.jpg" alt="Foto de Luigi"><span>L</span></div>
+          <h3>Luigi</h3>
+          <span class="role i18n-pt">Secretário</span>
+          <span class="role i18n-en" lang="en">Secretary</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.2s">
+          <div class="member-photo"><img src="assets/img/members/pedro-pereira.jpg" alt="Foto de Pedro Pereira"><span>PP</span></div>
+          <h3>Pedro Pereira</h3>
+          <span class="role i18n-pt">Tesoureiro</span>
+          <span class="role i18n-en" lang="en">Treasurer</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.25s">
+          <div class="member-photo"><img src="assets/img/members/julio.jpg" alt="Foto de Julio"><span>J</span></div>
+          <h3>Julio</h3>
+          <span class="role">Webmaster</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.3s">
+          <div class="member-photo"><img src="assets/img/members/thawan.jpg" alt="Foto de Thawan"><span>T</span></div>
+          <h3>Thawan</h3>
+          <span class="role i18n-pt">Diretor de Projetos</span>
+          <span class="role i18n-en" lang="en">Projects Director</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.35s">
+          <div class="member-photo"><img src="assets/img/members/caio-sandim.jpg" alt="Foto de Caio Sandim"><span>CS</span></div>
+          <h3>Caio Sandim</h3>
+          <span class="role i18n-pt">Diretor de Eventos</span>
+          <span class="role i18n-en" lang="en">Events Director</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.4s">
+          <div class="member-photo"><img src="assets/img/members/lindsei.jpg" alt="Foto de Lindsei"><span>L</span></div>
+          <h3>Lindsei</h3>
+          <span class="role i18n-pt">Diretora de Eventos</span>
+          <span class="role i18n-en" lang="en">Events Director</span>
+        </div>
+        <div class="board-card reveal" style="--delay:.45s">
+          <div class="member-photo"><img src="assets/img/members/raymundo-cordero.jpg" alt="Foto de Raymundo Cordero"><span>R</span></div>
+          <h3>Raymundo Cordero</h3>
+          <span class="role">Conselheiro / Advisor</span>
+        </div>
+      </div>
+      <p class="board-note i18n-pt">* Diretoria referente à gestão 2026. Cargos alinhados ao IEEE vTools Officer Reporting.</p>
+      <p class="board-note i18n-en" lang="en">* Board for the 2026 term. Roles aligned with IEEE vTools Officer Reporting.</p>
+    </div>
+  </section>
+
+  <!-- ================= MEMBROS DESTAQUES ================= -->
+  <section class="section" style="background:var(--bg-alt);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker i18n-pt">Membros Destaques</span>
+        <span class="kicker i18n-en" lang="en">Featured Members</span>
+        <h2 class="i18n-pt">Conheça quem guia a PELS</h2>
+        <h2 class="i18n-en" lang="en">Meet the people behind PELS</h2>
+        <p class="i18n-pt">Alguns de nossos membros que se destacam pela dedicação, pesquisa e contribuição ao capítulo.</p>
+        <p class="i18n-en" lang="en">Some of our members who stand out for their dedication, research and contribution to the chapter.</p>
+      </div>
+
+      <div class="board-grid reveal" style="margin-top:40px;">
+        <div class="board-card">
+          <div class="member-photo"><img src="assets/img/members/mariana-espinola-ribeiro.jpg" alt="Foto de Mariana Espinola Ribeiro"><span>M</span></div>
+          <h3>Mariana Espinola Ribeiro</h3>
+          <span class="role i18n-pt">Ex-Chair PELS UFMS • Membro Egressa</span>
+          <span class="role i18n-en" lang="en">Former Chair, PELS UFMS • Alumni Member</span>
+          <p class="i18n-pt" style="margin-top:10px;color:var(--ink-soft);font-size:0.88rem;">Doutoranda em Engenharia Elétrica na University of Tennessee, Knoxville (UTK) e Chair da iniciativa IEEE PELS Student Members.</p>
+          <p class="i18n-en" lang="en" style="margin-top:10px;color:var(--ink-soft);font-size:0.88rem;">PhD student in Electrical Engineering at the University of Tennessee, Knoxville (UTK), and Chair of the IEEE PELS Student Members initiative.</p>
+        </div>
+        <div class="board-card">
+          <div class="member-photo"><img src="assets/img/members/ianca.jpg" alt="Foto de Ianca"><span>I</span></div>
+          <h3>Ianca Moraes</h3>
+          <span class="role i18n-pt">Membro Ativa • Ex-Chair PELS UFMS</span>
+          <span class="role i18n-en" lang="en">Active Member • Former Chair, PELS UFMS</span>
+          <p class="i18n-pt" style="margin-top:10px;color:var(--ink-soft);font-size:0.88rem;">Exerceu a liderança do capítulo e segue contribuindo ativamente com pesquisas, projetos e formação de novos membros.</p>
+          <p class="i18n-en" lang="en" style="margin-top:10px;color:var(--ink-soft);font-size:0.88rem;">Led the chapter and continues to actively contribute with research, projects and the training of new members.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OPORTUNIDADES ================= -->
+  <section id="oportunidades">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker i18n-pt">Cresça com a gente</span>
+        <span class="kicker i18n-en" lang="en">Grow with us</span>
+        <h2 class="i18n-pt">Oportunidades para membros</h2>
+        <h2 class="i18n-en" lang="en">Opportunities for members</h2>
+        <p class="i18n-pt">Bolsas, competições, eventos técnicos, voluntariado e programas de liderança abertos a
+          estudantes de Engenharia da UFMS.</p>
+        <p class="i18n-en" lang="en">Scholarships, competitions, technical events, volunteering and leadership
+          programs open to UFMS Engineering students.</p>
+      </div>
+
+      <div class="opp-grid">
+        <div class="opp-card reveal" style="--delay:0s">
+          <div class="opp-icon">🔬</div>
+          <h3><a href="projetos/iniciacao-cientifica.html" target="_blank" rel="noopener"><span class="i18n-pt">Iniciação Científica</span><span class="i18n-en" lang="en">Undergraduate Research</span></a></h3>
+          <p class="i18n-pt">Novas frentes de pesquisa desenvolvidas junto a membros do capítulo, com orientação para
+            quem quer dar os primeiros passos na pesquisa acadêmica em eletrônica de potência.</p>
+          <p class="i18n-en" lang="en">New research fronts developed alongside chapter members, with guidance for
+            those who want to take their first steps in academic research in power electronics.</p>
+          <span class="opp-tag i18n-pt">Pesquisa</span>
+          <span class="opp-tag i18n-en" lang="en">Research</span>
+        </div>
+
+        <div class="opp-card reveal" style="--delay:.08s">
+          <div class="opp-icon">🏆</div>
+          <h3>COBEP</h3>
+          <p class="i18n-pt">Apoio e incentivo à participação de membros no Congresso Brasileiro de Eletrônica de
+            Potência, o principal evento científico da área no Brasil.</p>
+          <p class="i18n-en" lang="en">Support and encouragement for members to take part in the Brazilian Power
+            Electronics Conference, the field's leading scientific event in Brazil.</p>
+          <span class="opp-tag i18n-pt">Conferência</span>
+          <span class="opp-tag i18n-en" lang="en">Conference</span>
+        </div>
+
+        <div class="opp-card reveal" style="--delay:.16s">
+          <div class="opp-icon">⚡</div>
+          <h3><a href="projetos/circuito-pels.html" target="_blank" rel="noopener">Circuito PELS</a></h3>
+            <p class="i18n-pt">Curso completo e aplicado em eletrônica de potência, do básico de eletricidade até a montagem prática de conversores de potência. Desenvolvido integralmente pelo capítulo, oferece teoria fundamentada com prática em bancada, preparando membros para atuar em projetos industriais. <strong>Inscrições em breve.</strong></p>
+            <p class="i18n-en" lang="en">A complete, applied power electronics course, from the basics of electricity to the hands-on assembly of power converters. Developed entirely by the chapter, it pairs solid theory with bench practice, preparing members to work on industrial projects. <strong>Enrollment opening soon.</strong></p>
+          <span class="opp-tag i18n-pt">Novo · Competição/Prática</span>
+          <span class="opp-tag i18n-en" lang="en">New · Competition/Hands-on</span>
+        </div>
+
+        <div class="opp-card reveal" style="--delay:.24s">
+          <div class="opp-icon">🎤</div>
+          <h3><span class="i18n-pt">Webinars &amp; Palestras</span><span class="i18n-en" lang="en">Webinars &amp; Talks</span></h3>
+          <p class="i18n-pt">Encontros com profissionais e ex-membros do capítulo — como o webinar com Mariana Espinola
+            Ribeiro (doutoranda na University of Tennessee, Knoxville) e a palestra com a BEM
+            Inteligência de Dados — sobre carreira, indústria e inovação.</p>
+          <p class="i18n-en" lang="en">Meetings with professionals and chapter alumni — such as the webinar with
+            Mariana Espinola Ribeiro (PhD student at the University of Tennessee, Knoxville) and the talk with
+            BEM Inteligência de Dados — about career, industry and innovation.</p>
+          <span class="opp-tag i18n-pt">Desenvolvimento Profissional</span>
+          <span class="opp-tag i18n-en" lang="en">Professional Development</span>
+        </div>
+
+        <div class="opp-card reveal" style="--delay:.32s">
+          <div class="opp-icon">🤝</div>
+          <h3><span class="i18n-pt">Voluntariado</span><span class="i18n-en" lang="en">Volunteering</span></h3>
+          <p class="i18n-pt">Projeto humanitário SolIEEEdário, com doações e atividades para crianças da Comunidade
+            Mandela, e apoio ao grupo de afinidade Women in Engineering (WiE) através do WEFor.</p>
+          <p class="i18n-en" lang="en">The SolIEEEdário humanitarian project, with donations and activities for
+            children from the Mandela Community, and support for the Women in Engineering (WiE) affinity group
+            through WEFor.</p>
+          <span class="opp-tag i18n-pt">Impacto Social</span>
+          <span class="opp-tag i18n-en" lang="en">Social Impact</span>
+        </div>
+
+        <div class="opp-card reveal" style="--delay:.4s">
+          <div class="opp-icon">🚀</div>
+          <h3><span class="i18n-pt">Liderança</span><span class="i18n-en" lang="en">Leadership</span></h3>
+          <p class="i18n-pt">Processos seletivos anuais para novas diretorias e coordenações de projeto — uma porta de
+            entrada real para experiência de gestão dentro do IEEE.</p>
+          <p class="i18n-en" lang="en">Annual selection processes for new boards and project coordination roles —
+            a real gateway to management experience within IEEE.</p>
+          <span class="opp-tag i18n-pt">Programa de Liderança</span>
+          <span class="opp-tag i18n-en" lang="en">Leadership Program</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJETOS & EVENTOS ================= -->
+  <section id="projetos" class="section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker i18n-pt">Atividades do capítulo</span>
+        <span class="kicker i18n-en" lang="en">Chapter activities</span>
+        <h2 class="i18n-pt">Projetos &amp; Eventos</h2>
+        <h2 class="i18n-en" lang="en">Projects &amp; Events</h2>
+        <p class="i18n-pt">Um retrato do que estamos construindo — dos projetos técnicos recorrentes aos eventos com a comunidade.</p>
+        <p class="i18n-en" lang="en">A snapshot of what we're building — from recurring technical projects to events with the community.</p>
+      </div>
+
+      <div class="filter-row reveal" role="group" aria-label="Filtrar atividades">
+        <button class="filter-btn is-active" data-filter="all"><span class="i18n-pt">Todos</span><span class="i18n-en" lang="en">All</span></button>
+        <button class="filter-btn" data-filter="projeto"><span class="i18n-pt">Projetos</span><span class="i18n-en" lang="en">Projects</span></button>
+        <button class="filter-btn" data-filter="evento"><span class="i18n-pt">Eventos</span><span class="i18n-en" lang="en">Events</span></button>
+      </div>
+
+      <div class="timeline" id="timeline">
+
+        <div class="timeline-item reveal" data-type="projeto">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">Em andamento</span>
+              <span class="timeline-date i18n-en" lang="en">In progress</span>
+              <span class="badge badge-projeto i18n-pt">Projeto</span>
+              <span class="badge badge-projeto i18n-en" lang="en">Project</span>
+            </div>
+            <h3><a href="projetos/circuito-pels.html" target="_blank" rel="noopener">Circuito PELS</a></h3>
+            <p class="i18n-pt">Curso completo e aplicado em eletrônica de potência: dos fundamentos da eletricidade à análise e montagem de conversores. <strong>Inscrições em breve.</strong></p>
+            <p class="i18n-en" lang="en">A complete, applied power electronics course: from the fundamentals of electricity to the analysis and assembly of converters. <strong>Enrollment opening soon.</strong></p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="projeto">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">Em andamento</span>
+              <span class="timeline-date i18n-en" lang="en">In progress</span>
+              <span class="badge badge-projeto i18n-pt">Projeto</span>
+              <span class="badge badge-projeto i18n-en" lang="en">Project</span>
+            </div>
+            <h3><a href="projetos/iniciacao-cientifica.html" target="_blank" rel="noopener"><span class="i18n-pt">Iniciação Científica com membros PELS</span><span class="i18n-en" lang="en">Undergraduate Research with PELS members</span></a></h3>
+            <p class="i18n-pt">Projetos de Iniciação Científica em eletrônica de potência, com acesso a recursos como IEEE Xplore para revisão bibliográfica, desenvolvimento de pesquisa aplicada e preparação para apresentações em conferências científicas. Oportunidades de bolsa e publicação em periódicos técnicos.</p>
+            <p class="i18n-en" lang="en">Undergraduate research projects in power electronics, with access to resources like IEEE Xplore for literature review, applied research development and preparation for presentations at scientific conferences. Opportunities for scholarships and publication in technical journals.</p>
+          </div>
+        </div>
+
+<div class="timeline-item reveal" data-type="projeto">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">Recorrente · última edição 04/08/2026</span>
+              <span class="timeline-date i18n-en" lang="en">Recurring · last edition 08/04/2026</span>
+              <span class="badge badge-projeto i18n-pt">Projeto</span>
+              <span class="badge badge-projeto i18n-en" lang="en">Project</span>
+            </div>
+            <h3><a href="projetos/power-english.html" target="_blank" rel="noopener" lang="en">Power English</a></h3>
+            <p class="i18n-pt">Círculo de conversação em inglês com foco em terminologia técnica, networking profissional e integração com a comunidade global de Power Electronics. Encontros regulares com discussões em inglês sobre projetos, artigos científicos e oportunidades de mobilidade acadêmica.</p>
+            <p class="i18n-en" lang="en">An English conversation circle focused on technical terminology, professional networking and integration with the global Power Electronics community. Regular meetings with discussions in English about projects, scientific papers and academic mobility opportunities.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="projeto">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">Recorrente</span>
+              <span class="timeline-date i18n-en" lang="en">Recurring</span>
+              <span class="badge badge-projeto i18n-pt">Projeto</span>
+              <span class="badge badge-projeto i18n-en" lang="en">Project</span>
+            </div>
+            <h3><a href="projetos/paper-club.html" target="_blank" rel="noopener" lang="en">Paper Club</a></h3>
+            <p class="i18n-pt">Encontros periódicos para leitura, discussão e análise crítica de artigos científicos de ponta em eletrônica de potência, conversão de energia e aplicações de power electronics. Desenvolve pensamento científico e prepara membros para conferências como COBEP e publicações técnicas.</p>
+            <p class="i18n-en" lang="en">Periodic meetings to read, discuss and critically analyze cutting-edge scientific papers in power electronics, energy conversion and power electronics applications. Builds scientific thinking and prepares members for conferences like COBEP and technical publications.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="projeto">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">Contínuo</span>
+              <span class="timeline-date i18n-en" lang="en">Ongoing</span>
+              <span class="badge badge-projeto i18n-pt">Projeto Humanitário</span>
+              <span class="badge badge-projeto i18n-en" lang="en">Humanitarian Project</span>
+            </div>
+            <h3><a href="projetos/solieeedario.html" target="_blank" rel="noopener">SolIEEEdário</a></h3>
+            <p class="i18n-pt">Ações de doação e atividades lúdicas voltadas às crianças da Comunidade Mandela,
+              aproximando o capítulo da comunidade ao seu redor.</p>
+            <p class="i18n-en" lang="en">Donation drives and playful activities for children from the Mandela
+              Community, bringing the chapter closer to the community around it.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="evento">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date">2025</span>
+              <span class="badge badge-evento i18n-pt">Evento</span>
+              <span class="badge badge-evento i18n-en" lang="en">Event</span>
+            </div>
+            <h3><a href="projetos/cobep.html" target="_blank" rel="noopener">COBEP 2025</a></h3>
+            <p class="i18n-pt">Participação no Congresso Brasileiro de Eletrônica de Potência, um dos principais eventos
+              científicos da área no país.</p>
+            <p class="i18n-en" lang="en">Participation in the Brazilian Power Electronics Conference, one of the
+              country's leading scientific events in the field.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="evento">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">Edição anual</span>
+              <span class="timeline-date i18n-en" lang="en">Annual edition</span>
+              <span class="badge badge-evento i18n-pt">Evento</span>
+              <span class="badge badge-evento i18n-en" lang="en">Event</span>
+            </div>
+            <h3><a href="projetos/pels-day.html" target="_blank" rel="noopener">PELS Day</a></h3>
+            <p class="i18n-pt">Evento de divulgação científica que apresenta a eletrônica de potência e as atividades do
+              capítulo à comunidade acadêmica da UFMS.</p>
+            <p class="i18n-en" lang="en">A scientific outreach event that showcases power electronics and the
+              chapter's activities to the UFMS academic community.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="evento">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">26 de maio de 2026</span>
+              <span class="timeline-date i18n-en" lang="en">May 26, 2026</span>
+              <span class="badge badge-evento i18n-pt">Evento</span>
+              <span class="badge badge-evento i18n-en" lang="en">Event</span>
+            </div>
+            <h3><a href="projetos/webinar-mariana.html" target="_blank" rel="noopener">Webinar com Mariana Espinola Ribeiro</a></h3>
+            <p class="i18n-pt">Bate-papo com uma ex-membro do capítulo, hoje doutoranda em Engenharia Elétrica na
+              University of Tennessee, Knoxville (UTK), sobre carreira acadêmica internacional.</p>
+            <p class="i18n-en" lang="en">A conversation with a chapter alumna, now a PhD student in Electrical
+              Engineering at the University of Tennessee, Knoxville (UTK), about an international academic career.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="evento">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">2 de abril de 2026</span>
+              <span class="timeline-date i18n-en" lang="en">April 2, 2026</span>
+              <span class="badge badge-evento i18n-pt">Evento</span>
+              <span class="badge badge-evento i18n-en" lang="en">Event</span>
+            </div>
+            <h3><a href="projetos/palestra-bem.html" target="_blank" rel="noopener">Palestra — BEM Inteligência de Dados</a></h3>
+            <p class="i18n-pt">Palestra com a empresa BEM Inteligência de Dados, aproximando os membros do capítulo do
+              mercado de dados e tecnologia.</p>
+            <p class="i18n-en" lang="en">A talk with the company BEM Inteligência de Dados, bringing chapter
+              members closer to the data and technology market.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal" data-type="evento">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date i18n-pt">Ação contínua</span>
+              <span class="timeline-date i18n-en" lang="en">Ongoing action</span>
+              <span class="badge badge-evento i18n-pt">Evento</span>
+              <span class="badge badge-evento i18n-en" lang="en">Event</span>
+            </div>
+            <h3><a href="projetos/wefor.html" target="_blank" rel="noopener">WEFor — apoio ao Women in Engineering (WiE)</a></h3>
+            <p class="i18n-pt">Apoio do capítulo PELS ao grupo de afinidade WiE em ações que promovem diversidade e
+              inclusão na engenharia.</p>
+            <p class="i18n-en" lang="en">The PELS chapter's support for the WiE affinity group in actions that
+              promote diversity and inclusion in engineering.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LOJINHA ================= -->
+  <section id="loja" class="store-section">
+    <div class="container store-layout">
+      <div class="store-copy reveal reveal-left">
+        <span class="kicker i18n-pt">Lojinha PELS UFMS</span>
+        <span class="kicker i18n-en" lang="en">PELS UFMS Shop</span>
+        <h2 class="i18n-pt">Vista a energia<br>do capítulo.</h2>
+        <h2 class="i18n-en" lang="en">Wear the chapter's<br>energy.</h2>
+        <p class="i18n-pt">O boné oficial IEEE PELS UFMS une identidade, comunidade e apoio às iniciativas estudantis do capítulo.</p>
+        <p class="i18n-en" lang="en">The official IEEE PELS UFMS cap combines identity, community and support for the chapter's student initiatives.</p>
+        <ul class="store-points i18n-pt">
+          <li>Produto oficial do Capítulo Estudantil IEEE PELS UFMS</li>
+          <li>Pedido realizado pelo formulário da lojinha</li>
+          <li>Em breve: novas peças e edições especiais</li>
+        </ul>
+        <ul class="store-points i18n-en" lang="en">
+          <li>Official product of the IEEE PELS UFMS Student Chapter</li>
+          <li>Orders placed through the shop's form</li>
+          <li>Coming soon: new items and special editions</li>
+        </ul>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScPpSZk8Nlu5Xvtdf27kaiB1F0Iyk7gcQQs08hyeswyXiyEWQ/viewform?usp=publish-editor" target="_blank" rel="noopener"><span class="i18n-pt">Pedir meu boné</span><span class="i18n-en" lang="en">Order my cap</span> <span aria-hidden="true">↗</span></a>
+      </div>
+      <article class="product-card reveal reveal-right" aria-label="Boné oficial IEEE PELS UFMS">
+        <img class="product-photo" src="assets/img/products/bone-pels-ufms.jpeg" alt="Boné azul-marinho oficial PELS UFMS, visto pela frente e por trás" loading="lazy">
+        <div class="product-info">
+          <span class="product-status i18n-pt">Disponível para pedido</span>
+          <span class="product-status i18n-en" lang="en">Available to order</span>
+          <h3 class="i18n-pt">Boné oficial PELS UFMS</h3>
+          <h3 class="i18n-en" lang="en">Official PELS UFMS cap</h3>
+          <p class="i18n-pt">Azul-marinho com bordado da identidade do capítulo.</p>
+          <p class="i18n-en" lang="en">Navy blue with the chapter's identity embroidered on it.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= GALERIA ================= -->
+  <section id="galeria" class="section-alt">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="kicker i18n-pt">Momentos do capítulo</span>
+        <span class="kicker i18n-en" lang="en">Chapter moments</span>
+        <h2 class="i18n-pt">Galeria</h2>
+        <h2 class="i18n-en" lang="en">Gallery</h2>
+        <p class="i18n-pt">Registros reais das nossas atividades — clique em qualquer foto para ampliar.</p>
+        <p class="i18n-en" lang="en">Real records of our activities — click any photo to enlarge it.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item reveal reveal-scale tilt" style="--delay:0s" data-caption="Capítulo representado com a bandeira PELS em evento acadêmico" tabindex="0" role="button" aria-label="Ampliar foto: Representando o capítulo">
+          <img src="assets/img/gallery/momento-01.jpg" alt="Membros do capítulo PELS UFMS segurando a bandeira do capítulo em um evento" loading="lazy">
+          <div class="gallery-overlay"><span class="i18n-pt">Representando o capítulo</span><span class="i18n-en" lang="en">Representing the chapter</span></div>
+          <span class="gallery-expand" aria-hidden="true">⤢</span>
+        </div>
+        <div class="gallery-item reveal reveal-scale tilt" style="--delay:.08s" data-caption="Webinar com Mariana Espinola Ribeiro, ex-membro e doutoranda na UTK" tabindex="0" role="button" aria-label="Ampliar foto: Webinar com egressa (UTK)">
+          <img src="assets/img/gallery/momento-02.jpg" alt="Webinar por videochamada com ex-membro do capítulo" loading="lazy">
+          <div class="gallery-overlay"><span class="i18n-pt">Webinar com egressa (UTK)</span><span class="i18n-en" lang="en">Webinar with alumna (UTK)</span></div>
+          <span class="gallery-expand" aria-hidden="true">⤢</span>
+        </div>
+        <div class="gallery-item reveal reveal-scale tilt" style="--delay:.16s" data-caption="Ação social SolIEEEdário com crianças da Comunidade Mandela" tabindex="0" role="button" aria-label="Ampliar foto: SolIEEEdário">
+          <img src="assets/img/gallery/momento-03.jpg" alt="Voluntários do capítulo em ação social SolIEEEdário com crianças" loading="lazy">
+          <div class="gallery-overlay"><span>SolIEEEdário</span></div>
+          <span class="gallery-expand" aria-hidden="true">⤢</span>
+        </div>
+        <div class="gallery-item reveal reveal-scale tilt" style="--delay:.24s" data-caption="Apresentação de membro do capítulo em evento acadêmico da UFMS" tabindex="0" role="button" aria-label="Ampliar foto: No palco, representando a PELS">
+          <img src="assets/img/gallery/momento-04.jpg" alt="Membro do capítulo apresentando em palco de evento acadêmico" loading="lazy">
+          <div class="gallery-overlay"><span class="i18n-pt">No palco, representando a PELS</span><span class="i18n-en" lang="en">On stage, representing PELS</span></div>
+          <span class="gallery-expand" aria-hidden="true">⤢</span>
+        </div>
+      </div>
+      <!-- TODO: substituir/completar com fotos de confraternizações e do PELS Day fornecidas pela diretoria -->
+
+      <div class="insta-embeds reveal" style="margin-top:56px;">
+        <div class="section-head center" style="margin-bottom:32px;">
+          <span class="kicker">@pels_ufms</span>
+          <h3 class="i18n-pt" style="font-size:1.4rem;">Direto do nosso Instagram</h3>
+          <h3 class="i18n-en" lang="en" style="font-size:1.4rem;">Straight from our Instagram</h3>
+        </div>
+        <div class="insta-embeds-grid">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DVg1gPiico-/" data-instgrm-version="14"></blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DVoG5PVjSPw/" data-instgrm-version="14"></blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWUKyNYltnK/" data-instgrm-version="14"></blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script async src="https://www.instagram.com/embed.js"></script>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-figure">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">✕</button>
+      <button class="lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">‹</button>
+      <button class="lightbox-next" id="lightboxNext" aria-label="Próxima foto">›</button>
+      <img id="lightboxImg" src="" alt="">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <!-- ================= POR QUE PELS ================= -->
+  <section class="section" style="background:var(--bg-alt);">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="kicker i18n-pt">Crescimento profissional</span>
+        <span class="kicker i18n-en" lang="en">Professional growth</span>
+        <h2 class="i18n-pt">Por que fazer parte da PELS UFMS?</h2>
+        <h2 class="i18n-en" lang="en">Why join PELS UFMS?</h2>
+      </div>
+
+      <div class="why-grid reveal">
+        <div class="why-card">
+          <span class="why-icon">🎓</span>
+          <h3 class="i18n-pt">Educação de Excelência</h3>
+          <h3 class="i18n-en" lang="en">Educational Excellence</h3>
+          <p class="i18n-pt">Acesso a cursos práticos, workshops e palestras com profissionais da indústria de eletrônica de potência.</p>
+          <p class="i18n-en" lang="en">Access to hands-on courses, workshops and talks with power electronics industry professionals.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">🔬</span>
+          <h3 class="i18n-pt">Pesquisa Aplicada</h3>
+          <h3 class="i18n-en" lang="en">Applied Research</h3>
+          <p class="i18n-pt">Oportunidades de Iniciação Científica com suporte de professores e acesso a recursos como IEEE Xplore.</p>
+          <p class="i18n-en" lang="en">Undergraduate research opportunities with faculty support and access to resources like IEEE Xplore.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">🤝</span>
+          <h3 class="i18n-pt">Networking Global</h3>
+          <h3 class="i18n-en" lang="en">Global Networking</h3>
+          <p class="i18n-pt">Conecte-se com profissionais, pesquisadores e estudantes de engenharia em nível nacional e internacional.</p>
+          <p class="i18n-en" lang="en">Connect with professionals, researchers and engineering students both nationally and internationally.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">⚡</span>
+          <h3 class="i18n-pt">Impacto Social</h3>
+          <h3 class="i18n-en" lang="en">Social Impact</h3>
+          <p class="i18n-pt">Contribua para projetos que transformam energia limpa e eficiência em realidade nas comunidades.</p>
+          <p class="i18n-en" lang="en">Contribute to projects that turn clean energy and efficiency into reality within communities.</p>
+        </div>
+      </div>
+
+      <!-- EXEMPLO ILUSTRATIVO: depoimento fictício, gerado apenas para a diretoria avaliar o formato.
+           NÃO publicar sem antes confirmar o texto real com a Mariana. Trocar/remover antes de ir ao ar. -->
+      <div class="testimonial-draft-flag reveal" style="max-width:680px;margin:48px auto 0;text-align:center;">
+        <span class="opp-tag i18n-pt" style="background:var(--badge-projeto-bg, rgba(212,160,23,.16));color:var(--badge-projeto-ink, #b8860b);">Exemplo — texto fictício, aguardando aprovação</span>
+        <span class="opp-tag i18n-en" lang="en" style="background:var(--badge-projeto-bg, rgba(212,160,23,.16));color:var(--badge-projeto-ink, #b8860b);">Example — fictional text, pending approval</span>
+      </div>
+      <figure class="testimonial-card reveal" style="max-width:680px;margin:14px auto 0;">
+        <blockquote class="i18n-pt">
+          "Entrar para o PELS UFMS foi o que me deu a base para pensar em pesquisa fora do Brasil. As
+          discussões técnicas, os projetos práticos e a troca com a diretoria me prepararam para os
+          desafios que encontrei na pós-graduação — hoje, quando oriento estudantes na UTK, percebo o
+          quanto aquele ambiente colaborativo do capítulo formou a pesquisadora que sou."
+        </blockquote>
+        <blockquote class="i18n-en" lang="en">
+          "Joining PELS UFMS gave me the foundation to consider research outside Brazil. The technical
+          discussions, hands-on projects and exchanges with the board prepared me for the challenges I found
+          in grad school — today, as I mentor students at UTK, I realize how much that collaborative
+          environment shaped the researcher I've become."
+        </blockquote>
+        <figcaption>
+          <img src="assets/img/members/mariana-espinola-ribeiro.jpg" alt="" aria-hidden="true">
+          <span class="i18n-pt"><strong>Mariana Espinola Ribeiro</strong><br>Ex-Chair PELS UFMS · Doutoranda na University of Tennessee, Knoxville</span>
+          <span class="i18n-en" lang="en"><strong>Mariana Espinola Ribeiro</strong><br>Former Chair, PELS UFMS · PhD student at the University of Tennessee, Knoxville</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= TORNE-SE MEMBRO ================= -->
+  <section id="membros">
+    <div class="container">
+      <div class="join reveal reveal-scale">
+        <h2 class="i18n-pt">Quer fazer parte do IEEE PELS UFMS?</h2>
+        <h2 class="i18n-en" lang="en">Want to join IEEE PELS UFMS?</h2>
+        <p class="i18n-pt">Se você é estudante da UFMS e tem interesse em eletrônica de potência, inovação, educação
+          técnica e networking, esse é o seu lugar.</p>
+        <p class="i18n-en" lang="en">If you're a UFMS student interested in power electronics, innovation,
+          technical education and networking, this is your place.</p>
+        <div class="join-actions">
+          <a href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener" class="btn btn-ghost-light"><span class="i18n-pt">Entrar no grupo do WhatsApp</span><span class="i18n-en" lang="en">Join the WhatsApp group</span></a>
+          <a href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener" class="btn btn-ghost-light"><span class="i18n-pt">Seguir no Instagram</span><span class="i18n-en" lang="en">Follow on Instagram</span></a>
+        </div>
+
+        <div class="join-steps">
+          <div class="join-step">
+            <span class="num">01</span>
+            <p class="i18n-pt">Torne-se membro IEEE e associe-se à PELS através do site oficial do IEEE.</p>
+            <p class="i18n-en" lang="en">Become an IEEE member and join PELS through the official IEEE website.</p>
+          </div>
+          <div class="join-step">
+            <span class="num">02</span>
+            <p class="i18n-pt">Entre no nosso grupo do WhatsApp e siga @pels_ufms para acompanhar avisos e seletivos.</p>
+            <p class="i18n-en" lang="en">Join our WhatsApp group and follow @pels_ufms to keep up with announcements and selection processes.</p>
+          </div>
+          <div class="join-step">
+            <span class="num">03</span>
+            <p class="i18n-pt">Participe dos próximos projetos, palestras e eventos abertos do capítulo.</p>
+            <p class="i18n-en" lang="en">Take part in the chapter's next open projects, talks and events.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATO ================= -->
+  <section id="contato" class="section-alt">
+    <div class="container contact-grid">
+      <div class="reveal reveal-left">
+        <span class="kicker i18n-pt">Fale com a gente</span>
+        <span class="kicker i18n-en" lang="en">Talk to us</span>
+        <h2 class="i18n-pt">Contato &amp; Redes Sociais</h2>
+        <h2 class="i18n-en" lang="en">Contact &amp; Social Media</h2>
+        <p class="i18n-pt" style="margin-top:14px;color:var(--ink-soft)">Dúvidas, parcerias ou convites para o capítulo? Estes são
+          nossos canais oficiais de comunicação.</p>
+        <p class="i18n-en" lang="en" style="margin-top:14px;color:var(--ink-soft)">Questions, partnerships or
+          invitations for the chapter? These are our official communication channels.</p>
+
+        <div class="contact-list">
+          <a class="contact-item" href="mailto:pelsufms@gmail.com">
+            <span class="contact-icon contact-icon-email" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 5.5h17v13h-17zM4 6l8 6 8-6"/></svg></span>
+            <span><strong>E-mail</strong><span>pelsufms@gmail.com</span></span>
+          </a>
+          <a class="contact-item" href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener">
+            <span class="contact-icon contact-icon-instagram" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
+            <span><strong>Instagram</strong><span>@pels_ufms</span></span>
+          </a>
+          <a class="contact-item" href="https://youtube.com/@pelsufms8757" target="_blank" rel="noopener">
+            <span class="contact-icon contact-icon-youtube" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12c0 3.5-.4 5.7-1.1 6.7-.7.9-2.2 1.3-4.8 1.3H8.9c-2.6 0-4.1-.4-4.8-1.3C3.4 17.7 3 15.5 3 12s.4-5.7 1.1-6.7C4.8 4.4 6.3 4 8.9 4h6.2c2.6 0 4.1.4 4.8 1.3.7 1 1.1 3.2 1.1 6.7Z"/><path d="m10 8.8 5.3 3.2-5.3 3.2Z" class="fill"/></svg></span>
+            <span><strong>YouTube</strong><span>PELS UFMS</span></span>
+          </a>
+          <a class="contact-item" href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener">
+            <span class="contact-icon contact-icon-whatsapp" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.8a8 8 0 0 1-11.8 7L4 20l1.3-4.1A8 8 0 1 1 20 11.8Z"/><path d="M9.1 8.3c.2-.4.3-.4.6-.4h.5c.1 0 .3 0 .4.3l.8 1.9c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.4.9 1.4 2 1.9.3.2.5.2.7 0l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.3.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.2.6-1.5.6-.4 0-1.5-.1-3.1-.8a10.7 10.7 0 0 1-3.5-3.1c-.9-1.2-1.2-2.3-1.2-3.1 0-.8.4-1.3.7-1.7Z" class="fill"/></svg></span>
+            <span><strong>WhatsApp</strong><span class="i18n-pt">Grupo da comunidade</span><span class="i18n-en" lang="en">Community group</span></span>
+          </a>
+          <a class="contact-item" href="https://www.ieee-pels.org" target="_blank" rel="noopener">
+            <span class="contact-icon pels-international-mark" aria-hidden="true"><span>PELS</span></span>
+            <span><strong>IEEE Power Electronics Society</strong><span class="i18n-pt">PELS Internacional · ieee-pels.org</span><span class="i18n-en" lang="en">PELS International · ieee-pels.org</span></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="map-card reveal reveal-right">
+        <iframe
+          title="Localização — UFMS, Campo Grande"
+          src="https://www.google.com/maps?q=Universidade+Federal+de+Mato+Grosso+do+Sul,+Cidade+Universit%C3%A1ria,+Campo+Grande+-+MS&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= DOCUMENTOS ================= -->
+<section id="documentos" class="section" style="background:var(--bg-alt);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="kicker i18n-pt">Transparência e Governança</span>
+      <span class="kicker i18n-en" lang="en">Transparency &amp; Governance</span>
+      <h2 class="i18n-pt">Documentos Oficiais</h2>
+      <h2 class="i18n-en" lang="en">Official Documents</h2>
+      <p class="i18n-pt">Acesse nossos documentos institucionais e legislação que normatiza o funcionamento do capítulo.</p>
+      <p class="i18n-en" lang="en">Access our institutional documents and the bylaws that govern how the chapter operates.</p>
+    </div>
+
+    <div class="docs-grid reveal">
+      <article class="doc-card">
+        <span class="doc-icon">📋</span>
+        <h3 class="i18n-pt">Regimento Interno — PELS UFMS</h3>
+        <h3 class="i18n-en" lang="en">Bylaws — PELS UFMS</h3>
+        <p class="i18n-pt">Estatuto e normas que regulam o funcionamento e a governança do Capítulo Estudantil IEEE PELS UFMS.</p>
+        <p class="i18n-en" lang="en">The charter and rules governing the operation and governance of the IEEE PELS UFMS Student Chapter.</p>
+        <a href="assets/docs/Regimento_Interno_PELS.pdf" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:16px;font-size:0.85rem;"><span class="i18n-pt">Abrir documento</span><span class="i18n-en" lang="en">Open document</span></a>
+      </article>
+      <article class="doc-card">
+        <span class="doc-icon">🏛️</span>
+        <h3 class="i18n-pt">Regimento Interno — Ramo IEEE UFMS</h3>
+        <h3 class="i18n-en" lang="en">Bylaws — IEEE UFMS Student Branch</h3>
+        <p class="i18n-pt">Documento institucional que orienta a organização e o funcionamento do Ramo Estudantil IEEE UFMS.</p>
+        <p class="i18n-en" lang="en">The institutional document guiding the organization and operation of the IEEE UFMS Student Branch.</p>
+        <a href="assets/docs/Regimento_Interno_Ramo_UFMS.pdf" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:16px;font-size:0.85rem;"><span class="i18n-pt">Abrir documento</span><span class="i18n-en" lang="en">Open document</span></a>
+      </article>
+      <article class="doc-card">
+        <span class="doc-icon">🎨</span>
+        <h3 class="i18n-pt">Mídia Kit</h3>
+        <h3 class="i18n-en" lang="en">Media Kit</h3>
+        <p class="i18n-pt">Logo oficial do capítulo em PNG (fundo transparente) e SVG (vetor), para imprensa, parceiros e divulgação.</p>
+        <p class="i18n-en" lang="en">The chapter's official logo in PNG (transparent background) and SVG (vector), for press, partners and outreach.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+          <a href="assets/img/logo.png" download class="btn btn-outline" style="font-size:0.85rem;"><span class="i18n-pt">Baixar PNG</span><span class="i18n-en" lang="en">Download PNG</span></a>
+          <a href="assets/img/logo-vector.svg" download class="btn btn-outline" style="font-size:0.85rem;"><span class="i18n-pt">Baixar SVG</span><span class="i18n-en" lang="en">Download SVG</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="Logo IEEE PELS UFMS">
+        <strong>IEEE PELS UFMS Chapter</strong>
+      </div>
+      <p class="i18n-pt">Capítulo Estudantil IEEE Power Electronics Society da Universidade Federal de Mato Grosso do
+        Sul. Vinculado ao Ramo Estudantil IEEE UFMS.</p>
+      <p class="i18n-en" lang="en">IEEE Power Electronics Society Student Chapter at the Federal University of Mato
+        Grosso do Sul. Affiliated with the IEEE UFMS Student Branch.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://youtube.com/@pelsufms8757" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21 12c0 3.5-.4 5.7-1.1 6.7-.7.9-2.2 1.3-4.8 1.3H8.9c-2.6 0-4.1-.4-4.8-1.3C3.4 17.7 3 15.5 3 12s.4-5.7 1.1-6.7C4.8 4.4 6.3 4 8.9 4h6.2c2.6 0 4.1.4 4.8 1.3.7 1 1.1 3.2 1.1 6.7Z"/><path d="m10 8.8 5.3 3.2-5.3 3.2Z" class="fill"/></svg></a>
+        <a href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20 11.8a8 8 0 0 1-11.8 7L4 20l1.3-4.1A8 8 0 1 1 20 11.8Z"/><path d="M9.1 8.3c.2-.4.3-.4.6-.4h.5c.1 0 .3 0 .4.3l.8 1.9c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.4.9 1.4 2 1.9.3.2.5.2.7 0l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.3.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.2.6-1.5.6-.4 0-1.5-.1-3.1-.8a10.7 10.7 0 0 1-3.5-3.1c-.9-1.2-1.2-2.3-1.2-3.1 0-.8.4-1.3.7-1.7Z" class="fill"/></svg></a>
+        <a href="mailto:pelsufms@gmail.com" aria-label="E-mail"><svg viewBox="0 0 24 24"><path d="M3.5 5.5h17v13h-17zM4 6l8 6 8-6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Navegação</span><span class="i18n-en" lang="en">Navigation</span></h4>
+      <ul>
+        <li><a href="#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a></li>
+        <li><a href="#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a></li>
+        <li><a href="#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a></li>
+        <li><a href="#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a></li>
+        <li><a href="#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a></li>
+        <li><a href="#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Capítulo</span><span class="i18n-en" lang="en">Chapter</span></h4>
+      <ul>
+        <li><a href="#membros"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a></li>
+        <li><a href="#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a></li>
+        <li><a href="https://www.ieee-pels.org" target="_blank" rel="noopener"><span class="i18n-pt">IEEE PELS Internacional</span><span class="i18n-en" lang="en">IEEE PELS International</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>IEEE</h4>
+      <ul>
+        <li><a href="https://www.ieee.org" target="_blank" rel="noopener">IEEE.org</a></li>
+        <li><a href="https://r9.ieee.org/sac" target="_blank" rel="noopener">IEEE Region 9 SAC</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span><span class="i18n-pt">© <span id="year"></span> IEEE PELS UFMS Chapter. Site estudantil, sem fins lucrativos.</span><span class="i18n-en" lang="en">© <span id="yearEn"></span> IEEE PELS UFMS Chapter. Student-run, non-profit website.</span></span>
+    <span class="footer-updated"><span class="i18n-pt">Última atualização em <span id="lastUpdated">—</span></span><span class="i18n-en" lang="en">Last updated on <span id="lastUpdatedEn">—</span></span></span>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module" src="js/logo3d.js"></script>
+</body>
+</html>

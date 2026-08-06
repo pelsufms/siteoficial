@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuito PELS — IEEE PELS UFMS Chapter</title>
+<meta name="description" content="Circuito PELS: minicurso prático de eletrônica de potência do Capítulo Estudantil IEEE PELS UFMS, do circuito básico à montagem física de um conversor Buck.">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<script>
+  (function () {
+    var stored = localStorage.getItem('pels-theme');
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+
+    var storedLang = localStorage.getItem('pels-lang');
+    if (storedLang === 'en') document.documentElement.setAttribute('lang', 'en');
+  })();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="../index.html" class="brand">
+      <img src="../assets/img/logo.png" alt="Logo IEEE PELS UFMS Chapter">
+      <span class="brand-text">
+        <strong>IEEE PELS UFMS</strong>
+        <span>Student Chapter</span>
+      </span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <a href="../index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+      <a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+      <a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+      <a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+      <a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+      <a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+      <a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+      <a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+    </nav>
+
+    <div class="lang-toggle" role="group" aria-label="Idioma do site / Site language">
+      <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+      <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+      <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+      <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+      <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    </button>
+
+    <a href="../index.html#membros" class="btn btn-outline"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="navMobile" aria-label="Navegação mobile">
+  <a href="../index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+  <a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+  <a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+  <a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+  <a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+  <a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+  <a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+  <a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+  <a href="../index.html#membros" class="btn btn-primary"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+  <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Idioma do site / Site language">
+    <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+    <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+    <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+  </div>
+  <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+    <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+    <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    <span class="theme-toggle-label" id="themeToggleLabel">Tema escuro</span>
+  </button>
+</nav>
+
+<main id="conteudo">
+
+  <section class="page-hero">
+    <div class="container">
+      <a href="../index.html#projetos" class="page-back"><span class="i18n-pt">← Voltar para Projetos &amp; Eventos</span><span class="i18n-en" lang="en">← Back to Projects &amp; Events</span></a>
+      <span class="kicker i18n-pt">Projeto · Em breve</span>
+      <span class="kicker i18n-en" lang="en">Project · Coming soon</span>
+      <h1>Circuito PELS</h1>
+      <p class="page-lead i18n-pt">Fundamentos e Prática do Conversor Buck: do circuito básico à montagem física. Um minicurso completo de eletrônica de potência, desenvolvido integralmente pelo capítulo.</p>
+      <p class="page-lead i18n-en" lang="en">Fundamentals and Practice of the Buck Converter: from the basic circuit to physical assembly. A complete power electronics short course, developed entirely by the chapter.</p>
+      <span class="opp-tag i18n-pt">Novo · Competição/Prática</span>
+      <span class="opp-tag i18n-en" lang="en">New · Competition/Hands-on</span>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Como funciona</h2>
+      <h2 class="i18n-en" lang="en">How it works</h2>
+      <p class="i18n-pt">
+        O Circuito PELS é o minicurso "Fundamentos e Prática do Conversor Buck", com carga horária total de
+        <strong>43 horas</strong> — 24 horas de aulas presenciais e 19 horas de atividades extraclasse — estruturado
+        em <strong>7 módulos semanais</strong>, cada um com duas aulas presenciais e uma lista de exercícios ou
+        relatório para fazer em casa. O curso é ideal para quem quer integralizar horas complementares de extensão
+        enquanto aprende eletrônica de potência na prática.
+      </p>
+      <p class="i18n-en" lang="en">
+        Circuito PELS is the "Fundamentals and Practice of the Buck Converter" short course, with a total workload
+        of <strong>43 hours</strong> — 24 hours of in-person classes and 19 hours of extra-class activities —
+        structured into <strong>7 weekly modules</strong>, each with two in-person classes and a set of exercises
+        or a take-home report. The course is ideal for anyone wanting to earn extension credit hours while learning
+        power electronics hands-on.
+      </p>
+      <p class="i18n-pt">O percurso vai do básico ao protótipo funcional:</p>
+      <p class="i18n-en" lang="en">The path goes from the basics to a working prototype:</p>
+      <ol class="i18n-pt">
+        <li><strong>Módulo 1 — O básico da eletricidade:</strong> revisão das Leis de Kirchhoff e Ohm, com analogias práticas (modelo hidráulico) e conceitos de CC e CA.</li>
+        <li><strong>Módulo 2 — O comportamento dos componentes:</strong> armazenamento de energia em capacitores e indutores, com demonstração prática de carga/descarga RC.</li>
+        <li><strong>Módulo 3 — Introdução aos semicondutores:</strong> funcionamento de diodos e MOSFETs, estados de corte e saturação, sinal PWM.</li>
+        <li><strong>Módulo 4 — A topologia Buck:</strong> interação dos componentes no rebaixamento de tensão e dimensionamento matemático do indutor e capacitor.</li>
+        <li><strong>Módulo 5 — Simulação e validação:</strong> introdução a softwares de simulação e observação gráfica do ripple de tensão e corrente.</li>
+        <li><strong>Módulo 6 — A interface de controle:</strong> acionamento via microcontroladores e o papel dos CIs de Gate Drive.</li>
+        <li><strong>Módulo 7 — Montagem e teste do protótipo:</strong> soldagem em placa ilhada e medição das formas de onda reais com osciloscópio.</li>
+      </ol>
+      <ol class="i18n-en" lang="en">
+        <li><strong>Module 1 — Electricity basics:</strong> review of Kirchhoff's and Ohm's laws, with hands-on analogies (hydraulic model) and DC/AC concepts.</li>
+        <li><strong>Module 2 — Component behavior:</strong> energy storage in capacitors and inductors, with hands-on RC charge/discharge demonstrations.</li>
+        <li><strong>Module 3 — Introduction to semiconductors:</strong> how diodes and MOSFETs work, cutoff and saturation states, PWM signal.</li>
+        <li><strong>Module 4 — The Buck topology:</strong> how components interact to step down voltage, and the mathematical sizing of the inductor and capacitor.</li>
+        <li><strong>Module 5 — Simulation and validation:</strong> introduction to simulation software and graphical observation of voltage and current ripple.</li>
+        <li><strong>Module 6 — The control interface:</strong> driving via microcontrollers and the role of Gate Drive ICs.</li>
+        <li><strong>Module 7 — Assembly and prototype testing:</strong> soldering on perfboard and measuring real waveforms with an oscilloscope.</li>
+      </ol>
+      <p class="i18n-pt">
+        O curso funciona como uma porta de entrada estratégica para a pesquisa do capítulo: a infraestrutura montada
+        durante o Circuito PELS costuma dar origem a subprojetos de Iniciação Científica voltados à modelagem,
+        simulação e controle de conversores.
+      </p>
+      <p class="i18n-en" lang="en">
+        The course works as a strategic gateway into the chapter's research: the infrastructure built during
+        Circuito PELS often gives rise to undergraduate research subprojects focused on converter modeling,
+        simulation and control.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Como participar</h2>
+      <h2 class="i18n-en" lang="en">How to join</h2>
+      <div class="page-cta">
+        <p class="i18n-pt">As inscrições para a próxima turma do Circuito PELS serão abertas em breve. Para não perder a data,
+          acompanhe o nosso Instagram — é lá que anunciamos o formulário e o cronograma completo.</p>
+        <p class="i18n-en" lang="en">Enrollment for the next Circuito PELS class will open soon. To not miss the
+          date, follow our Instagram — that's where we announce the form and the full schedule.</p>
+        <a href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener" class="btn btn-primary"><span class="i18n-pt">Seguir @pels_ufms no Instagram</span><span class="i18n-en" lang="en">Follow @pels_ufms on Instagram</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container">
+      <h2 class="i18n-pt">Edições anteriores</h2>
+      <h2 class="i18n-en" lang="en">Past editions</h2>
+      <p class="i18n-pt">Fotos e registros de turmas passadas do Circuito PELS.</p>
+      <p class="i18n-en" lang="en">Photos and records of past Circuito PELS classes.</p>
+      <!-- Fotos: substituir os placeholders abaixo por <img src="../assets/img/projetos/circuito-pels/foto-N.jpg" alt="..."> -->
+      <div class="photo-placeholder-grid">
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/circuito-pels/foto-1.jpg</span></div>
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/circuito-pels/foto-2.jpg</span></div>
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/circuito-pels/foto-3.jpg</span></div>
+        <div class="photo-placeholder"><span>📷</span><span>assets/img/projetos/circuito-pels/foto-4.jpg</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="../assets/img/logo.png" alt="Logo IEEE PELS UFMS">
+        <strong>IEEE PELS UFMS Chapter</strong>
+      </div>
+      <p class="i18n-pt">Capítulo Estudantil IEEE Power Electronics Society da Universidade Federal de Mato Grosso do
+        Sul. Vinculado ao Ramo Estudantil IEEE UFMS.</p>
+      <p class="i18n-en" lang="en">IEEE Power Electronics Society Student Chapter at the Federal University of
+        Mato Grosso do Sul. Affiliated with the IEEE UFMS Student Branch.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://youtube.com/@pelsufms8757" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21 12c0 3.5-.4 5.7-1.1 6.7-.7.9-2.2 1.3-4.8 1.3H8.9c-2.6 0-4.1-.4-4.8-1.3C3.4 17.7 3 15.5 3 12s.4-5.7 1.1-6.7C4.8 4.4 6.3 4 8.9 4h6.2c2.6 0 4.1.4 4.8 1.3.7 1 1.1 3.2 1.1 6.7Z"/><path d="m10 8.8 5.3 3.2-5.3 3.2Z" class="fill"/></svg></a>
+        <a href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20 11.8a8 8 0 0 1-11.8 7L4 20l1.3-4.1A8 8 0 1 1 20 11.8Z"/><path d="M9.1 8.3c.2-.4.3-.4.6-.4h.5c.1 0 .3 0 .4.3l.8 1.9c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.4.9 1.4 2 1.9.3.2.5.2.7 0l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.3.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.2.6-1.5.6-.4 0-1.5-.1-3.1-.8a10.7 10.7 0 0 1-3.5-3.1c-.9-1.2-1.2-2.3-1.2-3.1 0-.8.4-1.3.7-1.7Z" class="fill"/></svg></a>
+        <a href="mailto:pelsufms@gmail.com" aria-label="E-mail"><svg viewBox="0 0 24 24"><path d="M3.5 5.5h17v13h-17zM4 6l8 6 8-6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Navegação</span><span class="i18n-en" lang="en">Navigation</span></h4>
+      <ul>
+        <li><a href="../index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a></li>
+        <li><a href="../index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a></li>
+        <li><a href="../index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a></li>
+        <li><a href="../index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a></li>
+        <li><a href="../index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a></li>
+        <li><a href="../index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Capítulo</span><span class="i18n-en" lang="en">Chapter</span></h4>
+      <ul>
+        <li><a href="../index.html#membros"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a></li>
+        <li><a href="../index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a></li>
+        <li><a href="https://www.ieee-pels.org" target="_blank" rel="noopener"><span class="i18n-pt">IEEE PELS Internacional</span><span class="i18n-en" lang="en">IEEE PELS International</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>IEEE</h4>
+      <ul>
+        <li><a href="https://www.ieee.org" target="_blank" rel="noopener">IEEE.org</a></li>
+        <li><a href="https://r9.ieee.org/sac" target="_blank" rel="noopener">IEEE Region 9 SAC</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span><span class="i18n-pt">© <span id="year"></span> IEEE PELS UFMS Chapter. Site estudantil, sem fins lucrativos.</span><span class="i18n-en" lang="en">© <span id="yearEn"></span> IEEE PELS UFMS Chapter. Student-run, non-profit website.</span></span>
+    <span class="footer-updated"><span class="i18n-pt">Última atualização em <span id="lastUpdated">—</span></span><span class="i18n-en" lang="en">Last updated on <span id="lastUpdatedEn">—</span></span></span>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="../js/i18n.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
