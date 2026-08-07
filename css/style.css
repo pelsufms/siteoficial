@@ -694,18 +694,39 @@ section { padding: 108px 0; perspective: 1200px; }
   flex-wrap: wrap;
 }
 .supporter-mark {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 1px;
-  color: var(--ink-soft);
-  opacity: 0.75;
-  transition: opacity 0.25s, color 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+  padding: 10px 22px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  opacity: 0.88;
+  transition: opacity 0.25s, transform 0.25s;
 }
-.supporter-mark:hover { opacity: 1; color: var(--red); }
+.supporter-mark img {
+  max-height: 100%;
+  max-width: 130px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.supporter-mark:hover { opacity: 1; transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.supporter-mark-featured {
+  height: 78px;
+  padding: 14px 30px;
+  opacity: 1;
+  border: 2px solid var(--red);
+}
+.supporter-mark-featured img { max-width: 170px; }
 @media (max-width: 480px) {
-  .supporters-row { gap: 28px; }
-  .supporter-mark { font-size: 1.05rem; }
+  .supporters-row { gap: 16px; }
+  .supporter-mark { height: 46px; padding: 8px 16px; }
+  .supporter-mark img { max-width: 96px; }
+  .supporter-mark-featured { height: 60px; padding: 10px 20px; }
+  .supporter-mark-featured img { max-width: 120px; }
 }
 
 /* ---------- Board / Diretoria ---------- */
@@ -1237,11 +1258,15 @@ section { padding: 108px 0; perspective: 1200px; }
 .gallery-carousel { position: relative; display: flex; align-items: center; gap: 14px; }
 .gallery-grid {
   display: flex;
+  align-items: center;
   gap: 20px;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
-  padding-block: 18px 6px;
+  padding-block: 30px 10px;
+}
+@media (max-width: 640px) {
+  .gallery-grid { padding-block: 20px 8px; }
 }
 .gallery-nav {
   flex: 0 0 auto;
@@ -1287,7 +1312,8 @@ section { padding: 108px 0; perspective: 1200px; }
   z-index: 2;
 }
 @media (max-width: 640px) {
-  .gallery-item { flex-basis: 78vw; }
+  .gallery-item { flex-basis: 68vw; }
+  .gallery-item.is-centered { transform: scale(1.04); }
 }
 @media (prefers-reduced-motion: reduce) {
   .gallery-item { opacity: 1; transform: none; transition: box-shadow 0.3s; }
