@@ -337,8 +337,55 @@
     cineStats.forEach(el => el.classList.add('is-active'));
   }
 
-  /* ---------- Gallery carousel (auto-scroll + center highlight) ---------- */
+  /* ---------- Gallery: photos from every project, shuffled ---------- */
+  const GALLERY_PHOTOS = [
+    { src: 'assets/img/gallery/recepção_calouros.jpeg', pt: 'Recepção de calouros', en: 'Freshman welcome' },
+    { src: 'assets/img/gallery/reunião_gestão.jpeg', pt: 'Reunião de gestão', en: 'Board meeting' },
+    { src: 'assets/img/projetos/cobep/foto-1.jpg', pt: 'COBEP 2025', en: 'COBEP 2025' },
+    { src: 'assets/img/projetos/cobep/foto-2.jpg', pt: 'COBEP 2025', en: 'COBEP 2025' },
+    { src: 'assets/img/projetos/cobep/foto-3.jpg', pt: 'COBEP 2025', en: 'COBEP 2025' },
+    { src: 'assets/img/projetos/cobep/foto-4.jpg', pt: 'COBEP 2025', en: 'COBEP 2025' },
+    { src: 'assets/img/projetos/palestra-bem/02_04_2026-1.jpg', pt: 'Palestra BEM Inteligência de Dados', en: 'BEM Inteligência de Dados talk' },
+    { src: 'assets/img/projetos/palestra-bem/02_04_2026-2.jpg', pt: 'Palestra BEM Inteligência de Dados', en: 'BEM Inteligência de Dados talk' },
+    { src: 'assets/img/projetos/palestra-bem/02_04_2026-3.jpg', pt: 'Palestra BEM Inteligência de Dados', en: 'BEM Inteligência de Dados talk' },
+    { src: "assets/img/projetos/pels-day/20_06_2024 - 1.jpg", pt: 'PELS Day 2024', en: 'PELS Day 2024' },
+    { src: "assets/img/projetos/pels-day/19_06_2025 - 1.jpg", pt: 'PELS Day 2025', en: 'PELS Day 2025' },
+    { src: "assets/img/projetos/pels-day/19_06_2025 - 2.jpg", pt: 'PELS Day 2025', en: 'PELS Day 2025' },
+    { src: "assets/img/projetos/pels-day/20_06_2026 - 1.jpg", pt: 'Arraiá IEEE UFMS 2026', en: 'Arraiá IEEE UFMS 2026' },
+    { src: "assets/img/projetos/pels-day/20_06_2026 - 2.jpg", pt: 'Arraiá IEEE UFMS 2026', en: 'Arraiá IEEE UFMS 2026' },
+    { src: "assets/img/projetos/pels-day/20_06_2026 - 3.jpg", pt: 'Arraiá IEEE UFMS 2026', en: 'Arraiá IEEE UFMS 2026' },
+    { src: "assets/img/projetos/pels-day/20_06_2026 - 4.jpg", pt: 'Arraiá IEEE UFMS 2026', en: 'Arraiá IEEE UFMS 2026' },
+    { src: 'assets/img/projetos/power-english/12_05_2026.jpg', pt: 'Power English', en: 'Power English' },
+    { src: 'assets/img/projetos/power-english/19_05_2026.jpg', pt: 'Power English', en: 'Power English' },
+    { src: 'assets/img/projetos/power-english/03_06_2026.jpg', pt: 'Power English', en: 'Power English' },
+    { src: 'assets/img/projetos/power-english/04_08_2026.jpg', pt: 'Power English', en: 'Power English' },
+    { src: 'assets/img/projetos/wefor/06_04_2026.jpeg', pt: 'WEFor 2026', en: 'WEFor 2026' },
+    { src: 'assets/img/projetos/wefor/07_04_2026.jpeg', pt: 'WEFor 2026', en: 'WEFor 2026' },
+    { src: 'assets/img/projetos/wefor/08_04_2026.jpeg', pt: 'WEFor 2026', en: 'WEFor 2026' },
+    { src: 'assets/img/projetos/wefor/09_04_2026.jpeg', pt: 'WEFor 2026', en: 'WEFor 2026' },
+  ];
+
+  const shuffle = (arr) => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
   const galleryGrid = document.getElementById('galleryGrid');
+  if (galleryGrid) {
+    galleryGrid.innerHTML = shuffle(GALLERY_PHOTOS).map((p) => `
+      <div class="gallery-item" data-caption="${p.pt}" tabindex="0" role="button" aria-label="Ampliar foto: ${p.pt}">
+        <img src="${p.src}" alt="${p.pt} — foto do capítulo IEEE PELS UFMS" loading="lazy">
+        <div class="gallery-overlay"><span class="i18n-pt">${p.pt}</span><span class="i18n-en" lang="en">${p.en}</span></div>
+        <span class="gallery-expand" aria-hidden="true">⤢</span>
+      </div>
+    `).join('');
+  }
+
+  /* ---------- Gallery carousel (auto-scroll + center highlight) ---------- */
   const galleryPrev = document.getElementById('galleryPrev');
   const galleryNext = document.getElementById('galleryNext');
 
