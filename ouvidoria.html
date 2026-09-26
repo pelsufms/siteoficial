@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Área do Membro — IEEE PELS UFMS Chapter</title>
-<meta name="description" content="Área do membro do Capítulo Estudantil IEEE PELS UFMS: entre com sua conta Google para ver seu cargo atual e acessar a biblioteca de materiais do capítulo.">
+<title>Ouvidoria — IEEE PELS UFMS Chapter</title>
+<meta name="description" content="Canal de denúncia anônima do Capítulo Estudantil IEEE PELS UFMS. Aberto a membros e não membros, sem necessidade de login ou identificação.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/img/favicon-192.png">
@@ -61,7 +61,7 @@
       <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
     </button>
 
-    <a href="area-membro.html" class="member-area-link is-active" aria-label="Área do Membro / Member Area" title="Área do Membro">
+    <a href="area-membro.html" class="member-area-link" aria-label="Área do Membro / Member Area" title="Área do Membro">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.5 3.5-7 8-7s8 2.5 8 7"/></svg>
     </a>
 
@@ -82,8 +82,8 @@
   <a href="index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
   <a href="index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
   <a href="index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
-  <a href="area-membro.html" class="is-active"><span class="i18n-pt">Área do Membro</span><span class="i18n-en" lang="en">Member Area</span></a>
-  <a href="ouvidoria.html"><span class="i18n-pt">Ouvidoria</span><span class="i18n-en" lang="en">Ombudsman</span></a>
+  <a href="area-membro.html"><span class="i18n-pt">Área do Membro</span><span class="i18n-en" lang="en">Member Area</span></a>
+  <a href="ouvidoria.html" class="is-active"><span class="i18n-pt">Ouvidoria</span><span class="i18n-en" lang="en">Ombudsman</span></a>
   <a href="index.html#membros" class="btn btn-primary"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
   <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Idioma do site / Site language">
     <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
@@ -101,164 +101,66 @@
 
   <section class="page-hero">
     <div class="container">
-      <span class="kicker i18n-pt">Área restrita</span>
-      <span class="kicker i18n-en" lang="en">Members only</span>
-      <h1 class="i18n-pt">Área do Membro</h1>
-      <h1 class="i18n-en" lang="en">Member Area</h1>
-      <p class="page-lead i18n-pt">Entre com sua conta Google para ver seu cargo atual no capítulo e acessar a
-        biblioteca de materiais.</p>
-      <p class="page-lead i18n-en" lang="en">Sign in with your Google account to see your current role in the
-        chapter and access the materials library.</p>
+      <span class="kicker i18n-pt">Canal confidencial</span>
+      <span class="kicker i18n-en" lang="en">Confidential channel</span>
+      <h1 class="i18n-pt">Ouvidoria</h1>
+      <h1 class="i18n-en" lang="en">Ombudsman</h1>
+      <p class="page-lead i18n-pt">Um espaço seguro e anônimo para relatar condutas inadequadas, conflitos ou
+        qualquer situação que vá contra os valores do capítulo — sem precisar se identificar.</p>
+      <p class="page-lead i18n-en" lang="en">A safe, anonymous space to report misconduct, conflicts, or anything
+        that goes against the chapter's values — no need to identify yourself.</p>
     </div>
   </section>
 
   <section class="page-section">
-    <div class="container" style="max-width:520px;">
+    <div class="container" style="max-width:640px;">
 
-      <!-- Estado: antes de logar -->
-      <div id="memberLoggedOut" class="page-cta" style="text-align:center;">
-        <p class="i18n-pt">Use a mesma conta Google associada ao seu cadastro no capítulo.</p>
-        <p class="i18n-en" lang="en">Use the same Google account associated with your chapter registration.</p>
-        <div id="googleSignInButton" style="display:flex;justify-content:center;margin-top:16px;"></div>
-        <p id="memberLoginError" class="i18n-pt" style="display:none;color:var(--red);margin-top:16px;font-size:0.9rem;"></p>
+      <div class="info-cards" style="margin-top:0;margin-bottom:28px;">
+        <div class="info-card">
+          <h3 class="i18n-pt">100% anônimo</h3>
+          <h3 class="i18n-en" lang="en">100% anonymous</h3>
+          <p class="i18n-pt">Não é preciso fazer login com o Google nem informar nome ou e-mail. O formulário
+            não coleta nenhum dado que identifique quem preencheu.</p>
+          <p class="i18n-en" lang="en">No Google login, name, or e-mail required. The form does not collect any
+            data that could identify who submitted it.</p>
+        </div>
+        <div class="info-card">
+          <h3 class="i18n-pt">Quem pode usar</h3>
+          <h3 class="i18n-en" lang="en">Who can use it</h3>
+          <p class="i18n-pt">Membros, ex-membros ou qualquer pessoa que tenha vivenciado algo relacionado ao
+            capítulo — não precisa ser cadastrado.</p>
+          <p class="i18n-en" lang="en">Members, former members, or anyone who has experienced something related
+            to the chapter — no registration needed.</p>
+        </div>
+        <div class="info-card">
+          <h3 class="i18n-pt">O que relatar</h3>
+          <h3 class="i18n-en" lang="en">What to report</h3>
+          <p class="i18n-pt">Assédio, discriminação, conflitos internos, uso indevido de recursos, ou qualquer
+            conduta que vá contra o código de ética do IEEE.</p>
+          <p class="i18n-en" lang="en">Harassment, discrimination, internal conflicts, misuse of resources, or any
+            conduct against the IEEE code of ethics.</p>
+        </div>
       </div>
 
-      <!-- Estado: carregando -->
-      <div id="memberLoading" style="display:none;text-align:center;color:var(--ink-soft);">
-        <p class="i18n-pt">Verificando...</p>
-        <p class="i18n-en" lang="en">Checking...</p>
+      <div class="page-cta" style="text-align:center;">
+        <p class="i18n-pt">Ao clicar no botão abaixo, você abre um formulário externo do Google que não
+          registra sua identidade. Preencha com o máximo de detalhes que puder — isso ajuda a diretoria e o
+          tutor do capítulo a entenderem e agirem sobre a situação.</p>
+        <p class="i18n-en" lang="en">Clicking the button below opens an external Google Form that does not log
+          your identity. Fill it out with as much detail as you can — this helps the board and the chapter's
+          advisor understand and act on the situation.</p>
+        <a href="OUVIDORIA_FORM_URL_AQUI" target="_blank" rel="noopener" class="btn btn-primary">
+          <span class="i18n-pt">Fazer denúncia anônima</span><span class="i18n-en" lang="en">Submit an anonymous report</span>
+        </a>
       </div>
 
-      <!-- Estado: logado mas não reconhecido -->
-      <div id="memberNotFound" class="page-cta" style="display:none;text-align:center;">
-        <p class="i18n-pt">Não encontramos essa conta na nossa lista de membros ativos. Se você acha que isso é
-          um engano, fale com a Diretoria pelo WhatsApp.</p>
-        <p class="i18n-en" lang="en">We couldn't find this account on our active members list. If you think
-          this is a mistake, reach out to the Board on WhatsApp.</p>
-        <a href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener" class="btn btn-primary"><span class="i18n-pt">Falar com a PELS no WhatsApp</span><span class="i18n-en" lang="en">Talk to PELS on WhatsApp</span></a>
-        <p style="margin-top:24px;">
-          <button type="button" id="memberSignOutNotFound" class="btn btn-outline" style="font-size:0.85rem;"><span class="i18n-pt">Tentar com outra conta</span><span class="i18n-en" lang="en">Try another account</span></button>
-        </p>
-      </div>
+      <p class="i18n-pt" style="margin-top:24px;font-size:0.85rem;color:var(--ink-faint);">Se a situação envolver
+        risco imediato à sua segurança ou de terceiros, procure também a Ouvidoria da UFMS, a Reitoria ou as
+        autoridades competentes.</p>
+      <p class="i18n-en" lang="en" style="margin-top:24px;font-size:0.85rem;color:var(--ink-faint);">If the
+        situation involves immediate risk to your safety or someone else's, also reach out to UFMS's own
+        ombudsman office, the Dean's office, or the relevant authorities.</p>
 
-    </div>
-  </section>
-
-  <!-- Estado: logado e reconhecido — painel completo do membro -->
-  <section class="page-section" id="memberFound" style="display:none;">
-    <div class="container member-dashboard">
-
-      <div>
-        <div class="id-card" id="idCard">
-          <div class="id-card-header">
-            <img src="assets/img/logo.png" alt="" class="id-card-logo">
-            <span class="i18n-pt">Carteirinha de Membro</span>
-            <span class="i18n-en" lang="en">Member Card</span>
-          </div>
-          <div class="id-card-body">
-            <img id="memberPhoto" src="" alt="" class="id-card-photo">
-            <div class="id-card-fields">
-              <div>
-                <label class="i18n-pt">Nome</label><label class="i18n-en" lang="en">Name</label>
-                <strong id="memberName"></strong>
-              </div>
-              <div>
-                <label class="i18n-pt">Cargo</label><label class="i18n-en" lang="en">Role</label>
-                <strong id="memberRole"></strong>
-              </div>
-              <div>
-                <label class="i18n-pt">Curso</label><label class="i18n-en" lang="en">Program</label>
-                <strong id="memberCurso">—</strong>
-              </div>
-              <div>
-                <label class="i18n-pt">Membro desde</label><label class="i18n-en" lang="en">Member since</label>
-                <strong id="memberDesde">—</strong>
-              </div>
-            </div>
-          </div>
-          <div class="id-card-footer">
-            <span class="id-card-year">2026</span>
-            <span>IEEE PELS UFMS Chapter</span>
-          </div>
-        </div>
-        <button type="button" id="downloadCard" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;margin-top:12px;">
-          <span class="i18n-pt">Baixar carteirinha (PNG)</span><span class="i18n-en" lang="en">Download card (PNG)</span>
-        </button>
-      </div>
-
-      <div class="member-panels">
-
-        <div class="member-panel">
-          <h3><span class="i18n-pt">Biblioteca de materiais</span><span class="i18n-en" lang="en">Materials library</span></h3>
-          <p class="i18n-pt">Slides, artigos e templates enviados pelos próprios membros.</p>
-          <p class="i18n-en" lang="en">Slides, papers and templates shared by the members themselves.</p>
-          <a href="https://drive.google.com/drive/folders/1V4RuXtvk8DWLdrQGQojuCq9GKKexJJSr" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><span class="i18n-pt">Abrir Biblioteca PELS</span><span class="i18n-en" lang="en">Open PELS Library</span></a>
-        </div>
-
-        <div class="member-panel">
-          <h3><span class="i18n-pt">Buscar no IEEE Xplore</span><span class="i18n-en" lang="en">Search IEEE Xplore</span></h3>
-          <p class="i18n-pt">Pesquise artigos e papers direto na biblioteca digital do IEEE.</p>
-          <p class="i18n-en" lang="en">Search papers directly on IEEE's digital library.</p>
-          <form id="xploreSearchForm" class="member-search-form">
-            <input type="search" id="xploreSearchInput" data-placeholder-pt="Ex: conversor buck-boost" data-placeholder-en="e.g. buck-boost converter" required>
-            <button type="submit" class="btn btn-outline btn-sm"><span class="i18n-pt">Buscar</span><span class="i18n-en" lang="en">Search</span></button>
-          </form>
-        </div>
-
-        <div class="member-panel">
-          <h3><span class="i18n-pt">Ouvidoria</span><span class="i18n-en" lang="en">Ombudsman</span></h3>
-          <p class="i18n-pt">Canal 100% anônimo para relatar condutas inadequadas ou conflitos — sem login, sem identificação.</p>
-          <p class="i18n-en" lang="en">A 100% anonymous channel to report misconduct or conflicts — no login, no identification.</p>
-          <a href="ouvidoria.html" class="btn btn-outline btn-sm"><span class="i18n-pt">Abrir canal anônimo</span><span class="i18n-en" lang="en">Open anonymous channel</span></a>
-        </div>
-
-        <div class="member-panel member-panel-wide">
-          <h3><span class="i18n-pt">Meus dados</span><span class="i18n-en" lang="en">My profile</span></h3>
-          <p class="i18n-pt">Mantenha seu cadastro atualizado. Cargo e e-mail só a diretoria pode alterar.</p>
-          <p class="i18n-en" lang="en">Keep your profile up to date. Role and e-mail can only be changed by the board.</p>
-          <form id="profileForm" class="member-profile-form">
-            <label>
-              <span class="i18n-pt">Nome</span><span class="i18n-en" lang="en">Name</span>
-              <input type="text" id="profileNome" required>
-            </label>
-            <label>
-              <span class="i18n-pt">Curso</span><span class="i18n-en" lang="en">Program</span>
-              <input type="text" id="profileCurso" data-placeholder-pt="Ex: Engenharia Elétrica" data-placeholder-en="e.g. Electrical Engineering">
-            </label>
-            <label>
-              <span class="i18n-pt">RA</span><span class="i18n-en" lang="en">Student ID</span>
-              <input type="text" id="profileRa">
-            </label>
-            <label>
-              <span class="i18n-pt">Telefone / WhatsApp</span><span class="i18n-en" lang="en">Phone / WhatsApp</span>
-              <input type="tel" id="profileTelefone" data-placeholder-pt="(67) 9XXXX-XXXX" data-placeholder-en="+55 67 9XXXX-XXXX">
-            </label>
-            <button type="submit" class="btn btn-primary btn-sm"><span class="i18n-pt">Salvar dados</span><span class="i18n-en" lang="en">Save profile</span></button>
-            <span id="profileStatus" style="font-size:0.82rem;"></span>
-          </form>
-        </div>
-
-        <div class="member-panel member-panel-wide">
-          <h3><span class="i18n-pt">Mural de avisos</span><span class="i18n-en" lang="en">Announcements</span></h3>
-
-          <form id="avisoForm" class="member-aviso-form" style="display:none;">
-            <input type="text" id="avisoTitulo" data-placeholder-pt="Título do aviso" data-placeholder-en="Announcement title" required>
-            <textarea id="avisoTexto" data-placeholder-pt="Texto (opcional)" data-placeholder-en="Text (optional)" rows="2"></textarea>
-            <button type="submit" class="btn btn-outline btn-sm"><span class="i18n-pt">Publicar aviso</span><span class="i18n-en" lang="en">Post announcement</span></button>
-            <span id="avisoStatus" style="font-size:0.82rem;"></span>
-          </form>
-
-          <div id="memberAvisos">
-            <p class="i18n-pt" style="color:var(--ink-soft);">Nenhum aviso no momento.</p>
-            <p class="i18n-en" lang="en" style="color:var(--ink-soft);">No announcements right now.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <p style="margin-top:8px;">
-        <button type="button" id="memberSignOut" class="btn btn-outline btn-sm"><span class="i18n-pt">Sair</span><span class="i18n-en" lang="en">Sign out</span></button>
-      </p>
     </div>
   </section>
 
@@ -325,7 +227,5 @@
 
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="js/area-membro.js"></script>
 </body>
 </html>

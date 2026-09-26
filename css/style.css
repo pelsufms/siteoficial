@@ -1762,9 +1762,42 @@ html[lang="en"] .i18n-pt { display: none; }
 
 .aviso-item { padding: 12px 0; border-top: 1px solid var(--border); }
 .aviso-item:first-child { border-top: none; padding-top: 0; }
-.aviso-item-date { font-size: 0.72rem; color: var(--ink-faint); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+.aviso-item-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
 .aviso-item-title { font-size: 0.95rem; color: var(--ink); margin: 2px 0 4px; }
 .aviso-item-text { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+
+.aviso-item-actions { display: flex; gap: 10px; text-transform: none; letter-spacing: normal; }
+.aviso-item-actions button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--red);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.aviso-edit-titulo, .aviso-edit-texto {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-family: inherit;
+}
 
 .member-profile-form {
   display: grid;

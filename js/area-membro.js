@@ -44,8 +44,15 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
   }
 
   function handleCredentialResponse(response) {
-    showOnly(elLoading);
     lastCredential = response.credential;
+
+    // Se o painel do membro já está na tela (veio do cache desta aba, ou a
+    // pessoa já tinha acabado de logar), isso é só uma renovação silenciosa
+    // do token em segundo plano — não refaz a busca nem re-renderiza nada,
+    // pra não apagar o que a pessoa esteja digitando nos formulários.
+    if (elFound.style.display !== 'none') return;
+
+    showOnly(elLoading);
 
     if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('URL_DO_APP_DA_WEB_AQUI') !== -1) {
       showError('Configuração pendente: a Área do Membro ainda não foi finalizada. Fale com a Diretoria.');
@@ -108,7 +115,10 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     return div.innerHTML;
   }
 
+  var currentAvisos = [];
+
   function renderAvisos(avisos) {
+    currentAvisos = avisos;
     var container = document.getElementById('memberAvisos');
     if (!avisos.length) {
       container.innerHTML =
@@ -118,14 +128,86 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     }
 
     container.innerHTML = avisos.map(function (aviso) {
+      var id = escapeHtml(aviso.id);
+      var actions = aviso.podeEditar
+        ? '<span class="aviso-item-actions">' +
+            '<button type="button" class="aviso-edit-btn" data-id="' + id + '">' + t('Editar', 'Edit') + '</button>' +
+            '<button type="button" class="aviso-delete-btn" data-id="' + id + '">' + t('Excluir', 'Delete') + '</button>' +
+          '</span>'
+        : '';
       return (
-        '<div class="aviso-item">' +
-          '<p class="aviso-item-date">' + escapeHtml(aviso.data) + '</p>' +
+        '<div class="aviso-item" data-id="' + id + '">' +
+          '<p class="aviso-item-date">' + escapeHtml(aviso.data) + actions + '</p>' +
           '<p class="aviso-item-title">' + escapeHtml(aviso.titulo) + '</p>' +
           '<p class="aviso-item-text">' + escapeHtml(aviso.texto) + '</p>' +
         '</div>'
       );
     }).join('');
+  }
+
+  function findAviso(id) {
+    for (var i = 0; i < currentAvisos.length; i++) {
+      if (currentAvisos[i].id === id) return currentAvisos[i];
+    }
+    return null;
+  }
+
+  function setupAvisoActions() {
+    document.getElementById('memberAvisos').addEventListener('click', function (ev) {
+      var editBtn = ev.target.closest('.aviso-edit-btn');
+      var deleteBtn = ev.target.closest('.aviso-delete-btn');
+      var saveBtn = ev.target.closest('.aviso-save-btn');
+      var cancelBtn = ev.target.closest('.aviso-cancel-btn');
+
+      if (editBtn) {
+        var aviso = findAviso(editBtn.dataset.id);
+        if (!aviso) return;
+        var item = editBtn.closest('.aviso-item');
+        item.innerHTML =
+          '<input type="text" class="aviso-edit-titulo" value="' + escapeHtml(aviso.titulo) + '">' +
+          '<textarea class="aviso-edit-texto" rows="2">' + escapeHtml(aviso.texto) + '</textarea>' +
+          '<span class="aviso-item-actions">' +
+            '<button type="button" class="aviso-save-btn" data-id="' + editBtn.dataset.id + '">' + t('Salvar', 'Save') + '</button>' +
+            '<button type="button" class="aviso-cancel-btn" data-id="' + editBtn.dataset.id + '">' + t('Cancelar', 'Cancel') + '</button>' +
+          '</span>';
+        return;
+      }
+
+      if (cancelBtn) {
+        renderAvisos(currentAvisos);
+        return;
+      }
+
+      if (saveBtn) {
+        var item2 = saveBtn.closest('.aviso-item');
+        var novoTitulo = item2.querySelector('.aviso-edit-titulo').value.trim();
+        var novoTexto = item2.querySelector('.aviso-edit-texto').value.trim();
+        if (!novoTitulo) return;
+        callBackend({ action: 'updateAviso', id: saveBtn.dataset.id, titulo: novoTitulo, texto: novoTexto })
+          .then(handleAvisoActionResult);
+        return;
+      }
+
+      if (deleteBtn) {
+        if (!window.confirm(t('Excluir este aviso?', 'Delete this announcement?'))) return;
+        callBackend({ action: 'deleteAviso', id: deleteBtn.dataset.id })
+          .then(handleAvisoActionResult);
+        return;
+      }
+    });
+  }
+
+  function handleAvisoActionResult(data) {
+    if (data && data.found) {
+      sessionStorage.setItem('pels-member', JSON.stringify(data));
+      renderAvisos(data.avisos || []);
+      return;
+    }
+    var msg = data && data.error === 'session_expired'
+      ? t('Sessão expirada — saia e entre novamente.', 'Session expired — sign out and sign in again.')
+      : t('Não foi possível concluir. Tente novamente.', 'Could not complete this. Please try again.');
+    window.alert(msg);
+    renderAvisos(currentAvisos);
   }
 
   function setupPlaceholders() {
@@ -347,40 +429,53 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
   setupXploreSearch();
   setupProfileForm();
   setupAvisoForm();
+  setupAvisoActions();
   setupDownloadCard();
 
   window.addEventListener('load', function () {
-    // Se já verificamos essa pessoa nesta aba, evita pedir login de novo.
-    // Ações que gravam dados (salvar perfil, publicar aviso) ainda vão pedir
-    // login de novo se o token da sessão anterior tiver expirado.
+    // Se já verificamos essa pessoa nesta aba, evita pedir login de novo —
+    // mas o token do login anterior não vem junto (só fica em memória, não
+    // é salvo), então tentamos renovar ele sozinho em segundo plano logo
+    // abaixo. Sem essa renovação, ações que gravam dados (salvar perfil,
+    // publicar aviso) pediriam pra sair e entrar de novo toda vez que a
+    // página fosse recarregada.
+    var mostrandoCache = false;
     var cached = sessionStorage.getItem('pels-member');
     if (cached) {
       try {
         renderFound(JSON.parse(cached));
-        return;
+        mostrandoCache = true;
       } catch (e) {
         sessionStorage.removeItem('pels-member');
       }
     }
 
     if (!window.google || !google.accounts || !google.accounts.id) {
-      showError('Não foi possível carregar o login do Google. Verifique sua conexão e recarregue a página.');
+      if (!mostrandoCache) showError('Não foi possível carregar o login do Google. Verifique sua conexão e recarregue a página.');
       return;
     }
 
     if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID.indexOf('CLIENT_ID_AQUI') !== -1) {
-      showError('Configuração pendente: a Área do Membro ainda não foi finalizada. Fale com a Diretoria.');
+      if (!mostrandoCache) showError('Configuração pendente: a Área do Membro ainda não foi finalizada. Fale com a Diretoria.');
       return;
     }
 
     google.accounts.id.initialize({
       client_id: GOOGLE_CLIENT_ID,
-      callback: handleCredentialResponse
+      callback: handleCredentialResponse,
+      auto_select: true
     });
 
-    google.accounts.id.renderButton(
-      document.getElementById('googleSignInButton'),
-      { theme: 'outline', size: 'large', text: 'signin_with', locale: 'pt-BR' }
-    );
+    if (mostrandoCache) {
+      // Tenta obter um token novo silenciosamente (sem interromper quem já
+      // está vendo o painel). Se não conseguir, só vai pedir login de novo
+      // quando a pessoa tentar salvar algo.
+      try { google.accounts.id.prompt(); } catch (e) {}
+    } else {
+      google.accounts.id.renderButton(
+        document.getElementById('googleSignInButton'),
+        { theme: 'outline', size: 'large', text: 'signin_with', locale: 'pt-BR' }
+      );
+    }
   });
 })();

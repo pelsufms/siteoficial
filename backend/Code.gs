@@ -10,7 +10,8 @@
  *    lista inteira.
  * 3. Permite que o próprio membro atualize Nome, Curso, RA e Telefone.
  * 4. Permite que membros da diretoria (qualquer Cargo diferente de "Membro")
- *    publiquem avisos no mural, lidos por todo mundo que logar.
+ *    publiquem, editem e removam avisos no mural — cada um só mexe nos
+ *    próprios avisos.
  *
  * Estrutura de colunas esperada na planilha (aba principal, primeira linha
  * é cabeçalho):
@@ -33,8 +34,11 @@
  * a versão nova — a URL continua a mesma.
  *
  * Mural de avisos:
- * A aba "Avisos" (Data | Titulo | Texto) é criada automaticamente na primeira
- * vez que um diretor publica um aviso pelo site. Não precisa criar na mão.
+ * A aba "Avisos" (ID | Data | Titulo | Texto | Autor) é criada
+ * automaticamente na primeira vez que um diretor publica um aviso pelo
+ * site. Se você já tinha uma aba "Avisos" de uma versão anterior deste
+ * script (só com Data | Titulo | Texto), apague essa aba uma vez — ela é
+ * recriada sozinha no formato novo.
  */
 
 // ATENÇÃO: troque pelo Client ID real depois de criá-lo no Google Cloud Console.
@@ -55,6 +59,8 @@ function doPost(e) {
       if (action === 'login') result = handleLogin(body);
       else if (action === 'updateProfile') result = handleUpdateProfile(body);
       else if (action === 'addAviso') result = handleAddAviso(body);
+      else if (action === 'updateAviso') result = handleUpdateAviso(body);
+      else if (action === 'deleteAviso') result = handleDeleteAviso(body);
       else result = { error: 'unknown_action' };
     }
   } catch (err) {
@@ -86,21 +92,22 @@ function verifyToken(idToken) {
   };
 }
 
-// Acha a linha (1-indexada, incluindo cabeçalho) do e-mail na planilha
+// Acha a linha (0-indexada no array `dados`) do e-mail na planilha
 // principal. Devolve -1 se não achar.
 function acharLinhaPorEmail(dados, email) {
   for (var i = 1; i < dados.length; i++) {
     var rowEmail = String(dados[i][1] || '').toLowerCase().trim();
-    if (rowEmail && rowEmail === email) return i; // índice 0-based do array `dados`
+    if (rowEmail && rowEmail === email) return i;
   }
   return -1;
 }
 
 function montarPerfil(linha, fotoGoogle) {
   var cargo = String(linha[2] || '').trim();
+  var nome = linha[0];
   return {
     found: true,
-    nome: linha[0],
+    nome: nome,
     cargo: cargo,
     curso: linha[3] || '',
     ra: linha[4] || '',
@@ -108,7 +115,7 @@ function montarPerfil(linha, fotoGoogle) {
     dataIngresso: linha[6] || '',
     fotoGoogle: fotoGoogle,
     isDiretoria: cargo !== '' && cargo !== 'Membro',
-    avisos: getAvisos()
+    avisos: getAvisos(nome)
   };
 }
 
@@ -173,30 +180,108 @@ function handleAddAviso(body) {
   var abaAvisos = planilha.getSheetByName('Avisos');
   if (!abaAvisos) {
     abaAvisos = planilha.insertSheet('Avisos');
-    abaAvisos.appendRow(['Data', 'Titulo', 'Texto']);
+    abaAvisos.appendRow(['ID', 'Data', 'Titulo', 'Texto', 'Autor']);
   }
-  abaAvisos.appendRow([new Date(), titulo, texto]);
+  var novoId = String(new Date().getTime());
+  abaAvisos.appendRow([novoId, new Date(), titulo, texto, dados[idx][0]]);
 
   return montarPerfil(dados[idx], auth.fotoGoogle);
 }
 
-// Lê a aba "Avisos" (Data | Titulo | Texto), se ela existir. Não quebra o
-// login caso a aba ainda não tenha sido criada.
-function getAvisos() {
+// Acha a linha (1-indexada, pronta para getRange) de um aviso pelo ID.
+// Devolve -1 se não achar.
+function acharLinhaAvisoPorId(abaAvisos, id) {
+  var linhas = abaAvisos.getDataRange().getValues();
+  for (var i = 1; i < linhas.length; i++) {
+    if (String(linhas[i][0]) === String(id)) return i + 1;
+  }
+  return -1;
+}
+
+// Só quem publicou o aviso pode editá-lo (compara pelo Nome salvo na
+// própria linha do aviso, não pelo e-mail, então funciona mesmo que o
+// autor já tenha trocado de cargo).
+function handleUpdateAviso(body) {
+  var auth = verifyToken(body.credential);
+  if (!auth) return { error: 'invalid_token' };
+
+  var planilha = SpreadsheetApp.openById(SHEET_ID);
+  var sheet = planilha.getSheets()[0];
+  var dados = sheet.getDataRange().getValues();
+  var idx = acharLinhaPorEmail(dados, auth.email);
+  if (idx === -1) return { found: false, nomeGoogle: auth.nomeGoogle };
+
+  var abaAvisos = planilha.getSheetByName('Avisos');
+  if (!abaAvisos) return { error: 'not_found' };
+
+  var linhaAviso = acharLinhaAvisoPorId(abaAvisos, body.id);
+  if (linhaAviso === -1) return { error: 'not_found' };
+
+  var autorAtual = String(abaAvisos.getRange(linhaAviso, 5).getValue());
+  if (autorAtual !== String(dados[idx][0])) return { error: 'not_allowed' };
+
+  var titulo = String(body.titulo || '').trim();
+  var texto = String(body.texto || '').trim();
+  if (!titulo) return { error: 'missing_title' };
+
+  abaAvisos.getRange(linhaAviso, 3).setValue(titulo);
+  abaAvisos.getRange(linhaAviso, 4).setValue(texto);
+
+  return montarPerfil(dados[idx], auth.fotoGoogle);
+}
+
+function handleDeleteAviso(body) {
+  var auth = verifyToken(body.credential);
+  if (!auth) return { error: 'invalid_token' };
+
+  var planilha = SpreadsheetApp.openById(SHEET_ID);
+  var sheet = planilha.getSheets()[0];
+  var dados = sheet.getDataRange().getValues();
+  var idx = acharLinhaPorEmail(dados, auth.email);
+  if (idx === -1) return { found: false, nomeGoogle: auth.nomeGoogle };
+
+  var abaAvisos = planilha.getSheetByName('Avisos');
+  if (!abaAvisos) return { error: 'not_found' };
+
+  var linhaAviso = acharLinhaAvisoPorId(abaAvisos, body.id);
+  if (linhaAviso === -1) return { error: 'not_found' };
+
+  var autorAtual = String(abaAvisos.getRange(linhaAviso, 5).getValue());
+  if (autorAtual !== String(dados[idx][0])) return { error: 'not_allowed' };
+
+  abaAvisos.deleteRow(linhaAviso);
+
+  return montarPerfil(dados[idx], auth.fotoGoogle);
+}
+
+// Lê a aba "Avisos" (ID | Data | Titulo | Texto | Autor), se ela existir.
+// `nomeAtual` é o nome de quem está logado, só para marcar quais avisos
+// essa pessoa pode editar/excluir (os que ela mesma publicou).
+function getAvisos(nomeAtual) {
   try {
     var abaAvisos = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Avisos');
     if (!abaAvisos) return [];
 
-    var linhas = abaAvisos.getDataRange().getValues(); // [ [Data, Titulo, Texto], ... ]
+    var linhas = abaAvisos.getDataRange().getValues();
     var avisos = [];
     for (var i = 1; i < linhas.length; i++) {
-      var titulo = String(linhas[i][1] || '').trim();
+      var titulo = String(linhas[i][2] || '').trim();
       if (!titulo) continue;
-      var dataAviso = linhas[i][0];
+      var dataAviso = linhas[i][1];
+      var autor = String(linhas[i][4] || '');
+      // Usa "duck typing" em vez de instanceof: valores vindos da planilha
+      // às vezes não passam no instanceof Date mesmo sendo datas.
+      var dataFormatada = (dataAviso && typeof dataAviso.getTime === 'function')
+        ? Utilities.formatDate(dataAviso, 'GMT-4', 'dd/MM/yyyy')
+        : String(dataAviso || '');
+
       avisos.push({
-        data: dataAviso instanceof Date ? Utilities.formatDate(dataAviso, 'GMT-4', 'dd/MM/yyyy') : String(dataAviso || ''),
+        id: String(linhas[i][0]),
+        data: dataFormatada,
         titulo: titulo,
-        texto: String(linhas[i][2] || '')
+        texto: String(linhas[i][3] || ''),
+        autor: autor,
+        podeEditar: !!nomeAtual && autor === String(nomeAtual)
       });
     }
     // Mais recentes primeiro.
