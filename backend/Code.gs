@@ -7,6 +7,8 @@
  *    que vem do navegador sem checar).
  * 3. Procura o e-mail confirmado na planilha "Membros e Cargos PELS 2026 (PRIVADO)".
  * 4. Devolve para o site SÓ o nome e o cargo daquela pessoa — nunca a lista inteira.
+ * 5. Também devolve os avisos internos cadastrados na aba "Avisos" da mesma
+ *    planilha (se ela existir) para exibir no mural da Área do Membro.
  *
  * Como publicar (uma única vez):
  * 1. Acesse https://script.google.com/ logado como pelsufms@gmail.com
@@ -19,6 +21,13 @@
  * 5. Autorize o script quando pedir (é a sua própria conta pedindo permissão
  *    pra ler a própria planilha — normal e esperado)
  * 6. Copie a URL do App da Web gerada e cole no site (js/area-membro.js)
+ *
+ * Mural de avisos (opcional):
+ * Na planilha "Membros e Cargos PELS 2026 (PRIVADO)", crie uma aba chamada
+ * exatamente "Avisos" com as colunas Data | Titulo | Texto (uma linha de
+ * cabeçalho + uma linha por aviso). Toda vez que reimplantar (Implantar >
+ * Gerenciar implantações > editar > Nova versão) os avisos novos aparecem
+ * pra todos os membros logados.
  */
 
 // ATENÇÃO: troque pelo Client ID real depois de criá-lo no Google Cloud Console.
@@ -82,10 +91,37 @@ function handleLogin(e) {
         found: true,
         nome: data[i][0],
         cargo: data[i][2],
-        fotoGoogle: fotoGoogle
+        fotoGoogle: fotoGoogle,
+        avisos: getAvisos()
       };
     }
   }
 
   return { found: false, nomeGoogle: nomeGoogle };
+}
+
+// Lê a aba "Avisos" (Data | Titulo | Texto), se ela existir. Não quebra o
+// login caso a aba ainda não tenha sido criada.
+function getAvisos() {
+  try {
+    var abaAvisos = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Avisos');
+    if (!abaAvisos) return [];
+
+    var linhas = abaAvisos.getDataRange().getValues(); // [ [Data, Titulo, Texto], ... ]
+    var avisos = [];
+    for (var i = 1; i < linhas.length; i++) {
+      var titulo = String(linhas[i][1] || '').trim();
+      if (!titulo) continue;
+      var dataAviso = linhas[i][0];
+      avisos.push({
+        data: dataAviso instanceof Date ? Utilities.formatDate(dataAviso, 'GMT-4', 'dd/MM/yyyy') : String(dataAviso || ''),
+        titulo: titulo,
+        texto: String(linhas[i][2] || '')
+      });
+    }
+    // Mais recentes primeiro.
+    return avisos.reverse();
+  } catch (err) {
+    return [];
+  }
 }

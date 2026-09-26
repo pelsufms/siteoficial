@@ -1640,3 +1640,86 @@ html[lang="en"] .i18n-pt { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .photo-grid-item:hover img { transform: none; }
 }
+
+/* ---------- Área do Membro ---------- */
+.btn-sm { padding: 9px 18px; font-size: 0.82rem; }
+
+.member-dashboard {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 780px) {
+  .member-dashboard { grid-template-columns: 1fr; }
+}
+
+.member-card {
+  background: linear-gradient(160deg, var(--red-dark), var(--red-darker));
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-red);
+  position: sticky;
+  top: 100px;
+}
+.member-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 18px;
+}
+.member-card-photo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.6);
+  margin: 0 auto 14px;
+  display: block;
+  background: rgba(255,255,255,0.15);
+}
+.member-card-name { font-size: 1.15rem; margin-bottom: 4px; color: #fff; }
+.member-card-role { font-weight: 700; font-size: 0.95rem; margin-bottom: 14px; }
+.member-card-caption { font-size: 0.72rem; opacity: 0.8; margin: 0; }
+
+.member-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 640px) {
+  .member-panels { grid-template-columns: 1fr; }
+}
+.member-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+.member-panel h3 { font-size: 1rem; margin-bottom: 8px; color: var(--ink); }
+.member-panel p { font-size: 0.88rem; margin-bottom: 14px; }
+.member-panel-wide { grid-column: 1 / -1; }
+
+.member-search-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.member-search-form input[type="search"] {
+  flex: 1 1 160px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--ink);
+  font-size: 0.85rem;
+}
+
+.aviso-item { padding: 12px 0; border-top: 1px solid var(--border); }
+.aviso-item:first-child { border-top: none; padding-top: 0; }
+.aviso-item-date { font-size: 0.72rem; color: var(--ink-faint); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+.aviso-item-title { font-size: 0.95rem; color: var(--ink); margin: 2px 0 4px; }
+.aviso-item-text { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }

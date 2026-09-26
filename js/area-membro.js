@@ -68,7 +68,49 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     } else {
       photo.style.display = 'none';
     }
+    renderAvisos(data.avisos || []);
     showOnly(elFound);
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderAvisos(avisos) {
+    var container = document.getElementById('memberAvisos');
+    if (!avisos.length) return; // mantém a mensagem padrão "nenhum aviso"
+
+    container.innerHTML = avisos.map(function (aviso) {
+      return (
+        '<div class="aviso-item">' +
+          '<p class="aviso-item-date">' + escapeHtml(aviso.data) + '</p>' +
+          '<p class="aviso-item-title">' + escapeHtml(aviso.titulo) + '</p>' +
+          '<p class="aviso-item-text">' + escapeHtml(aviso.texto) + '</p>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  function setupXploreSearch() {
+    var form = document.getElementById('xploreSearchForm');
+    var input = document.getElementById('xploreSearchInput');
+    if (!form || !input) return;
+
+    function updatePlaceholder() {
+      var isEn = document.documentElement.getAttribute('lang') === 'en';
+      input.placeholder = isEn ? input.dataset.placeholderEn : input.dataset.placeholderPt;
+    }
+    updatePlaceholder();
+    window.addEventListener('pelslangchange', updatePlaceholder);
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var query = input.value.trim();
+      if (!query) return;
+      window.open('https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=' + encodeURIComponent(query), '_blank', 'noopener');
+    });
   }
 
   function signOut() {
@@ -81,6 +123,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
 
   document.getElementById('memberSignOut').addEventListener('click', signOut);
   document.getElementById('memberSignOutNotFound').addEventListener('click', signOut);
+  setupXploreSearch();
 
   window.addEventListener('load', function () {
     // Se já verificamos essa pessoa nesta aba, evita pedir login de novo.

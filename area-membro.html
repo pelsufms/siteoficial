@@ -125,19 +125,6 @@
         <p class="i18n-en" lang="en">Checking...</p>
       </div>
 
-      <!-- Estado: logado e reconhecido -->
-      <div id="memberFound" class="page-cta" style="display:none;text-align:center;">
-        <img id="memberPhoto" src="" alt="" style="width:72px;height:72px;border-radius:50%;margin:0 auto 16px;display:block;object-fit:cover;">
-        <p class="i18n-pt" style="color:var(--ink-soft);margin-bottom:4px;">Bem-vindo(a) de volta,</p>
-        <p class="i18n-en" lang="en" style="color:var(--ink-soft);margin-bottom:4px;">Welcome back,</p>
-        <h2 id="memberName" style="margin-bottom:4px;"></h2>
-        <p style="color:var(--red);font-weight:700;margin-bottom:24px;"><span class="i18n-pt">Cargo atual: </span><span class="i18n-en" lang="en">Current role: </span><span id="memberRole"></span></p>
-        <a href="https://drive.google.com/drive/folders/1V4RuXtvk8DWLdrQGQojuCq9GKKexJJSr" target="_blank" rel="noopener" class="btn btn-primary"><span class="i18n-pt">Abrir Biblioteca PELS</span><span class="i18n-en" lang="en">Open PELS Library</span></a>
-        <p style="margin-top:24px;">
-          <button type="button" id="memberSignOut" class="btn btn-outline" style="font-size:0.85rem;"><span class="i18n-pt">Sair</span><span class="i18n-en" lang="en">Sign out</span></button>
-        </p>
-      </div>
-
       <!-- Estado: logado mas não reconhecido -->
       <div id="memberNotFound" class="page-cta" style="display:none;text-align:center;">
         <p class="i18n-pt">Não encontramos essa conta na nossa lista de membros ativos. Se você acha que isso é
@@ -150,6 +137,57 @@
         </p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Estado: logado e reconhecido — painel completo do membro -->
+  <section class="page-section" id="memberFound" style="display:none;">
+    <div class="container member-dashboard">
+
+      <div class="member-card">
+        <div class="member-card-top">
+          <span class="member-card-brand">IEEE PELS UFMS</span>
+          <span class="member-card-year">2026</span>
+        </div>
+        <img id="memberPhoto" src="" alt="" class="member-card-photo">
+        <h2 id="memberName" class="member-card-name"></h2>
+        <p class="member-card-role"><span id="memberRole"></span></p>
+        <p class="member-card-caption i18n-pt">Carteirinha digital de membro</p>
+        <p class="member-card-caption i18n-en" lang="en">Digital member card</p>
+      </div>
+
+      <div class="member-panels">
+
+        <div class="member-panel">
+          <h3><span class="i18n-pt">Biblioteca de materiais</span><span class="i18n-en" lang="en">Materials library</span></h3>
+          <p class="i18n-pt">Slides, artigos e templates enviados pelos próprios membros.</p>
+          <p class="i18n-en" lang="en">Slides, papers and templates shared by the members themselves.</p>
+          <a href="https://drive.google.com/drive/folders/1V4RuXtvk8DWLdrQGQojuCq9GKKexJJSr" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><span class="i18n-pt">Abrir Biblioteca PELS</span><span class="i18n-en" lang="en">Open PELS Library</span></a>
+        </div>
+
+        <div class="member-panel">
+          <h3><span class="i18n-pt">Buscar no IEEE Xplore</span><span class="i18n-en" lang="en">Search IEEE Xplore</span></h3>
+          <p class="i18n-pt">Pesquise artigos e papers direto na biblioteca digital do IEEE.</p>
+          <p class="i18n-en" lang="en">Search papers directly on IEEE's digital library.</p>
+          <form id="xploreSearchForm" class="member-search-form">
+            <input type="search" id="xploreSearchInput" data-placeholder-pt="Ex: conversor buck-boost" data-placeholder-en="e.g. buck-boost converter" required>
+            <button type="submit" class="btn btn-outline btn-sm"><span class="i18n-pt">Buscar</span><span class="i18n-en" lang="en">Search</span></button>
+          </form>
+        </div>
+
+        <div class="member-panel member-panel-wide">
+          <h3><span class="i18n-pt">Mural de avisos</span><span class="i18n-en" lang="en">Announcements</span></h3>
+          <div id="memberAvisos">
+            <p class="i18n-pt" style="color:var(--ink-soft);">Nenhum aviso no momento.</p>
+            <p class="i18n-en" lang="en" style="color:var(--ink-soft);">No announcements right now.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="margin-top:8px;">
+        <button type="button" id="memberSignOut" class="btn btn-outline btn-sm"><span class="i18n-pt">Sair</span><span class="i18n-en" lang="en">Sign out</span></button>
+      </p>
     </div>
   </section>
 
