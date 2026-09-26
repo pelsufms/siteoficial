@@ -1481,7 +1481,7 @@ section { padding: 108px 0; perspective: 1200px; }
   background: var(--red);
   border-color: var(--red);
 }
-@media (max-width: 1360px) {
+@media (max-width: 1460px) {
   .nav-desktop, .site-header .btn-outline, .member-area-link { display: none; }
   .nav-toggle { display: block; }
 }
