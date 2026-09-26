@@ -174,6 +174,10 @@
                 <label class="i18n-pt">Membro desde</label><label class="i18n-en" lang="en">Member since</label>
                 <strong id="memberDesde">—</strong>
               </div>
+              <div id="memberIeeeField" style="display:none;">
+                <label>Nº IEEE</label>
+                <strong id="memberNumeroIeee"></strong>
+              </div>
             </div>
           </div>
           <div class="id-card-footer">
@@ -217,6 +221,13 @@
           <p class="i18n-pt">Mantenha seu cadastro atualizado. Cargo e e-mail só a diretoria pode alterar.</p>
           <p class="i18n-en" lang="en">Keep your profile up to date. Role and e-mail can only be changed by the board.</p>
           <form id="profileForm" class="member-profile-form">
+            <label class="member-profile-photo-field">
+              <span class="i18n-pt">Foto de perfil</span><span class="i18n-en" lang="en">Profile photo</span>
+              <span class="member-profile-photo-row">
+                <img id="profilePhotoPreview" src="" alt="" class="member-profile-photo-preview">
+                <input type="file" id="profileFoto" accept="image/*">
+              </span>
+            </label>
             <label>
               <span class="i18n-pt">Nome</span><span class="i18n-en" lang="en">Name</span>
               <input type="text" id="profileNome" required>
@@ -232,6 +243,14 @@
             <label>
               <span class="i18n-pt">Telefone / WhatsApp</span><span class="i18n-en" lang="en">Phone / WhatsApp</span>
               <input type="tel" id="profileTelefone" data-placeholder-pt="(67) 9XXXX-XXXX" data-placeholder-en="+55 67 9XXXX-XXXX">
+            </label>
+            <label>
+              <span class="i18n-pt">Membro desde</span><span class="i18n-en" lang="en">Member since</span>
+              <input type="text" id="profileDataIngresso" data-placeholder-pt="Ex: Fevereiro de 2025" data-placeholder-en="e.g. February 2025">
+            </label>
+            <label>
+              <span class="i18n-pt">Número de membro IEEE (se tiver)</span><span class="i18n-en" lang="en">IEEE membership number (if any)</span>
+              <input type="text" id="profileNumeroIeee" data-placeholder-pt="Opcional" data-placeholder-en="Optional">
             </label>
             <button type="submit" class="btn btn-primary btn-sm"><span class="i18n-pt">Salvar dados</span><span class="i18n-en" lang="en">Save profile</span></button>
             <span id="profileStatus" style="font-size:0.82rem;"></span>

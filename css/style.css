@@ -1828,6 +1828,24 @@ html[lang="en"] .i18n-pt { display: none; }
 }
 .member-profile-form button { grid-column: 1 / -1; justify-self: start; }
 
+.member-profile-photo-field { grid-column: 1 / -1; }
+.member-profile-photo-row { display: flex; align-items: center; gap: 14px; }
+.member-profile-photo-preview {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.member-profile-photo-row input[type="file"] {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
 .member-aviso-form {
   display: flex;
   flex-direction: column;

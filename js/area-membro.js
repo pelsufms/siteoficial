@@ -84,9 +84,18 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     document.getElementById('memberCurso').textContent = data.curso || '—';
     document.getElementById('memberDesde').textContent = data.dataIngresso || '—';
 
+    var ieeeField = document.getElementById('memberIeeeField');
+    if (data.numeroIeee) {
+      document.getElementById('memberNumeroIeee').textContent = data.numeroIeee;
+      ieeeField.style.display = '';
+    } else {
+      ieeeField.style.display = 'none';
+    }
+
+    var fotoExibida = data.fotoUrl || data.fotoGoogle;
     var photo = document.getElementById('memberPhoto');
-    if (data.fotoGoogle) {
-      photo.src = data.fotoGoogle;
+    if (fotoExibida) {
+      photo.src = fotoExibida;
       photo.style.display = 'block';
     } else {
       photo.style.display = 'none';
@@ -103,6 +112,17 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     document.getElementById('profileCurso').value = data.curso || '';
     document.getElementById('profileRa').value = data.ra || '';
     document.getElementById('profileTelefone').value = data.telefone || '';
+    document.getElementById('profileDataIngresso').value = data.dataIngresso || '';
+    document.getElementById('profileNumeroIeee').value = data.numeroIeee || '';
+
+    var preview = document.getElementById('profilePhotoPreview');
+    var fotoExibida = data.fotoUrl || data.fotoGoogle;
+    if (fotoExibida) {
+      preview.src = fotoExibida;
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
   }
 
   function t(pt, en) {
@@ -235,21 +255,73 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     });
   }
 
+  // Redimensiona a imagem escolhida (máx. 400px no lado maior, JPEG) antes
+  // de mandar pro servidor — evita fotos gigantes de celular travando o
+  // upload ou estourando o limite do Apps Script.
+  function resizeImageFile(file, maxSize) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          var scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL('image/jpeg', 0.85));
+        };
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
   function setupProfileForm() {
     var form = document.getElementById('profileForm');
     var status = document.getElementById('profileStatus');
+    var fotoInput = document.getElementById('profileFoto');
+    var preview = document.getElementById('profilePhotoPreview');
+
+    fotoInput.addEventListener('change', function () {
+      var file = fotoInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       status.textContent = '...';
       status.style.color = 'var(--ink-soft)';
 
-      callBackend({
+      var payload = {
         action: 'updateProfile',
         nome: document.getElementById('profileNome').value,
         curso: document.getElementById('profileCurso').value,
         ra: document.getElementById('profileRa').value,
-        telefone: document.getElementById('profileTelefone').value
+        telefone: document.getElementById('profileTelefone').value,
+        dataIngresso: document.getElementById('profileDataIngresso').value,
+        numeroIeee: document.getElementById('profileNumeroIeee').value
+      };
+
+      var fotoFile = fotoInput.files[0];
+      var prepararFoto = fotoFile
+        ? resizeImageFile(fotoFile, 400).then(function (dataUrl) {
+            var partes = dataUrl.split(',');
+            payload.fotoMimeType = partes[0].match(/:(.*?);/)[1];
+            payload.fotoBase64 = partes[1];
+          })
+        : Promise.resolve();
+
+      prepararFoto.then(function () {
+        return callBackend(payload);
       }).then(function (data) {
         if (data.error === 'session_expired' || data.error === 'invalid_token') {
           status.textContent = t('Sessão expirada — saia e entre novamente.', 'Session expired — sign out and sign in again.');
@@ -261,6 +333,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
           status.style.color = 'var(--red)';
           return;
         }
+        fotoInput.value = '';
         sessionStorage.setItem('pels-member', JSON.stringify(data));
         renderFound(data);
         status.textContent = t('Dados salvos!', 'Profile saved!');
@@ -325,19 +398,22 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
       var cargo = document.getElementById('memberRole').textContent;
       var curso = document.getElementById('memberCurso').textContent;
       var desde = document.getElementById('memberDesde').textContent;
+      var ieeeField = document.getElementById('memberIeeeField');
+      var numeroIeee = ieeeField.style.display !== 'none' ? document.getElementById('memberNumeroIeee').textContent : '';
       var fotoUrl = document.getElementById('memberPhoto').src;
 
+      var altura = numeroIeee ? 598 : 520;
       var canvas = document.createElement('canvas');
       canvas.width = 900;
-      canvas.height = 520;
+      canvas.height = altura;
       var ctx = canvas.getContext('2d');
 
       function drawCardBody(photoImg) {
-        var grad = ctx.createLinearGradient(0, 0, 900, 520);
+        var grad = ctx.createLinearGradient(0, 0, 900, altura);
         grad.addColorStop(0, '#6e0919');
         grad.addColorStop(1, '#4a0611');
         ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, 900, 520);
+        ctx.fillRect(0, 0, 900, altura);
 
         ctx.fillStyle = 'rgba(0,0,0,0.18)';
         ctx.fillRect(0, 0, 900, 70);
@@ -367,6 +443,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
           ['CURSO', curso],
           ['MEMBRO DESDE', desde]
         ];
+        if (numeroIeee) fields.push(['Nº IEEE', numeroIeee]);
         var fy = 140;
         fields.forEach(function (f) {
           ctx.fillStyle = 'rgba(255,255,255,0.7)';
@@ -378,18 +455,19 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
           fy += 78;
         });
 
+        var footerY = altura - 60;
         ctx.fillStyle = 'rgba(0,0,0,0.25)';
-        ctx.fillRect(0, 460, 900, 60);
+        ctx.fillRect(0, footerY, 900, 60);
         ctx.fillStyle = '#fff';
         ctx.beginPath();
-        ctx.roundRect ? ctx.roundRect(32, 475, 70, 30, 15) : ctx.rect(32, 475, 70, 30);
+        ctx.roundRect ? ctx.roundRect(32, footerY + 15, 70, 30, 15) : ctx.rect(32, footerY + 15, 70, 30);
         ctx.fill();
         ctx.fillStyle = '#4a0611';
         ctx.font = 'bold 15px Inter, sans-serif';
-        ctx.fillText('2026', 48, 495);
+        ctx.fillText('2026', 48, footerY + 35);
         ctx.fillStyle = '#fff';
         ctx.font = 'bold 15px Inter, sans-serif';
-        ctx.fillText('IEEE PELS UFMS Chapter', 780 - ctx.measureText('IEEE PELS UFMS Chapter').width + 32, 495);
+        ctx.fillText('IEEE PELS UFMS Chapter', 780 - ctx.measureText('IEEE PELS UFMS Chapter').width + 32, footerY + 35);
 
         try {
           var link = document.createElement('a');

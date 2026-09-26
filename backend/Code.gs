@@ -15,8 +15,11 @@
  *
  * Estrutura de colunas esperada na planilha (aba principal, primeira linha
  * é cabeçalho):
- *   A: Nome | B: Email | C: Cargo | D: Curso | E: RA | F: Telefone | G: Data de Ingresso
- * As colunas D a G podem ficar em branco — o site trata isso normalmente.
+ *   A: Nome | B: Email | C: Cargo | D: Curso | E: RA | F: Telefone
+ *   G: Data de Ingresso | H: FotoURL | I: Numero IEEE
+ * As colunas D a I podem ficar em branco — o site trata isso normalmente.
+ * A coluna H (FotoURL) é preenchida sozinha pelo próprio script quando o
+ * membro envia uma foto pela Área do Membro — não precisa mexer nela na mão.
  *
  * Como publicar (uma única vez):
  * 1. Acesse https://script.google.com/ logado como pelsufms@gmail.com
@@ -40,6 +43,13 @@
  * script (só com Data | Titulo | Texto), apague essa aba uma vez — ela é
  * recriada sozinha no formato novo.
  *
+ * Foto de perfil:
+ * Quando o membro envia uma foto pela Área do Membro, ela é salva na pasta
+ * "Fotos de Perfil - Área do Membro" (FOTOS_FOLDER_ID) com permissão
+ * "qualquer pessoa com o link pode ver" — necessário pra imagem aparecer
+ * no <img> do site. O link em si não é divulgado em nenhum lugar público,
+ * só fica guardado na planilha privada.
+ *
  * Ouvidoria:
  * Canal anônimo (sem login) que grava as denúncias na planilha separada
  * "Ouvidoria PELS 2026 (CONFIDENCIAL)" (OUVIDORIA_SHEET_ID abaixo). Essa
@@ -60,6 +70,10 @@ var SHEET_ID = '1UMan9l-7FcVvq6pIrcPTvazZBqUgXWH-er6PaEbEPZQ';
 // (pelsufms@gmail.com). Só recebe as denúncias, sem nenhum dado de quem
 // enviou (nem e-mail, nem IP, nem nome).
 var OUVIDORIA_SHEET_ID = '11iTOu-cJ6JgPQ9ujdDuNyNY8LiJGn-lIUpJqTELPL9Y';
+
+// ID da pasta "Fotos de Perfil - Área do Membro" no Drive, onde as fotos
+// enviadas pelos próprios membros são guardadas.
+var FOTOS_FOLDER_ID = '1TAw8sZDkuhF_N7tqA9Ykt5NfQlzfllX7';
 
 function doPost(e) {
   var result;
@@ -128,6 +142,8 @@ function montarPerfil(linha, fotoGoogle) {
     ra: linha[4] || '',
     telefone: linha[5] || '',
     dataIngresso: linha[6] || '',
+    fotoUrl: linha[7] || '',
+    numeroIeee: linha[8] || '',
     fotoGoogle: fotoGoogle,
     isDiretoria: cargo !== '' && cargo !== 'Membro',
     avisos: getAvisos(nome)
@@ -147,8 +163,9 @@ function handleLogin(body) {
 }
 
 // O membro só pode editar os PRÓPRIOS dados (identificado pelo e-mail do
-// token verificado). Nome, Curso, RA e Telefone são editáveis; Cargo,
-// E-mail e Data de Ingresso continuam controlados pela diretoria.
+// token verificado). Cargo e e-mail continuam controlados pela diretoria;
+// todo o resto (nome, curso, RA, telefone, data de ingresso, foto, número
+// IEEE) o próprio membro pode preencher.
 function handleUpdateProfile(body) {
   var auth = verifyToken(body.credential);
   if (!auth) return { error: 'invalid_token' };
@@ -163,14 +180,45 @@ function handleUpdateProfile(body) {
   var curso = String(body.curso || '').trim();
   var ra = String(body.ra || '').trim();
   var telefone = String(body.telefone || '').trim();
+  var dataIngresso = String(body.dataIngresso || '').trim();
+  var numeroIeee = String(body.numeroIeee || '').trim();
 
   sheet.getRange(linhaPlanilha, 1).setValue(nome);
   sheet.getRange(linhaPlanilha, 4).setValue(curso);
   sheet.getRange(linhaPlanilha, 5).setValue(ra);
   sheet.getRange(linhaPlanilha, 6).setValue(telefone);
+  sheet.getRange(linhaPlanilha, 7).setValue(dataIngresso);
+  sheet.getRange(linhaPlanilha, 9).setValue(numeroIeee);
+
+  if (body.fotoBase64 && body.fotoMimeType) {
+    var novaFotoUrl = salvarFotoPerfil(body.fotoBase64, body.fotoMimeType, dados[idx][7]);
+    sheet.getRange(linhaPlanilha, 8).setValue(novaFotoUrl);
+  }
 
   var dadosAtualizados = sheet.getDataRange().getValues();
   return montarPerfil(dadosAtualizados[idx], auth.fotoGoogle);
+}
+
+// Salva a foto enviada pelo membro na pasta "Fotos de Perfil - Área do
+// Membro", apaga a foto antiga dessa mesma pessoa (se houver) para não
+// acumular arquivo órfão, e devolve a URL pronta para exibir num <img>.
+function salvarFotoPerfil(base64, mimeType, urlAntiga) {
+  if (urlAntiga) {
+    try {
+      var match = String(urlAntiga).match(/id=([a-zA-Z0-9_-]+)/);
+      if (match) DriveApp.getFileById(match[1]).setTrashed(true);
+    } catch (err) {
+      // Se não conseguir apagar a antiga, segue o baile — não é crítico.
+    }
+  }
+
+  var bytes = Utilities.base64Decode(base64);
+  var blob = Utilities.newBlob(bytes, mimeType, 'foto-perfil.jpg');
+  var pasta = DriveApp.getFolderById(FOTOS_FOLDER_ID);
+  var arquivo = pasta.createFile(blob);
+  arquivo.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+
+  return 'https://drive.google.com/uc?export=view&id=' + arquivo.getId();
 }
 
 // Só quem tem Cargo diferente de "Membro" (ou seja, diretoria/tutor) pode
