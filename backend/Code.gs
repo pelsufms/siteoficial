@@ -39,6 +39,14 @@
  * site. Se você já tinha uma aba "Avisos" de uma versão anterior deste
  * script (só com Data | Titulo | Texto), apague essa aba uma vez — ela é
  * recriada sozinha no formato novo.
+ *
+ * Ouvidoria:
+ * Canal anônimo (sem login) que grava as denúncias na planilha separada
+ * "Ouvidoria PELS 2026 (CONFIDENCIAL)" (OUVIDORIA_SHEET_ID abaixo). Essa
+ * planilha só é compartilhada com pelsufms@gmail.com — se quiser que o
+ * tutor/orientador também leia diretamente (sem depender da conta
+ * institucional), compartilhe essa planilha específica com o e-mail
+ * pessoal dele.
  */
 
 // ATENÇÃO: troque pelo Client ID real depois de criá-lo no Google Cloud Console.
@@ -46,6 +54,12 @@ var GOOGLE_CLIENT_ID = '1061281219061-hdhk000q0j4mjfegohcc3rpep5jec4e4.apps.goog
 
 // ID da planilha "Membros e Cargos PELS 2026 (PRIVADO)" — já preenchido.
 var SHEET_ID = '1UMan9l-7FcVvq6pIrcPTvazZBqUgXWH-er6PaEbEPZQ';
+
+// ID da planilha "Ouvidoria PELS 2026 (CONFIDENCIAL)" — separada da planilha
+// de membros de propósito, e sem nenhum compartilhamento além do dono
+// (pelsufms@gmail.com). Só recebe as denúncias, sem nenhum dado de quem
+// enviou (nem e-mail, nem IP, nem nome).
+var OUVIDORIA_SHEET_ID = '11iTOu-cJ6JgPQ9ujdDuNyNY8LiJGn-lIUpJqTELPL9Y';
 
 function doPost(e) {
   var result;
@@ -61,6 +75,7 @@ function doPost(e) {
       else if (action === 'addAviso') result = handleAddAviso(body);
       else if (action === 'updateAviso') result = handleUpdateAviso(body);
       else if (action === 'deleteAviso') result = handleDeleteAviso(body);
+      else if (action === 'sendOuvidoria') result = handleSendOuvidoria(body);
       else result = { error: 'unknown_action' };
     }
   } catch (err) {
@@ -252,6 +267,25 @@ function handleDeleteAviso(body) {
   abaAvisos.deleteRow(linhaAviso);
 
   return montarPerfil(dados[idx], auth.fotoGoogle);
+}
+
+// Canal da Ouvidoria: DE PROPÓSITO não chama verifyToken nem pede
+// credencial nenhuma — quem denuncia não precisa logar com o Google nem
+// se identificar de forma alguma. Só grava a mensagem e a data/hora numa
+// planilha separada (OUVIDORIA_SHEET_ID), que só pelsufms@gmail.com acessa.
+function handleSendOuvidoria(body) {
+  var mensagem = String(body.mensagem || '').trim();
+  if (!mensagem) return { error: 'missing_message' };
+  if (mensagem.length > 4000) mensagem = mensagem.substring(0, 4000);
+
+  var planilha = SpreadsheetApp.openById(OUVIDORIA_SHEET_ID);
+  var aba = planilha.getSheets()[0];
+  if (aba.getLastRow() === 0) {
+    aba.appendRow(['Data', 'Mensagem']);
+  }
+  aba.appendRow([new Date(), mensagem]);
+
+  return { success: true };
 }
 
 // Lê a aba "Avisos" (ID | Data | Titulo | Texto | Autor), se ela existir.
