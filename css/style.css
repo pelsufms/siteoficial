@@ -1464,14 +1464,14 @@ section { padding: 108px 0; perspective: 1200px; }
 .brand, .lang-toggle, .theme-toggle, .site-header .btn-outline, .nav-toggle {
   flex-shrink: 0;
 }
-@media (max-width: 1360px) {
+@media (max-width: 1500px) {
   .nav-desktop { gap: 14px; }
   .nav-desktop a { font-size: 0.85rem; }
 }
-@media (max-width: 1260px) {
+@media (max-width: 1400px) {
   .brand-text span:not(strong) { display: none; }
 }
-@media (max-width: 1180px) {
+@media (max-width: 1360px) {
   .nav-desktop, .site-header .btn-outline { display: none; }
   .nav-toggle { display: block; }
 }
