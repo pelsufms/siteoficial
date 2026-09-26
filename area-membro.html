@@ -147,16 +147,42 @@
   <section class="page-section" id="memberFound" style="display:none;">
     <div class="container member-dashboard">
 
-      <div class="member-card">
-        <div class="member-card-top">
-          <span class="member-card-brand">IEEE PELS UFMS</span>
-          <span class="member-card-year">2026</span>
+      <div>
+        <div class="id-card" id="idCard">
+          <div class="id-card-header">
+            <img src="assets/img/logo.png" alt="" class="id-card-logo">
+            <span class="i18n-pt">Carteirinha de Membro</span>
+            <span class="i18n-en" lang="en">Member Card</span>
+          </div>
+          <div class="id-card-body">
+            <img id="memberPhoto" src="" alt="" class="id-card-photo">
+            <div class="id-card-fields">
+              <div>
+                <label class="i18n-pt">Nome</label><label class="i18n-en" lang="en">Name</label>
+                <strong id="memberName"></strong>
+              </div>
+              <div>
+                <label class="i18n-pt">Cargo</label><label class="i18n-en" lang="en">Role</label>
+                <strong id="memberRole"></strong>
+              </div>
+              <div>
+                <label class="i18n-pt">Curso</label><label class="i18n-en" lang="en">Program</label>
+                <strong id="memberCurso">—</strong>
+              </div>
+              <div>
+                <label class="i18n-pt">Membro desde</label><label class="i18n-en" lang="en">Member since</label>
+                <strong id="memberDesde">—</strong>
+              </div>
+            </div>
+          </div>
+          <div class="id-card-footer">
+            <span class="id-card-year">2026</span>
+            <span>IEEE PELS UFMS Chapter</span>
+          </div>
         </div>
-        <img id="memberPhoto" src="" alt="" class="member-card-photo">
-        <h2 id="memberName" class="member-card-name"></h2>
-        <p class="member-card-role"><span id="memberRole"></span></p>
-        <p class="member-card-caption i18n-pt">Carteirinha digital de membro</p>
-        <p class="member-card-caption i18n-en" lang="en">Digital member card</p>
+        <button type="button" id="downloadCard" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;margin-top:12px;">
+          <span class="i18n-pt">Baixar carteirinha (PNG)</span><span class="i18n-en" lang="en">Download card (PNG)</span>
+        </button>
       </div>
 
       <div class="member-panels">
@@ -179,7 +205,41 @@
         </div>
 
         <div class="member-panel member-panel-wide">
+          <h3><span class="i18n-pt">Meus dados</span><span class="i18n-en" lang="en">My profile</span></h3>
+          <p class="i18n-pt">Mantenha seu cadastro atualizado. Cargo e e-mail só a diretoria pode alterar.</p>
+          <p class="i18n-en" lang="en">Keep your profile up to date. Role and e-mail can only be changed by the board.</p>
+          <form id="profileForm" class="member-profile-form">
+            <label>
+              <span class="i18n-pt">Nome</span><span class="i18n-en" lang="en">Name</span>
+              <input type="text" id="profileNome" required>
+            </label>
+            <label>
+              <span class="i18n-pt">Curso</span><span class="i18n-en" lang="en">Program</span>
+              <input type="text" id="profileCurso" data-placeholder-pt="Ex: Engenharia Elétrica" data-placeholder-en="e.g. Electrical Engineering">
+            </label>
+            <label>
+              <span class="i18n-pt">RA</span><span class="i18n-en" lang="en">Student ID</span>
+              <input type="text" id="profileRa">
+            </label>
+            <label>
+              <span class="i18n-pt">Telefone / WhatsApp</span><span class="i18n-en" lang="en">Phone / WhatsApp</span>
+              <input type="tel" id="profileTelefone" data-placeholder-pt="(67) 9XXXX-XXXX" data-placeholder-en="+55 67 9XXXX-XXXX">
+            </label>
+            <button type="submit" class="btn btn-primary btn-sm"><span class="i18n-pt">Salvar dados</span><span class="i18n-en" lang="en">Save profile</span></button>
+            <span id="profileStatus" style="font-size:0.82rem;"></span>
+          </form>
+        </div>
+
+        <div class="member-panel member-panel-wide">
           <h3><span class="i18n-pt">Mural de avisos</span><span class="i18n-en" lang="en">Announcements</span></h3>
+
+          <form id="avisoForm" class="member-aviso-form" style="display:none;">
+            <input type="text" id="avisoTitulo" data-placeholder-pt="Título do aviso" data-placeholder-en="Announcement title" required>
+            <textarea id="avisoTexto" data-placeholder-pt="Texto (opcional)" data-placeholder-en="Text (optional)" rows="2"></textarea>
+            <button type="submit" class="btn btn-outline btn-sm"><span class="i18n-pt">Publicar aviso</span><span class="i18n-en" lang="en">Post announcement</span></button>
+            <span id="avisoStatus" style="font-size:0.82rem;"></span>
+          </form>
+
           <div id="memberAvisos">
             <p class="i18n-pt" style="color:var(--ink-soft);">Nenhum aviso no momento.</p>
             <p class="i18n-en" lang="en" style="color:var(--ink-soft);">No announcements right now.</p>
