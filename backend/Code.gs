@@ -43,6 +43,12 @@
  * script (só com Data | Titulo | Texto), apague essa aba uma vez — ela é
  * recriada sozinha no formato novo.
  *
+ * Lembretes da página inicial ("Agora e em breve"):
+ * A diretoria cadastra pela Área do Membro; ficam na aba "Lembretes" (criada
+ * sozinha) e a página inicial lê pela rota pública GET ...?action=lembretes.
+ * As artes (horizontais, 1600x512) vão para a pasta POSTERS_FOLDER_ID com
+ * link público, pois aparecem na página aberta ao público.
+ *
  * Foto de perfil:
  * Quando o membro envia uma foto pela Área do Membro, ela é salva na pasta
  * "Fotos de Perfil - Área do Membro" (FOTOS_FOLDER_ID) com permissão
@@ -75,6 +81,30 @@ var OUVIDORIA_SHEET_ID = '11iTOu-cJ6JgPQ9ujdDuNyNY8LiJGn-lIUpJqTELPL9Y';
 // enviadas pelos próprios membros são guardadas.
 var FOTOS_FOLDER_ID = '1TAw8sZDkuhF_N7tqA9Ykt5NfQlzfllX7';
 
+// ID da pasta "Lembretes - Posters (página inicial)", onde ficam as artes
+// dos lembretes publicados pela diretoria (ficam com link público para a
+// página inicial conseguir exibi-las).
+var POSTERS_FOLDER_ID = '1v-XR_B6ucyU2XZBfDizuVWUbBrISCCSA';
+
+var LEMBRETES_HEADERS = ['ID', 'Titulo', 'TituloEN', 'Selo', 'SeloEN', 'Link', 'PosterURL', 'Destaque', 'Validade'];
+
+// Leitura PÚBLICA (sem login) usada pela página inicial do site:
+//   .../exec?action=lembretes  ->  { lembretes: [...] } (só os não vencidos)
+function doGet(e) {
+  var action = e && e.parameter && e.parameter.action;
+  var result = { error: 'unknown_action' };
+  try {
+    if (action === 'lembretes') {
+      result = { lembretes: lerLembretes().filter(function (l) { return !l.expirado; }) };
+    }
+  } catch (err) {
+    result = { error: 'server_error' };
+  }
+  return ContentService
+    .createTextOutput(JSON.stringify(result))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function doPost(e) {
   var result;
   try {
@@ -90,6 +120,9 @@ function doPost(e) {
       else if (action === 'updateAviso') result = handleUpdateAviso(body);
       else if (action === 'deleteAviso') result = handleDeleteAviso(body);
       else if (action === 'sendOuvidoria') result = handleSendOuvidoria(body);
+      else if (action === 'addLembrete') result = handleSaveLembrete(body, false);
+      else if (action === 'updateLembrete') result = handleSaveLembrete(body, true);
+      else if (action === 'deleteLembrete') result = handleDeleteLembrete(body);
       else result = { error: 'unknown_action' };
     }
   } catch (err) {
@@ -146,7 +179,8 @@ function montarPerfil(linha, fotoGoogle) {
     numeroIeee: linha[8] || '',
     fotoGoogle: fotoGoogle,
     isDiretoria: cargo !== '' && cargo !== 'Membro',
-    avisos: getAvisos(nome)
+    avisos: getAvisos(nome),
+    lembretes: (cargo !== '' && cargo !== 'Membro') ? lerLembretes() : []
   };
 }
 
@@ -315,6 +349,168 @@ function handleDeleteAviso(body) {
   abaAvisos.deleteRow(linhaAviso);
 
   return montarPerfil(dados[idx], auth.fotoGoogle);
+}
+
+// ---------- Lembretes da página inicial ("Agora e em breve") ----------
+
+function abaLembretes(criar) {
+  var planilha = SpreadsheetApp.openById(SHEET_ID);
+  var aba = planilha.getSheetByName('Lembretes');
+  if (!aba && criar) {
+    aba = planilha.insertSheet('Lembretes');
+    aba.appendRow(LEMBRETES_HEADERS);
+  }
+  return aba;
+}
+
+function normalizarData(valor) {
+  if (valor && typeof valor.getTime === 'function') {
+    return Utilities.formatDate(valor, 'GMT-4', 'yyyy-MM-dd');
+  }
+  return String(valor || '').trim();
+}
+
+// Só aceita links http(s), páginas do próprio site (projetos/...) ou âncoras
+// (#membros) — barra "javascript:" e similares, já que o link vai para um
+// href na página pública.
+function linkSeguro(link) {
+  link = String(link || '').trim();
+  if (/^https?:\/\//i.test(link) || /^projetos\/[\w.\-]+$/.test(link) || /^#[\w\-]+$/.test(link)) return link;
+  return '';
+}
+
+// Lê todos os lembretes (mais recentes primeiro), marcando os vencidos.
+function lerLembretes() {
+  var aba = abaLembretes(false);
+  if (!aba) return [];
+
+  var hoje = Utilities.formatDate(new Date(), 'GMT-4', 'yyyy-MM-dd');
+  var linhas = aba.getDataRange().getValues();
+  var lista = [];
+  for (var i = 1; i < linhas.length; i++) {
+    var titulo = String(linhas[i][1] || '').trim();
+    if (!titulo) continue;
+    var validade = normalizarData(linhas[i][8]);
+    lista.push({
+      id: String(linhas[i][0]),
+      titulo: titulo,
+      tituloEn: String(linhas[i][2] || '').trim(),
+      selo: String(linhas[i][3] || '').trim(),
+      seloEn: String(linhas[i][4] || '').trim(),
+      link: linkSeguro(linhas[i][5]),
+      posterUrl: String(linhas[i][6] || '').trim(),
+      destaque: String(linhas[i][7] || '').trim().toUpperCase() === 'SIM',
+      validade: validade,
+      expirado: !!validade && validade < hoje
+    });
+  }
+  return lista.reverse();
+}
+
+// Valida o login e confere que a pessoa é da diretoria (Cargo != "Membro").
+// Devolve { auth, dados, idx } ou { erro: <resposta pronta para o site> }.
+function autenticarDiretor(body) {
+  var auth = verifyToken(body.credential);
+  if (!auth) return { erro: { error: 'invalid_token' } };
+
+  var sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+  var dados = sheet.getDataRange().getValues();
+  var idx = acharLinhaPorEmail(dados, auth.email);
+  if (idx === -1) return { erro: { found: false, nomeGoogle: auth.nomeGoogle } };
+
+  var cargo = String(dados[idx][2] || '').trim();
+  if (cargo === '' || cargo === 'Membro') return { erro: { error: 'not_allowed' } };
+  return { auth: auth, dados: dados, idx: idx };
+}
+
+function acharLinhaLembretePorId(aba, id) {
+  var linhas = aba.getDataRange().getValues();
+  for (var i = 1; i < linhas.length; i++) {
+    if (String(linhas[i][0]) === String(id)) return i + 1;
+  }
+  return -1;
+}
+
+function idDoArquivoDrive(url) {
+  var m = String(url || '').match(/(?:\/d\/|id=)([a-zA-Z0-9_-]+)/);
+  return m ? m[1] : null;
+}
+
+// Salva a arte na pasta de pôsteres; apaga a anterior (se houver). Devolve
+// uma URL que o <img> da página inicial consegue carregar.
+function salvarPoster(base64, mimeType, urlAntiga) {
+  var idAntigo = idDoArquivoDrive(urlAntiga);
+  if (idAntigo) {
+    try { DriveApp.getFileById(idAntigo).setTrashed(true); } catch (err) {}
+  }
+  var blob = Utilities.newBlob(Utilities.base64Decode(base64), mimeType, 'poster.jpg');
+  var arquivo = DriveApp.getFolderById(POSTERS_FOLDER_ID).createFile(blob);
+  arquivo.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return 'https://lh3.googleusercontent.com/d/' + arquivo.getId();
+}
+
+// Qualquer pessoa da diretoria pode criar/editar lembretes (são conteúdo
+// público do site, geridos em conjunto).
+function handleSaveLembrete(body, editando) {
+  var ctx = autenticarDiretor(body);
+  if (ctx.erro) return ctx.erro;
+
+  var titulo = String(body.titulo || '').trim();
+  if (!titulo) return { error: 'missing_title' };
+
+  var aba = abaLembretes(true);
+  var linha = -1;
+  var posterAtual = '';
+  if (editando) {
+    linha = acharLinhaLembretePorId(aba, body.id);
+    if (linha === -1) return { error: 'not_found' };
+    posterAtual = String(aba.getRange(linha, 7).getValue() || '');
+  }
+
+  var posterUrl = posterAtual;
+  if (body.posterBase64 && body.posterMimeType) {
+    posterUrl = salvarPoster(body.posterBase64, body.posterMimeType, posterAtual);
+  }
+
+  var validade = String(body.validade || '').trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(validade)) validade = '';
+
+  var campos = [
+    titulo.substring(0, 140),
+    String(body.tituloEn || '').trim().substring(0, 140),
+    String(body.selo || '').trim().substring(0, 40),
+    String(body.seloEn || '').trim().substring(0, 40),
+    linkSeguro(body.link)
+  ];
+  var destaque = body.destaque ? 'SIM' : 'NAO';
+
+  if (editando) {
+    aba.getRange(linha, 2, 1, 5).setValues([campos]);
+    aba.getRange(linha, 7, 1, 3).setValues([[posterUrl, destaque, validade]]);
+  } else {
+    var id = String(new Date().getTime());
+    aba.appendRow([id].concat(campos, [posterUrl, destaque, validade]));
+  }
+
+  return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
+}
+
+function handleDeleteLembrete(body) {
+  var ctx = autenticarDiretor(body);
+  if (ctx.erro) return ctx.erro;
+
+  var aba = abaLembretes(false);
+  if (!aba) return { error: 'not_found' };
+  var linha = acharLinhaLembretePorId(aba, body.id);
+  if (linha === -1) return { error: 'not_found' };
+
+  var idPoster = idDoArquivoDrive(aba.getRange(linha, 7).getValue());
+  if (idPoster) {
+    try { DriveApp.getFileById(idPoster).setTrashed(true); } catch (err) {}
+  }
+  aba.deleteRow(linha);
+
+  return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
 }
 
 // Canal da Ouvidoria: DE PROPÓSITO não chama verifyToken nem pede

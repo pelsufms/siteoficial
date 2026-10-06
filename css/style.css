@@ -336,6 +336,145 @@ html[data-theme="dark"] .theme-icon-moon { display: inline; }
 }
 .nav-mobile .btn { margin-top: 24px; justify-content: center; }
 
+/* ---------- Lembretes "Agora e em breve" (cartões com pôster) ---------- */
+.ticker {
+  position: relative;
+  z-index: 2;
+  padding: 26px 0 30px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.ticker.is-empty { display: none; }
+.ticker.is-loading .ticker-viewport { opacity: 0; }
+.ticker-viewport { transition: opacity 0.4s var(--ease); }
+.ticker-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.ticker-pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  animation: ticker-pulse 1.6s ease-in-out infinite;
+}
+@keyframes ticker-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+.ticker-viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  animation: ticker-scroll var(--ticker-duration, 40s) linear infinite;
+}
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track { animation-play-state: paused; }
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-item { flex-shrink: 0; width: clamp(300px, 82vw, 480px); margin-right: 22px; }
+.ticker-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--ink);
+  white-space: normal;
+}
+a.ticker-card:hover .ticker-text { color: var(--red); }
+a.ticker-card:hover .ticker-poster { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+.ticker-poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1583 / 507; /* mesma proporção dos destaques do site da UFMS (arte: 1600x512) */
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.ticker-poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ticker-poster.has-img .ticker-poster-empty { display: none; }
+.ticker-poster-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 2rem;
+  background: linear-gradient(160deg, var(--red-tint), var(--bg-alt));
+}
+.ticker-poster-empty small {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.ticker-tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.ticker-tag-hot {
+  background: var(--red-tint);
+  border-color: transparent;
+  color: var(--red);
+}
+.ticker-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+  transition: color 0.2s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .ticker-viewport { overflow-x: auto; scrollbar-width: thin; mask-image: none; -webkit-mask-image: none; }
+  .ticker-pulse { animation: none; }
+  a.ticker-card:hover .ticker-poster { transform: none; }
+}
+@media (max-width: 640px) {
+  .ticker { padding: 20px 0 24px; }
+  .ticker-item { margin-right: 16px; }
+  .ticker-text { font-size: 0.84rem; }
+}
+
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
@@ -1844,6 +1983,63 @@ html[lang="en"] .i18n-pt { display: none; }
   color: var(--ink-soft);
   text-transform: none;
   letter-spacing: normal;
+}
+
+.lembrete-poster-preview {
+  width: 160px;
+  aspect-ratio: 1583 / 507;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.member-profile-form .lembrete-check {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.member-profile-form .lembrete-check input { padding: 0; width: auto; }
+.lembrete-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.lembretes-lista { margin-top: 22px; display: flex; flex-direction: column; }
+.lembrete-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+.lembrete-row-thumb {
+  width: 120px;
+  aspect-ratio: 1583 / 507;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  flex-shrink: 0;
+}
+.lembrete-row-info { flex: 1; min-width: 0; font-size: 0.88rem; }
+.lembrete-row-info strong { display: block; color: var(--ink); overflow-wrap: anywhere; }
+.lembrete-row-info small { color: var(--ink-faint); }
+.lembrete-row-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.lembrete-row-actions button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--red);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.lembrete-row.is-expired .lembrete-row-info { opacity: 0.55; }
+@media (max-width: 560px) {
+  .lembrete-row { flex-wrap: wrap; }
+  .lembrete-row-thumb { width: 100%; }
 }
 
 .member-aviso-form {

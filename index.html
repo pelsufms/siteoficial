@@ -150,6 +150,94 @@
     </div>
   </section>
 
+  <!-- ================= LEMBRETES: AGORA E EM BREVE =================
+       Os lembretes são cadastrados pela diretoria na Área do Membro (painel
+       "Lembretes da página inicial") e carregados daqui automaticamente.
+       Esta lista abaixo é só o PADRÃO: aparece enquanto não houver nenhum
+       lembrete cadastrado (ou se a planilha estiver fora do ar).
+       - Pôster: HORIZONTAL, proporção dos destaques da UFMS (ufms.br):
+         1600x512 px, JPG ou WebP. Para o padrão, salve em
+         assets/img/lembretes/ e preencha data-poster no <li>.
+       - Link: <a class="ticker-card" href="...">; sem link, troque por
+         <div class="ticker-card"> ... </div>.
+       - data-until="AAAA-MM-DD" faz o cartão sumir sozinho na data.
+       - ticker-tag-hot deixa o selo em vermelho. -->
+  <div class="ticker" id="ticker" role="region" aria-label="Agora e em breve">
+    <div class="container">
+      <div class="ticker-label">
+        <span class="ticker-pulse" aria-hidden="true"></span>
+        <span class="i18n-pt">Agora e em breve</span>
+        <span class="i18n-en" lang="en">Now &amp; coming up</span>
+      </div>
+    </div>
+    <div class="ticker-viewport">
+      <ul class="ticker-track" id="tickerTrack">
+        <li class="ticker-item" data-poster="assets/img/lembretes/circuito-pels.jpg">
+          <a class="ticker-card" href="projetos/circuito-pels.html">
+            <span class="ticker-poster"><span class="ticker-poster-empty" aria-hidden="true">⚡<small class="i18n-pt">Arte em breve · 1600×512</small><small class="i18n-en" lang="en">Poster coming soon · 1600×512</small></span></span>
+            <span class="ticker-tag ticker-tag-hot i18n-pt">Inscrições abertas</span>
+            <span class="ticker-tag ticker-tag-hot i18n-en" lang="en">Enrollment open</span>
+            <span class="ticker-text i18n-pt">Circuito PELS: curso de eletrônica de potência</span>
+            <span class="ticker-text i18n-en" lang="en">Circuito PELS: power electronics course</span>
+          </a>
+        </li>
+        <li class="ticker-item" data-poster="assets/img/lembretes/iniciacao-cientifica.jpg">
+          <a class="ticker-card" href="projetos/iniciacao-cientifica.html">
+            <span class="ticker-poster"><span class="ticker-poster-empty" aria-hidden="true">🔬<small class="i18n-pt">Arte em breve · 1600×512</small><small class="i18n-en" lang="en">Poster coming soon · 1600×512</small></span></span>
+            <span class="ticker-tag i18n-pt">Em andamento</span>
+            <span class="ticker-tag i18n-en" lang="en">In progress</span>
+            <span class="ticker-text i18n-pt">Iniciação Científica com membros PELS</span>
+            <span class="ticker-text i18n-en" lang="en">Undergraduate Research with PELS members</span>
+          </a>
+        </li>
+        <li class="ticker-item" data-poster="assets/img/lembretes/power-english.jpg">
+          <a class="ticker-card" href="projetos/power-english.html">
+            <span class="ticker-poster"><span class="ticker-poster-empty" aria-hidden="true">💬<small class="i18n-pt">Arte em breve · 1600×512</small><small class="i18n-en" lang="en">Poster coming soon · 1600×512</small></span></span>
+            <span class="ticker-tag i18n-pt">Recorrente</span>
+            <span class="ticker-tag i18n-en" lang="en">Recurring</span>
+            <span class="ticker-text i18n-pt">Power English: círculo de conversação em inglês</span>
+            <span class="ticker-text i18n-en" lang="en">Power English: English conversation circle</span>
+          </a>
+        </li>
+        <li class="ticker-item" data-poster="assets/img/lembretes/paper-club.jpg">
+          <a class="ticker-card" href="projetos/paper-club.html">
+            <span class="ticker-poster"><span class="ticker-poster-empty" aria-hidden="true">📄<small class="i18n-pt">Arte em breve · 1600×512</small><small class="i18n-en" lang="en">Poster coming soon · 1600×512</small></span></span>
+            <span class="ticker-tag i18n-pt">Recorrente</span>
+            <span class="ticker-tag i18n-en" lang="en">Recurring</span>
+            <span class="ticker-text i18n-pt">Paper Club: leitura e discussão de artigos</span>
+            <span class="ticker-text i18n-en" lang="en">Paper Club: reading and discussing papers</span>
+          </a>
+        </li>
+        <li class="ticker-item" data-poster="assets/img/lembretes/solieeedario.jpg">
+          <a class="ticker-card" href="projetos/solieeedario.html">
+            <span class="ticker-poster"><span class="ticker-poster-empty" aria-hidden="true">🤝<small class="i18n-pt">Arte em breve · 1600×512</small><small class="i18n-en" lang="en">Poster coming soon · 1600×512</small></span></span>
+            <span class="ticker-tag i18n-pt">Contínuo</span>
+            <span class="ticker-tag i18n-en" lang="en">Ongoing</span>
+            <span class="ticker-text i18n-pt">SolIEEEdário: ações na Comunidade Mandela</span>
+            <span class="ticker-text i18n-en" lang="en">SolIEEEdário: outreach in the Mandela Community</span>
+          </a>
+        </li>
+        <li class="ticker-item" data-poster="assets/img/lembretes/pels-day.jpg">
+          <a class="ticker-card" href="projetos/pels-day.html">
+            <span class="ticker-poster"><span class="ticker-poster-empty" aria-hidden="true">🦇<small class="i18n-pt">Arte em breve · 1600×512</small><small class="i18n-en" lang="en">Poster coming soon · 1600×512</small></span></span>
+            <span class="ticker-tag i18n-pt">Edição anual</span>
+            <span class="ticker-tag i18n-en" lang="en">Annual edition</span>
+            <span class="ticker-text">PELS Day</span>
+          </a>
+        </li>
+        <li class="ticker-item" data-poster="assets/img/lembretes/seja-membro.jpg">
+          <a class="ticker-card" href="#membros">
+            <span class="ticker-poster"><span class="ticker-poster-empty" aria-hidden="true">🚀<small class="i18n-pt">Arte em breve · 1600×512</small><small class="i18n-en" lang="en">Poster coming soon · 1600×512</small></span></span>
+            <span class="ticker-tag i18n-pt">Participe</span>
+            <span class="ticker-tag i18n-en" lang="en">Join us</span>
+            <span class="ticker-text i18n-pt">Veja como se tornar membro do capítulo</span>
+            <span class="ticker-text i18n-en" lang="en">See how to become a chapter member</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <!-- ================= STATS (cena fixa ao rolar) ================= -->
   <div class="pin-wrap" id="pinWrap">
     <div class="pin-inner">
@@ -1014,6 +1102,7 @@
 
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
+<script src="js/ticker.js"></script>
 <script type="importmap">
 {
   "imports": {

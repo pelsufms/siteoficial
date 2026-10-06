@@ -103,7 +103,9 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
 
     fillProfileForm(data);
     document.getElementById('avisoForm').style.display = data.isDiretoria ? 'flex' : 'none';
+    document.getElementById('lembretesPanel').style.display = data.isDiretoria ? '' : 'none';
     renderAvisos(data.avisos || []);
+    renderLembretes(data.lembretes || []);
     showOnly(elFound);
   }
 
@@ -346,6 +348,171 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     });
   }
 
+  // ---------- Lembretes da página inicial (só diretoria) ----------
+  var currentLembretes = [];
+  var editingLembreteId = null;
+
+  function posterSeguro(url) {
+    return /^https:\/\//i.test(url || '') ? url : '';
+  }
+
+  function renderLembretes(lista) {
+    currentLembretes = lista;
+    var box = document.getElementById('lembretesLista');
+    if (!lista.length) {
+      box.innerHTML =
+        '<p class="i18n-pt" style="color:var(--ink-soft);">Nenhum lembrete cadastrado — o site mostra a lista padrão dos projetos.</p>' +
+        '<p class="i18n-en" lang="en" style="color:var(--ink-soft);">No reminders yet — the site shows the default project list.</p>';
+      return;
+    }
+    box.innerHTML = lista.map(function (l) {
+      var poster = posterSeguro(l.posterUrl);
+      var thumb = poster
+        ? '<img class="lembrete-row-thumb" src="' + escapeHtml(poster) + '" alt="">'
+        : '<div class="lembrete-row-thumb"></div>';
+      var meta = [l.selo, l.validade ? t('até ', 'until ') + l.validade : '', l.expirado ? t('vencido', 'expired') : '']
+        .filter(Boolean).join(' · ');
+      var id = escapeHtml(l.id);
+      return (
+        '<div class="lembrete-row' + (l.expirado ? ' is-expired' : '') + '">' +
+          thumb +
+          '<div class="lembrete-row-info"><strong>' + escapeHtml(l.titulo) + '</strong><small>' + escapeHtml(meta) + '</small></div>' +
+          '<div class="lembrete-row-actions">' +
+            '<button type="button" class="lembrete-edit-btn" data-id="' + id + '">' + t('Editar', 'Edit') + '</button>' +
+            '<button type="button" class="lembrete-delete-btn" data-id="' + id + '">' + t('Excluir', 'Delete') + '</button>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  function resetLembreteForm() {
+    editingLembreteId = null;
+    document.getElementById('lembreteForm').reset();
+    var preview = document.getElementById('lembretePosterPreview');
+    preview.style.display = 'none';
+    preview.removeAttribute('src');
+    document.getElementById('lembreteCancel').style.display = 'none';
+    var label = document.getElementById('lembreteSubmit');
+    label.firstElementChild.textContent = 'Publicar lembrete';
+    label.lastElementChild.textContent = 'Publish reminder';
+  }
+
+  function setupLembretes() {
+    var form = document.getElementById('lembreteForm');
+    var status = document.getElementById('lembreteStatus');
+    var posterInput = document.getElementById('lembretePoster');
+    var preview = document.getElementById('lembretePosterPreview');
+    var lista = document.getElementById('lembretesLista');
+
+    function setStatus(msg, erro) {
+      status.textContent = msg;
+      status.style.color = erro ? 'var(--red)' : 'var(--ink-soft)';
+    }
+
+    posterInput.addEventListener('change', function () {
+      var file = posterInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById('lembreteCancel').addEventListener('click', function () {
+      resetLembreteForm();
+      setStatus('');
+    });
+
+    function handleResult(data, okMsg) {
+      if (data.error === 'session_expired' || data.error === 'invalid_token') {
+        setStatus(t('Sessão expirada — saia e entre novamente.', 'Session expired — sign out and sign in again.'), true);
+        return;
+      }
+      if (data.error === 'not_allowed') {
+        setStatus(t('Só a diretoria pode gerenciar lembretes.', 'Only the board can manage reminders.'), true);
+        return;
+      }
+      if (data.error || !data.found) {
+        setStatus(t('Não foi possível concluir. Tente novamente.', 'Could not complete this. Please try again.'), true);
+        return;
+      }
+      sessionStorage.setItem('pels-member', JSON.stringify(data));
+      renderLembretes(data.lembretes || []);
+      resetLembreteForm();
+      setStatus(okMsg, false);
+      setTimeout(function () { setStatus(''); }, 4000);
+    }
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var titulo = document.getElementById('lembreteTitulo').value.trim();
+      if (!titulo) return;
+      setStatus('...', false);
+
+      var payload = {
+        action: editingLembreteId ? 'updateLembrete' : 'addLembrete',
+        id: editingLembreteId,
+        titulo: titulo,
+        tituloEn: document.getElementById('lembreteTituloEn').value,
+        selo: document.getElementById('lembreteSelo').value,
+        seloEn: document.getElementById('lembreteSeloEn').value,
+        link: document.getElementById('lembreteLink').value,
+        validade: document.getElementById('lembreteValidade').value,
+        destaque: document.getElementById('lembreteDestaque').checked
+      };
+
+      var file = posterInput.files[0];
+      var preparar = file
+        ? resizeImageFile(file, 1600).then(function (dataUrl) {
+            var partes = dataUrl.split(',');
+            payload.posterMimeType = partes[0].match(/:(.*?);/)[1];
+            payload.posterBase64 = partes[1];
+          })
+        : Promise.resolve();
+
+      preparar.then(function () { return callBackend(payload); })
+        .then(function (data) { handleResult(data, t('Lembrete salvo! Já aparece no site.', 'Reminder saved! It is now on the site.')); })
+        .catch(function () { setStatus(t('Erro de conexão. Tente novamente.', 'Connection error. Please try again.'), true); });
+    });
+
+    lista.addEventListener('click', function (ev) {
+      var editBtn = ev.target.closest('.lembrete-edit-btn');
+      var deleteBtn = ev.target.closest('.lembrete-delete-btn');
+
+      if (editBtn) {
+        var l = currentLembretes.filter(function (x) { return x.id === editBtn.dataset.id; })[0];
+        if (!l) return;
+        editingLembreteId = l.id;
+        document.getElementById('lembreteTitulo').value = l.titulo;
+        document.getElementById('lembreteTituloEn').value = l.tituloEn;
+        document.getElementById('lembreteSelo').value = l.selo;
+        document.getElementById('lembreteSeloEn').value = l.seloEn;
+        document.getElementById('lembreteLink').value = l.link;
+        document.getElementById('lembreteValidade').value = l.validade;
+        document.getElementById('lembreteDestaque').checked = l.destaque;
+        posterInput.value = '';
+        var poster = posterSeguro(l.posterUrl);
+        if (poster) { preview.src = poster; preview.style.display = 'block'; } else { preview.style.display = 'none'; }
+        document.getElementById('lembreteCancel').style.display = '';
+        var label = document.getElementById('lembreteSubmit');
+        label.firstElementChild.textContent = 'Salvar alterações';
+        label.lastElementChild.textContent = 'Save changes';
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      if (deleteBtn) {
+        if (!window.confirm(t('Excluir este lembrete?', 'Delete this reminder?'))) return;
+        callBackend({ action: 'deleteLembrete', id: deleteBtn.dataset.id })
+          .then(function (data) { handleResult(data, t('Lembrete excluído.', 'Reminder deleted.')); })
+          .catch(function () { setStatus(t('Erro de conexão. Tente novamente.', 'Connection error. Please try again.'), true); });
+      }
+    });
+  }
+
   function setupAvisoForm() {
     var form = document.getElementById('avisoForm');
     var status = document.getElementById('avisoStatus');
@@ -508,6 +675,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
   setupProfileForm();
   setupAvisoForm();
   setupAvisoActions();
+  setupLembretes();
   setupDownloadCard();
 
   window.addEventListener('load', function () {

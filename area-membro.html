@@ -273,6 +273,55 @@
           </div>
         </div>
 
+        <div class="member-panel member-panel-wide" id="lembretesPanel" style="display:none;">
+          <h3><span class="i18n-pt">Lembretes da página inicial</span><span class="i18n-en" lang="en">Homepage reminders</span></h3>
+          <p class="i18n-pt">Aparecem no letreiro "Agora e em breve" do site, com pôster horizontal (1600×512 px) e link opcional. Enquanto não houver nenhum cadastrado aqui, o site mostra a lista padrão dos projetos.</p>
+          <p class="i18n-en" lang="en">They show up in the "Now &amp; coming up" strip on the homepage, with a landscape poster (1600×512 px) and an optional link. Until you add one here, the site shows the default project list.</p>
+          <form id="lembreteForm" class="member-profile-form">
+            <label>
+              <span class="i18n-pt">Título</span><span class="i18n-en" lang="en">Title</span>
+              <input type="text" id="lembreteTitulo" maxlength="140" required>
+            </label>
+            <label>
+              <span class="i18n-pt">Título em inglês (opcional)</span><span class="i18n-en" lang="en">Title in English (optional)</span>
+              <input type="text" id="lembreteTituloEn" maxlength="140">
+            </label>
+            <label>
+              <span class="i18n-pt">Selo (ex.: Inscrições abertas)</span><span class="i18n-en" lang="en">Badge (e.g. Enrollment open)</span>
+              <input type="text" id="lembreteSelo" maxlength="40">
+            </label>
+            <label>
+              <span class="i18n-pt">Selo em inglês (opcional)</span><span class="i18n-en" lang="en">Badge in English (optional)</span>
+              <input type="text" id="lembreteSeloEn" maxlength="40">
+            </label>
+            <label>
+              <span class="i18n-pt">Link da atividade (opcional)</span><span class="i18n-en" lang="en">Activity link (optional)</span>
+              <input type="url" id="lembreteLink" placeholder="https://...">
+            </label>
+            <label>
+              <span class="i18n-pt">Some do site em (opcional)</span><span class="i18n-en" lang="en">Hide from site on (optional)</span>
+              <input type="date" id="lembreteValidade">
+            </label>
+            <label class="member-profile-photo-field">
+              <span class="i18n-pt">Pôster horizontal (1600×512 px)</span><span class="i18n-en" lang="en">Landscape poster (1600×512 px)</span>
+              <span class="member-profile-photo-row">
+                <img id="lembretePosterPreview" src="" alt="" class="lembrete-poster-preview" style="display:none;">
+                <input type="file" id="lembretePoster" accept="image/*">
+              </span>
+            </label>
+            <label class="lembrete-check">
+              <input type="checkbox" id="lembreteDestaque">
+              <span class="i18n-pt">Destacar em vermelho (inscrições abertas, prazos)</span><span class="i18n-en" lang="en">Highlight in red (open enrollment, deadlines)</span>
+            </label>
+            <div class="lembrete-actions">
+              <button type="submit" class="btn btn-primary btn-sm" id="lembreteSubmit"><span class="i18n-pt">Publicar lembrete</span><span class="i18n-en" lang="en">Publish reminder</span></button>
+              <button type="button" class="btn btn-outline btn-sm" id="lembreteCancel" style="display:none;"><span class="i18n-pt">Cancelar edição</span><span class="i18n-en" lang="en">Cancel editing</span></button>
+              <span id="lembreteStatus" style="font-size:0.82rem;"></span>
+            </div>
+          </form>
+          <div id="lembretesLista" class="lembretes-lista"></div>
+        </div>
+
       </div>
 
       <p style="margin-top:8px;">
