@@ -81,12 +81,12 @@ var OUVIDORIA_SHEET_ID = '11iTOu-cJ6JgPQ9ujdDuNyNY8LiJGn-lIUpJqTELPL9Y';
 
 // ID da pasta "Fotos de Perfil - Área do Membro" no Drive, onde as fotos
 // enviadas pelos próprios membros são guardadas.
-var FOTOS_FOLDER_ID = '1TAw8sZDkuhF_N7tqA9Ykt5NfQlzfllX7';
+var FOTOS_FOLDER_ID = '1aCFUhwcVA-gLYIQCPam5TjMsoUEvX6Ch';
 
 // ID da pasta "Lembretes - Posters (página inicial)", onde ficam as artes
 // dos lembretes publicados pela diretoria (ficam com link público para a
 // página inicial conseguir exibi-las).
-var POSTERS_FOLDER_ID = '1v-XR_B6ucyU2XZBfDizuVWUbBrISCCSA';
+var POSTERS_FOLDER_ID = '1fuy7xewEwxyCCvH1-TWL3LrzHl8DILBo';
 
 var LEMBRETES_HEADERS = ['ID', 'Titulo', 'TituloEN', 'Selo', 'SeloEN', 'Link', 'PosterURL', 'Destaque', 'Validade', 'Publicado'];
 
@@ -274,7 +274,7 @@ function salvarFotoPerfil(base64, mimeType, urlAntiga) {
   var blob = Utilities.newBlob(bytes, mimeType, 'foto-perfil.jpg');
   var pasta = DriveApp.getFolderById(FOTOS_FOLDER_ID);
   var arquivo = pasta.createFile(blob);
-  arquivo.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  compartilharPublico(arquivo);
 
   return 'https://drive.google.com/uc?export=view&id=' + arquivo.getId();
 }
@@ -473,6 +473,15 @@ function idDoArquivoDrive(url) {
   return m ? m[1] : null;
 }
 
+// Tenta liberar o arquivo para quem tem o link. Em Drives compartilhados isso
+// pode ser bloqueado pelo Google; nesse caso o arquivo herda o acesso da pasta
+// (deixe a pasta como Qualquer pessoa com o link: Leitor).
+function compartilharPublico(arquivo) {
+  try {
+    arquivo.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  } catch (err) {}
+}
+
 // Salva a arte na pasta de pôsteres; apaga a anterior (se houver). Devolve
 // uma URL que o <img> da página inicial consegue carregar.
 function salvarPoster(base64, mimeType, urlAntiga) {
@@ -482,7 +491,7 @@ function salvarPoster(base64, mimeType, urlAntiga) {
   }
   var blob = Utilities.newBlob(Utilities.base64Decode(base64), mimeType, 'poster.jpg');
   var arquivo = DriveApp.getFolderById(POSTERS_FOLDER_ID).createFile(blob);
-  arquivo.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  compartilharPublico(arquivo);
   return 'https://lh3.googleusercontent.com/d/' + arquivo.getId();
 }
 
@@ -507,7 +516,11 @@ function handleSaveLembrete(body, editando) {
 
   var posterUrl = posterAtual;
   if (body.posterBase64 && body.posterMimeType) {
-    posterUrl = salvarPoster(body.posterBase64, body.posterMimeType, posterAtual);
+    try {
+      posterUrl = salvarPoster(body.posterBase64, body.posterMimeType, posterAtual);
+    } catch (err) {
+      return { error: 'poster_failed', message: String(err) };
+    }
   }
 
   var validade = String(body.validade || '').trim();

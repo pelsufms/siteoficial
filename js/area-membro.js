@@ -501,7 +501,8 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         return;
       }
       if (data.error || !data.found) {
-        setStatus(t('Não foi possível concluir. Tente novamente.', 'Could not complete this. Please try again.'), true);
+        var detalhe = data.error ? ' [' + data.error + (data.message ? ': ' + data.message : '') + ']' : '';
+        setStatus(t('Não foi possível concluir. Tente novamente.', 'Could not complete this. Please try again.') + detalhe, true);
         return;
       }
       sessionStorage.setItem('pels-member', JSON.stringify(data));
