@@ -46,6 +46,8 @@
  * Lembretes da página inicial ("Agora e em breve"):
  * A diretoria cadastra pela Área do Membro; ficam na aba "Lembretes" (criada
  * sozinha) e a página inicial lê pela rota pública GET ...?action=lembretes.
+ * Quem decide o que vai ao ar é o webmaster (e o chair): ver
+ * CARGOS_PUBLICADORES. Os demais criam rascunhos.
  * As artes (horizontais, 1600x512) vão para a pasta POSTERS_FOLDER_ID com
  * link público, pois aparecem na página aberta ao público.
  *
@@ -86,16 +88,35 @@ var FOTOS_FOLDER_ID = '1TAw8sZDkuhF_N7tqA9Ykt5NfQlzfllX7';
 // página inicial conseguir exibi-las).
 var POSTERS_FOLDER_ID = '1v-XR_B6ucyU2XZBfDizuVWUbBrISCCSA';
 
-var LEMBRETES_HEADERS = ['ID', 'Titulo', 'TituloEN', 'Selo', 'SeloEN', 'Link', 'PosterURL', 'Destaque', 'Validade'];
+var LEMBRETES_HEADERS = ['ID', 'Titulo', 'TituloEN', 'Selo', 'SeloEN', 'Link', 'PosterURL', 'Destaque', 'Validade', 'Publicado'];
+
+// Cargos (como estão na coluna "Cargo" da planilha) que decidem quais
+// lembretes/eventos aparecem na página inicial. Os demais da diretoria
+// cadastram e editam, mas o item só vai ao ar quando um desses libera.
+var CARGOS_PUBLICADORES = ['Webmaster', 'Chair'];
+
+function podePublicar(cargo) {
+  var c = String(cargo || '').trim().toLowerCase();
+  return CARGOS_PUBLICADORES.some(function (p) { return p.toLowerCase() === c; });
+}
 
 // Leitura PÚBLICA (sem login) usada pela página inicial do site:
-//   .../exec?action=lembretes  ->  { lembretes: [...] } (só os não vencidos)
+//   .../exec?action=lembretes
+//     -> { configurado: bool, lembretes: [...] }
+// "lembretes" traz só os liberados e não vencidos. "configurado" é false
+// quando ainda não existe nenhum lembrete cadastrado (aí o site mostra a
+// lista padrão); se existir ao menos um, o site mostra só os liberados
+// (inclusive nenhum, escondendo o letreiro).
 function doGet(e) {
   var action = e && e.parameter && e.parameter.action;
   var result = { error: 'unknown_action' };
   try {
     if (action === 'lembretes') {
-      result = { lembretes: lerLembretes().filter(function (l) { return !l.expirado; }) };
+      var todos = lerLembretes();
+      result = {
+        configurado: todos.length > 0,
+        lembretes: todos.filter(function (l) { return l.publicado && !l.expirado; })
+      };
     }
   } catch (err) {
     result = { error: 'server_error' };
@@ -123,6 +144,8 @@ function doPost(e) {
       else if (action === 'addLembrete') result = handleSaveLembrete(body, false);
       else if (action === 'updateLembrete') result = handleSaveLembrete(body, true);
       else if (action === 'deleteLembrete') result = handleDeleteLembrete(body);
+      else if (action === 'setLembretePublicado') result = handleSetLembretePublicado(body);
+      else if (action === 'seedLembretes') result = handleSeedLembretes(body);
       else result = { error: 'unknown_action' };
     }
   } catch (err) {
@@ -179,6 +202,7 @@ function montarPerfil(linha, fotoGoogle) {
     numeroIeee: linha[8] || '',
     fotoGoogle: fotoGoogle,
     isDiretoria: cargo !== '' && cargo !== 'Membro',
+    podePublicar: podePublicar(cargo),
     avisos: getAvisos(nome),
     lembretes: (cargo !== '' && cargo !== 'Membro') ? lerLembretes() : []
   };
@@ -359,6 +383,9 @@ function abaLembretes(criar) {
   if (!aba && criar) {
     aba = planilha.insertSheet('Lembretes');
     aba.appendRow(LEMBRETES_HEADERS);
+  } else if (aba && !aba.getRange(1, 10).getValue()) {
+    // Aba criada por uma versão anterior (sem a coluna "Publicado").
+    aba.getRange(1, 10).setValue('Publicado');
   }
   return aba;
 }
@@ -401,7 +428,9 @@ function lerLembretes() {
       posterUrl: String(linhas[i][6] || '').trim(),
       destaque: String(linhas[i][7] || '').trim().toUpperCase() === 'SIM',
       validade: validade,
-      expirado: !!validade && validade < hoje
+      expirado: !!validade && validade < hoje,
+      // Célula vazia (linhas antigas) conta como liberado.
+      publicado: String(linhas[i][9] || '').trim().toUpperCase() !== 'NAO'
     });
   }
   return lista.reverse();
@@ -420,7 +449,15 @@ function autenticarDiretor(body) {
 
   var cargo = String(dados[idx][2] || '').trim();
   if (cargo === '' || cargo === 'Membro') return { erro: { error: 'not_allowed' } };
-  return { auth: auth, dados: dados, idx: idx };
+  return { auth: auth, dados: dados, idx: idx, publica: podePublicar(cargo) };
+}
+
+// Como autenticarDiretor, mas só deixa passar quem decide o que vai ao ar.
+function autenticarPublicador(body) {
+  var ctx = autenticarDiretor(body);
+  if (ctx.erro) return ctx;
+  if (!ctx.publica) return { erro: { error: 'not_allowed' } };
+  return ctx;
 }
 
 function acharLinhaLembretePorId(aba, id) {
@@ -449,8 +486,9 @@ function salvarPoster(base64, mimeType, urlAntiga) {
   return 'https://lh3.googleusercontent.com/d/' + arquivo.getId();
 }
 
-// Qualquer pessoa da diretoria pode criar/editar lembretes (são conteúdo
-// público do site, geridos em conjunto).
+// Qualquer pessoa da diretoria cria/edita lembretes, mas o campo "Publicado"
+// só muda quando quem salva é publicador (webmaster/chair): os demais criam
+// sempre como rascunho e, ao editar, não mexem no status.
 function handleSaveLembrete(body, editando) {
   var ctx = autenticarDiretor(body);
   if (ctx.erro) return ctx.erro;
@@ -487,14 +525,64 @@ function handleSaveLembrete(body, editando) {
   if (editando) {
     aba.getRange(linha, 2, 1, 5).setValues([campos]);
     aba.getRange(linha, 7, 1, 3).setValues([[posterUrl, destaque, validade]]);
+    if (ctx.publica && typeof body.publicado === 'boolean') {
+      aba.getRange(linha, 10).setValue(body.publicado ? 'SIM' : 'NAO');
+    }
   } else {
     var id = String(new Date().getTime());
-    aba.appendRow([id].concat(campos, [posterUrl, destaque, validade]));
+    var publicado = ctx.publica && body.publicado ? 'SIM' : 'NAO';
+    aba.appendRow([id].concat(campos, [posterUrl, destaque, validade, publicado]));
   }
 
   return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
 }
 
+// Liberar/ocultar um lembrete na página inicial (só publicadores).
+function handleSetLembretePublicado(body) {
+  var ctx = autenticarPublicador(body);
+  if (ctx.erro) return ctx.erro;
+
+  var aba = abaLembretes(false);
+  if (!aba) return { error: 'not_found' };
+  var linha = acharLinhaLembretePorId(aba, body.id);
+  if (linha === -1) return { error: 'not_found' };
+
+  aba.getRange(linha, 10).setValue(body.publicado ? 'SIM' : 'NAO');
+  return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
+}
+
+// Cadastra de uma vez os projetos/eventos padrão do site para o webmaster
+// poder escolher quais mostrar. Pula os que já existem (pelo título).
+var LEMBRETES_PADRAO = [
+  { titulo: 'Circuito PELS: curso de eletrônica de potência', tituloEn: 'Circuito PELS: power electronics course', selo: 'Inscrições abertas', seloEn: 'Enrollment open', link: 'projetos/circuito-pels.html', destaque: true },
+  { titulo: 'Iniciação Científica com membros PELS', tituloEn: 'Undergraduate Research with PELS members', selo: 'Em andamento', seloEn: 'In progress', link: 'projetos/iniciacao-cientifica.html' },
+  { titulo: 'Power English: círculo de conversação em inglês', tituloEn: 'Power English: English conversation circle', selo: 'Recorrente', seloEn: 'Recurring', link: 'projetos/power-english.html' },
+  { titulo: 'Paper Club: leitura e discussão de artigos', tituloEn: 'Paper Club: reading and discussing papers', selo: 'Recorrente', seloEn: 'Recurring', link: 'projetos/paper-club.html' },
+  { titulo: 'SolIEEEdário: ações na Comunidade Mandela', tituloEn: 'SolIEEEdário: outreach in the Mandela Community', selo: 'Contínuo', seloEn: 'Ongoing', link: 'projetos/solieeedario.html' },
+  { titulo: 'PELS Day', tituloEn: 'PELS Day', selo: 'Edição anual', seloEn: 'Annual edition', link: 'projetos/pels-day.html' },
+  { titulo: 'Veja como se tornar membro do capítulo', tituloEn: 'See how to become a chapter member', selo: 'Participe', seloEn: 'Join us', link: '#membros' }
+];
+
+function handleSeedLembretes(body) {
+  var ctx = autenticarPublicador(body);
+  if (ctx.erro) return ctx.erro;
+
+  var aba = abaLembretes(true);
+  var existentes = {};
+  lerLembretes().forEach(function (l) { existentes[l.titulo] = true; });
+
+  var base = new Date().getTime();
+  // De trás pra frente: a leitura mostra o mais recente primeiro.
+  for (var i = LEMBRETES_PADRAO.length - 1; i >= 0; i--) {
+    var p = LEMBRETES_PADRAO[i];
+    if (existentes[p.titulo]) continue;
+    aba.appendRow([String(base + i), p.titulo, p.tituloEn, p.selo, p.seloEn, linkSeguro(p.link), '', p.destaque ? 'SIM' : 'NAO', '', 'SIM']);
+  }
+  return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
+}
+
+// Qualquer da diretoria exclui rascunhos; itens que estão no ar só os
+// publicadores excluem.
 function handleDeleteLembrete(body) {
   var ctx = autenticarDiretor(body);
   if (ctx.erro) return ctx.erro;
@@ -503,6 +591,9 @@ function handleDeleteLembrete(body) {
   if (!aba) return { error: 'not_found' };
   var linha = acharLinhaLembretePorId(aba, body.id);
   if (linha === -1) return { error: 'not_found' };
+
+  var noAr = String(aba.getRange(linha, 10).getValue() || '').trim().toUpperCase() !== 'NAO';
+  if (noAr && !ctx.publica) return { error: 'not_allowed' };
 
   var idPoster = idDoArquivoDrive(aba.getRange(linha, 7).getValue());
   if (idPoster) {

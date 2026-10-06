@@ -275,8 +275,11 @@
 
         <div class="member-panel member-panel-wide" id="lembretesPanel" style="display:none;">
           <h3><span class="i18n-pt">Lembretes da página inicial</span><span class="i18n-en" lang="en">Homepage reminders</span></h3>
-          <p class="i18n-pt">Aparecem no letreiro "Agora e em breve" do site, com pôster horizontal (1600×512 px) e link opcional. Enquanto não houver nenhum cadastrado aqui, o site mostra a lista padrão dos projetos.</p>
-          <p class="i18n-en" lang="en">They show up in the "Now &amp; coming up" strip on the homepage, with a landscape poster (1600×512 px) and an optional link. Until you add one here, the site shows the default project list.</p>
+          <p class="i18n-pt">Eventos, inscrições, editais e avisos do letreiro "Agora e em breve" da página inicial, com pôster horizontal (1600×512 px) e link opcional. Toda a diretoria cadastra; <strong>só o webmaster (e o chair) escolhe quais vão ao ar</strong>. Itens de outras pessoas ficam como rascunho até serem liberados. Enquanto não houver nenhum cadastrado, o site mostra a lista padrão dos projetos.</p>
+          <p class="i18n-en" lang="en">Events, enrollments, calls and notices for the "Now &amp; coming up" strip on the homepage, with a landscape poster (1600×512 px) and an optional link. The whole board can add them; <strong>only the webmaster (and the chair) chooses which go live</strong>. Items from others stay as drafts until released. Until one is added, the site shows the default project list.</p>
+          <div id="lembreteSeedBox" style="display:none;margin-bottom:16px;">
+            <button type="button" class="btn btn-outline btn-sm" id="lembreteSeed"><span class="i18n-pt">Adicionar projetos e eventos padrão à lista</span><span class="i18n-en" lang="en">Add default projects and events to the list</span></button>
+          </div>
           <form id="lembreteForm" class="member-profile-form">
             <label>
               <span class="i18n-pt">Título</span><span class="i18n-en" lang="en">Title</span>
@@ -308,13 +311,18 @@
                 <img id="lembretePosterPreview" src="" alt="" class="lembrete-poster-preview" style="display:none;">
                 <input type="file" id="lembretePoster" accept="image/*">
               </span>
+              <small id="lembretePosterNota" class="lembrete-nota"></small>
+            </label>
+            <label class="lembrete-check" id="lembretePublicadoField" style="display:none;">
+              <input type="checkbox" id="lembretePublicado">
+              <span class="i18n-pt"><strong>Mostrar na página inicial</strong> (liberar este item)</span><span class="i18n-en" lang="en"><strong>Show on the homepage</strong> (release this item)</span>
             </label>
             <label class="lembrete-check">
               <input type="checkbox" id="lembreteDestaque">
               <span class="i18n-pt">Destacar em vermelho (inscrições abertas, prazos)</span><span class="i18n-en" lang="en">Highlight in red (open enrollment, deadlines)</span>
             </label>
             <div class="lembrete-actions">
-              <button type="submit" class="btn btn-primary btn-sm" id="lembreteSubmit"><span class="i18n-pt">Publicar lembrete</span><span class="i18n-en" lang="en">Publish reminder</span></button>
+              <button type="submit" class="btn btn-primary btn-sm" id="lembreteSubmit"><span class="i18n-pt">Salvar lembrete</span><span class="i18n-en" lang="en">Save reminder</span></button>
               <button type="button" class="btn btn-outline btn-sm" id="lembreteCancel" style="display:none;"><span class="i18n-pt">Cancelar edição</span><span class="i18n-en" lang="en">Cancel editing</span></button>
               <span id="lembreteStatus" style="font-size:0.82rem;"></span>
             </div>

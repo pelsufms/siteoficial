@@ -68,8 +68,11 @@
     var timer = setTimeout(function () { if (controller) controller.abort(); }, 3500);
     return fetch(API_URL, controller ? { signal: controller.signal } : undefined)
       .then(function (r) { return r.json(); })
-      .then(function (d) { clearTimeout(timer); return d && d.lembretes ? d.lembretes : []; })
-      .catch(function () { clearTimeout(timer); return []; });
+      .then(function (d) {
+        clearTimeout(timer);
+        return { configurado: !!(d && d.configurado), lista: d && d.lembretes ? d.lembretes : [] };
+      })
+      .catch(function () { clearTimeout(timer); return { configurado: false, lista: [] }; });
   }
 
   // Só insere o <img> se o arquivo realmente carregar; senão o espaço
@@ -144,10 +147,13 @@
     ]).then(startLoop);
   }
 
-  fetchLembretes().then(function (lista) {
-    if (lista.length) {
+  fetchLembretes().then(function (res) {
+    // Há lembretes cadastrados: vale a seleção do webmaster (mesmo que não
+    // tenha liberado nenhum — aí o letreiro fica escondido). Sem nenhum
+    // cadastrado (ou planilha fora do ar), fica a lista padrão do HTML.
+    if (res.configurado) {
       track.textContent = '';
-      lista.forEach(function (l) { track.appendChild(buildItem(l)); });
+      res.lista.forEach(function (l) { track.appendChild(buildItem(l)); });
     }
     return init();
   }).then(function () {

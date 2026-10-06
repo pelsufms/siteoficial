@@ -105,6 +105,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     document.getElementById('avisoForm').style.display = data.isDiretoria ? 'flex' : 'none';
     document.getElementById('lembretesPanel').style.display = data.isDiretoria ? '' : 'none';
     renderAvisos(data.avisos || []);
+    definirPermissaoLembretes(data.podePublicar);
     renderLembretes(data.lembretes || []);
     showOnly(elFound);
   }
@@ -348,12 +349,52 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     });
   }
 
-  // ---------- Lembretes da página inicial (só diretoria) ----------
+  // ---------- Lembretes da página inicial (diretoria; webmaster libera) ----------
   var currentLembretes = [];
   var editingLembreteId = null;
+  var podePublicarAtual = false;
+  var posterPronto = null; // { dataUrl } do banner já ajustado para 1600x512
+  var posterPreparando = null;
 
   function posterSeguro(url) {
     return /^https:\/\//i.test(url || '') ? url : '';
+  }
+
+  function definirPermissaoLembretes(podePublicar) {
+    podePublicarAtual = !!podePublicar;
+    document.getElementById('lembretePublicadoField').style.display = podePublicarAtual ? 'flex' : 'none';
+    document.getElementById('lembreteSeedBox').style.display = podePublicarAtual ? '' : 'none';
+    if (!editingLembreteId) document.getElementById('lembretePublicado').checked = podePublicarAtual;
+  }
+
+  // Ajusta qualquer imagem ao banner 1600x512 (recorte central, "cover"),
+  // como os destaques do site da UFMS. Avisa se foi cortada ou está pequena.
+  function ajustarBanner(file) {
+    var W = 1600, H = 512;
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          var canvas = document.createElement('canvas');
+          canvas.width = W;
+          canvas.height = H;
+          var scale = Math.max(W / img.width, H / img.height);
+          var sw = W / scale, sh = H / scale;
+          canvas.getContext('2d').drawImage(img, (img.width - sw) / 2, (img.height - sh) / 2, sw, sh, 0, 0, W, H);
+          resolve({
+            dataUrl: canvas.toDataURL('image/jpeg', 0.88),
+            cortada: Math.abs(img.width / img.height - W / H) > 0.05 * (W / H),
+            pequena: img.width < W,
+            original: img.width + '×' + img.height
+          });
+        };
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   function renderLembretes(lista) {
@@ -373,13 +414,19 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
       var meta = [l.selo, l.validade ? t('até ', 'until ') + l.validade : '', l.expirado ? t('vencido', 'expired') : '']
         .filter(Boolean).join(' · ');
       var id = escapeHtml(l.id);
+      var status = podePublicarAtual
+        ? '<label class="lembrete-toggle"><input type="checkbox" class="lembrete-publicar" data-id="' + id + '"' + (l.publicado ? ' checked' : '') + '> ' +
+            t('Mostrar na página inicial', 'Show on homepage') + '</label>'
+        : '<span class="lembrete-badge' + (l.publicado ? ' on' : '') + '">' +
+            (l.publicado ? t('No ar', 'Live') : t('Rascunho — aguarda o webmaster', 'Draft — awaiting the webmaster')) + '</span>';
+      var podeExcluir = podePublicarAtual || !l.publicado;
       return (
         '<div class="lembrete-row' + (l.expirado ? ' is-expired' : '') + '">' +
           thumb +
-          '<div class="lembrete-row-info"><strong>' + escapeHtml(l.titulo) + '</strong><small>' + escapeHtml(meta) + '</small></div>' +
+          '<div class="lembrete-row-info"><strong>' + escapeHtml(l.titulo) + '</strong><small>' + escapeHtml(meta) + '</small>' + status + '</div>' +
           '<div class="lembrete-row-actions">' +
             '<button type="button" class="lembrete-edit-btn" data-id="' + id + '">' + t('Editar', 'Edit') + '</button>' +
-            '<button type="button" class="lembrete-delete-btn" data-id="' + id + '">' + t('Excluir', 'Delete') + '</button>' +
+            (podeExcluir ? '<button type="button" class="lembrete-delete-btn" data-id="' + id + '">' + t('Excluir', 'Delete') + '</button>' : '') +
           '</div>' +
         '</div>'
       );
@@ -388,20 +435,25 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
 
   function resetLembreteForm() {
     editingLembreteId = null;
+    posterPronto = null;
+    posterPreparando = null;
     document.getElementById('lembreteForm').reset();
+    document.getElementById('lembretePublicado').checked = podePublicarAtual;
+    document.getElementById('lembretePosterNota').textContent = '';
     var preview = document.getElementById('lembretePosterPreview');
     preview.style.display = 'none';
     preview.removeAttribute('src');
     document.getElementById('lembreteCancel').style.display = 'none';
     var label = document.getElementById('lembreteSubmit');
-    label.firstElementChild.textContent = 'Publicar lembrete';
-    label.lastElementChild.textContent = 'Publish reminder';
+    label.firstElementChild.textContent = 'Salvar lembrete';
+    label.lastElementChild.textContent = 'Save reminder';
   }
 
   function setupLembretes() {
     var form = document.getElementById('lembreteForm');
     var status = document.getElementById('lembreteStatus');
     var posterInput = document.getElementById('lembretePoster');
+    var posterNota = document.getElementById('lembretePosterNota');
     var preview = document.getElementById('lembretePosterPreview');
     var lista = document.getElementById('lembretesLista');
 
@@ -410,15 +462,28 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
       status.style.color = erro ? 'var(--red)' : 'var(--ink-soft)';
     }
 
+    function erroConexao() {
+      setStatus(t('Erro de conexão. Tente novamente.', 'Connection error. Please try again.'), true);
+    }
+
     posterInput.addEventListener('change', function () {
       var file = posterInput.files[0];
-      if (!file) return;
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        preview.src = e.target.result;
+      posterPronto = null;
+      posterNota.textContent = '';
+      if (!file) { posterPreparando = null; return; }
+      posterPreparando = ajustarBanner(file).then(function (r) {
+        posterPronto = r;
+        preview.src = r.dataUrl;
         preview.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
+        var notas = [];
+        if (r.pequena) notas.push(t('A imagem (' + r.original + ') é menor que 1600 px de largura e pode ficar borrada.', 'The image (' + r.original + ') is narrower than 1600 px and may look blurry.'));
+        if (r.cortada) notas.push(t('A proporção não é 1600×512: a imagem foi cortada no centro.', 'The aspect ratio is not 1600×512: the image was cropped at the center.'));
+        if (!notas.length) notas.push(t('Banner 1600×512 pronto.', 'Banner 1600×512 ready.'));
+        posterNota.textContent = notas.join(' ');
+      }).catch(function () {
+        posterNota.textContent = t('Não foi possível ler essa imagem.', 'Could not read that image.');
+        posterInput.value = '';
+      });
     });
 
     document.getElementById('lembreteCancel').addEventListener('click', function () {
@@ -432,7 +497,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         return;
       }
       if (data.error === 'not_allowed') {
-        setStatus(t('Só a diretoria pode gerenciar lembretes.', 'Only the board can manage reminders.'), true);
+        setStatus(t('Você não tem permissão para esta ação (liberar ou excluir itens no ar é do webmaster).', 'You do not have permission for this action (releasing or deleting live items is up to the webmaster).'), true);
         return;
       }
       if (data.error || !data.found) {
@@ -440,10 +505,11 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         return;
       }
       sessionStorage.setItem('pels-member', JSON.stringify(data));
+      definirPermissaoLembretes(data.podePublicar);
       renderLembretes(data.lembretes || []);
       resetLembreteForm();
       setStatus(okMsg, false);
-      setTimeout(function () { setStatus(''); }, 4000);
+      setTimeout(function () { setStatus(''); }, 5000);
     }
 
     form.addEventListener('submit', function (ev) {
@@ -452,6 +518,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
       if (!titulo) return;
       setStatus('...', false);
 
+      var publicando = podePublicarAtual && document.getElementById('lembretePublicado').checked;
       var payload = {
         action: editingLembreteId ? 'updateLembrete' : 'addLembrete',
         id: editingLembreteId,
@@ -463,19 +530,44 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         validade: document.getElementById('lembreteValidade').value,
         destaque: document.getElementById('lembreteDestaque').checked
       };
+      if (podePublicarAtual) payload.publicado = publicando;
 
-      var file = posterInput.files[0];
-      var preparar = file
-        ? resizeImageFile(file, 1600).then(function (dataUrl) {
-            var partes = dataUrl.split(',');
-            payload.posterMimeType = partes[0].match(/:(.*?);/)[1];
-            payload.posterBase64 = partes[1];
-          })
-        : Promise.resolve();
+      var okMsg = publicando
+        ? t('Lembrete salvo e no ar na página inicial.', 'Reminder saved and live on the homepage.')
+        : podePublicarAtual
+          ? t('Lembrete salvo, mas oculto na página inicial.', 'Reminder saved, but hidden on the homepage.')
+          : t('Lembrete salvo como rascunho. O webmaster decide quando vai ao ar.', 'Reminder saved as a draft. The webmaster decides when it goes live.');
 
-      preparar.then(function () { return callBackend(payload); })
-        .then(function (data) { handleResult(data, t('Lembrete salvo! Já aparece no site.', 'Reminder saved! It is now on the site.')); })
-        .catch(function () { setStatus(t('Erro de conexão. Tente novamente.', 'Connection error. Please try again.'), true); });
+      Promise.resolve(posterPreparando).then(function () {
+        if (posterPronto) {
+          var partes = posterPronto.dataUrl.split(',');
+          payload.posterMimeType = partes[0].match(/:(.*?);/)[1];
+          payload.posterBase64 = partes[1];
+        }
+        return callBackend(payload);
+      }).then(function (data) { handleResult(data, okMsg); })
+        .catch(erroConexao);
+    });
+
+    document.getElementById('lembreteSeed').addEventListener('click', function () {
+      setStatus('...', false);
+      callBackend({ action: 'seedLembretes' })
+        .then(function (data) { handleResult(data, t('Projetos e eventos padrão adicionados. Escolha abaixo quais mostrar.', 'Default projects and events added. Choose below which to show.')); })
+        .catch(erroConexao);
+    });
+
+    lista.addEventListener('change', function (ev) {
+      var toggle = ev.target.closest('.lembrete-publicar');
+      if (!toggle) return;
+      var publicado = toggle.checked;
+      setStatus('...', false);
+      callBackend({ action: 'setLembretePublicado', id: toggle.dataset.id, publicado: publicado })
+        .then(function (data) {
+          handleResult(data, publicado
+            ? t('No ar na página inicial.', 'Live on the homepage.')
+            : t('Oculto da página inicial.', 'Hidden from the homepage.'));
+        })
+        .catch(erroConexao);
     });
 
     lista.addEventListener('click', function (ev) {
@@ -486,6 +578,9 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         var l = currentLembretes.filter(function (x) { return x.id === editBtn.dataset.id; })[0];
         if (!l) return;
         editingLembreteId = l.id;
+        posterPronto = null;
+        posterPreparando = null;
+        posterNota.textContent = '';
         document.getElementById('lembreteTitulo').value = l.titulo;
         document.getElementById('lembreteTituloEn').value = l.tituloEn;
         document.getElementById('lembreteSelo').value = l.selo;
@@ -493,6 +588,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         document.getElementById('lembreteLink').value = l.link;
         document.getElementById('lembreteValidade').value = l.validade;
         document.getElementById('lembreteDestaque').checked = l.destaque;
+        document.getElementById('lembretePublicado').checked = l.publicado;
         posterInput.value = '';
         var poster = posterSeguro(l.posterUrl);
         if (poster) { preview.src = poster; preview.style.display = 'block'; } else { preview.style.display = 'none'; }
@@ -508,7 +604,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         if (!window.confirm(t('Excluir este lembrete?', 'Delete this reminder?'))) return;
         callBackend({ action: 'deleteLembrete', id: deleteBtn.dataset.id })
           .then(function (data) { handleResult(data, t('Lembrete excluído.', 'Reminder deleted.')); })
-          .catch(function () { setStatus(t('Erro de conexão. Tente novamente.', 'Connection error. Please try again.'), true); });
+          .catch(erroConexao);
       }
     });
   }

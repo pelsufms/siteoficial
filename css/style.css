@@ -2037,6 +2037,31 @@ html[lang="en"] .i18n-pt { display: none; }
   text-decoration: underline;
 }
 .lembrete-row.is-expired .lembrete-row-info { opacity: 0.55; }
+.lembrete-row-info small { display: block; }
+.lembrete-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+.lembrete-toggle input { accent-color: var(--red); width: 16px; height: 16px; }
+.lembrete-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.lembrete-badge.on { background: var(--red-tint); border-color: transparent; color: var(--red); }
+.lembrete-nota { display: block; margin-top: 6px; color: var(--ink-soft); font-size: 0.78rem; text-transform: none; letter-spacing: normal; font-weight: 500; }
 @media (max-width: 560px) {
   .lembrete-row { flex-wrap: wrap; }
   .lembrete-row-thumb { width: 100%; }
