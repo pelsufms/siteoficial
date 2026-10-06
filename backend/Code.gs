@@ -675,15 +675,16 @@ function getAvisos(nomeAtual) {
 
 // Rode UMA vez no editor (menu de funções -> autorizarDrive -> Executar) para
 // o Google pedir a permissão de acesso ao Drive, necessária para salvar
-// pôsteres e fotos de perfil. Depois, publique uma Nova versão da implantação.
-// Se o Google reclamar de "auth/drive", declare as permissões no appsscript.json
-// (Configurações do projeto > Mostrar arquivo de manifesto): veja o README do
-// backend ou a mensagem do Claude com o bloco "oauthScopes".
+// pôsteres e fotos de perfil. Ela cria e apaga um arquivo de teste de
+// propósito: só assim o Google pede a permissão de ESCRITA (ler a pasta não
+// basta). Depois, publique uma Nova versão da implantação.
 function autorizarDrive() {
-  var posters = DriveApp.getFolderById(POSTERS_FOLDER_ID).getName();
-  var fotos = DriveApp.getFolderById(FOTOS_FOLDER_ID).getName();
-  // Também testa a ESCRITA (criar arquivo exige a permissão completa do Drive).
-  var teste = DriveApp.getFolderById(POSTERS_FOLDER_ID).createFile('teste-autorizacao.txt', 'ok');
-  teste.setTrashed(true);
-  Logger.log('Drive autorizado (leitura e escrita). Pastas: ' + posters + ' | ' + fotos);
+  var pastas = [POSTERS_FOLDER_ID, FOTOS_FOLDER_ID];
+  pastas.forEach(function (id) {
+    var pasta = DriveApp.getFolderById(id);
+    var teste = pasta.createFile('teste-autorizacao.txt', 'ok');
+    teste.setTrashed(true);
+    Logger.log('Escrita OK na pasta: ' + pasta.getName());
+  });
+  Logger.log('Drive autorizado (leitura e escrita).');
 }
