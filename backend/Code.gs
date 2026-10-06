@@ -88,7 +88,7 @@ var FOTOS_FOLDER_ID = '1aCFUhwcVA-gLYIQCPam5TjMsoUEvX6Ch';
 // página inicial conseguir exibi-las).
 var POSTERS_FOLDER_ID = '1fuy7xewEwxyCCvH1-TWL3LrzHl8DILBo';
 
-var LEMBRETES_HEADERS = ['ID', 'Titulo', 'TituloEN', 'Selo', 'SeloEN', 'Link', 'PosterURL', 'Destaque', 'Validade', 'Publicado'];
+var LEMBRETES_HEADERS = ['ID', 'Titulo', 'TituloEN', 'Selo', 'SeloEN', 'Link', 'PosterURL', 'Destaque', 'Validade', 'Publicado', 'Inicio'];
 
 // Cargos (como estão na coluna "Cargo" da planilha) que decidem quais
 // lembretes/eventos aparecem na página inicial. Os demais da diretoria
@@ -115,7 +115,7 @@ function doGet(e) {
       var todos = lerLembretes();
       result = {
         configurado: todos.length > 0,
-        lembretes: todos.filter(function (l) { return l.publicado && !l.expirado; })
+        lembretes: todos.filter(function (l) { return l.publicado && !l.expirado && !l.agendado; })
       };
     }
   } catch (err) {
@@ -387,6 +387,7 @@ function abaLembretes(criar) {
     // Aba criada por uma versão anterior (sem a coluna "Publicado").
     aba.getRange(1, 10).setValue('Publicado');
   }
+  if (aba && !aba.getRange(1, 11).getValue()) aba.getRange(1, 11).setValue('Inicio');
   return aba;
 }
 
@@ -418,6 +419,7 @@ function lerLembretes() {
     var titulo = String(linhas[i][1] || '').trim();
     if (!titulo) continue;
     var validade = normalizarData(linhas[i][8]);
+    var inicio = normalizarData(linhas[i][10]);
     lista.push({
       id: String(linhas[i][0]),
       titulo: titulo,
@@ -428,7 +430,9 @@ function lerLembretes() {
       posterUrl: String(linhas[i][6] || '').trim(),
       destaque: String(linhas[i][7] || '').trim().toUpperCase() === 'SIM',
       validade: validade,
+      inicio: inicio,
       expirado: !!validade && validade < hoje,
+      agendado: !!inicio && inicio > hoje,
       // Célula vazia (linhas antigas) conta como liberado.
       publicado: String(linhas[i][9] || '').trim().toUpperCase() !== 'NAO'
     });
@@ -525,6 +529,9 @@ function handleSaveLembrete(body, editando) {
 
   var validade = String(body.validade || '').trim();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(validade)) validade = '';
+  var inicio = String(body.inicio || '').trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(inicio)) inicio = '';
+  if (inicio && validade && inicio > validade) return { error: 'invalid_dates' };
 
   var campos = [
     titulo.substring(0, 140),
@@ -538,13 +545,14 @@ function handleSaveLembrete(body, editando) {
   if (editando) {
     aba.getRange(linha, 2, 1, 5).setValues([campos]);
     aba.getRange(linha, 7, 1, 3).setValues([[posterUrl, destaque, validade]]);
+    aba.getRange(linha, 11).setValue(inicio);
     if (ctx.publica && typeof body.publicado === 'boolean') {
       aba.getRange(linha, 10).setValue(body.publicado ? 'SIM' : 'NAO');
     }
   } else {
     var id = String(new Date().getTime());
     var publicado = ctx.publica && body.publicado ? 'SIM' : 'NAO';
-    aba.appendRow([id].concat(campos, [posterUrl, destaque, validade, publicado]));
+    aba.appendRow([id].concat(campos, [posterUrl, destaque, validade, publicado, inicio]));
   }
 
   return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);

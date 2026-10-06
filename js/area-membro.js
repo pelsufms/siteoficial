@@ -356,6 +356,11 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
   var posterPronto = null; // { dataUrl } do banner já ajustado para 1600x512
   var posterPreparando = null;
 
+  function formatarData(iso) {
+    var p = String(iso || '').split('-');
+    return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : iso;
+  }
+
   function posterSeguro(url) {
     return /^https:\/\//i.test(url || '') ? url : '';
   }
@@ -411,7 +416,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
       var thumb = poster
         ? '<img class="lembrete-row-thumb" src="' + escapeHtml(poster) + '" alt="">'
         : '<div class="lembrete-row-thumb"></div>';
-      var meta = [l.selo, l.validade ? t('até ', 'until ') + l.validade : '', l.expirado ? t('vencido', 'expired') : '']
+      var meta = [l.selo, l.inicio ? t('a partir de ', 'from ') + formatarData(l.inicio) : '', l.validade ? t('até ', 'until ') + formatarData(l.validade) : '', l.agendado ? t('agendado', 'scheduled') : '', l.expirado ? t('vencido', 'expired') : '']
         .filter(Boolean).join(' · ');
       var id = escapeHtml(l.id);
       var status = podePublicarAtual
@@ -500,6 +505,10 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         setStatus(t('Você não tem permissão para esta ação (liberar ou excluir itens no ar é do webmaster).', 'You do not have permission for this action (releasing or deleting live items is up to the webmaster).'), true);
         return;
       }
+      if (data.error === 'invalid_dates') {
+        setStatus(t('A data "a partir de" não pode ser depois da data limite.', 'The "show from" date cannot be after the deadline.'), true);
+        return;
+      }
       if (data.error || !data.found) {
         var detalhe = data.error ? ' [' + data.error + (data.message ? ': ' + data.message : '') + ']' : '';
         setStatus(t('Não foi possível concluir. Tente novamente.', 'Could not complete this. Please try again.') + detalhe, true);
@@ -529,6 +538,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         seloEn: document.getElementById('lembreteSeloEn').value,
         link: document.getElementById('lembreteLink').value,
         validade: document.getElementById('lembreteValidade').value,
+        inicio: document.getElementById('lembreteInicio').value,
         destaque: document.getElementById('lembreteDestaque').checked
       };
       if (podePublicarAtual) payload.publicado = publicando;
@@ -588,6 +598,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         document.getElementById('lembreteSeloEn').value = l.seloEn;
         document.getElementById('lembreteLink').value = l.link;
         document.getElementById('lembreteValidade').value = l.validade;
+        document.getElementById('lembreteInicio').value = l.inicio || '';
         document.getElementById('lembreteDestaque').checked = l.destaque;
         document.getElementById('lembretePublicado').checked = l.publicado;
         posterInput.value = '';

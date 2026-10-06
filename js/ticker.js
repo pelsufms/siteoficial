@@ -58,6 +58,11 @@
     }
     card.appendChild(span('ticker-text i18n-pt', l.titulo));
     card.appendChild(span('ticker-text i18n-en', l.tituloEn || l.titulo, 'en'));
+    if (/^\d{4}-\d{2}-\d{2}$/.test(l.validade || '')) {
+      var p = l.validade.split('-');
+      card.appendChild(span('ticker-deadline i18n-pt', 'Até ' + p[2] + '/' + p[1] + '/' + p[0]));
+      card.appendChild(span('ticker-deadline i18n-en', 'Until ' + p[1] + '/' + p[2] + '/' + p[0], 'en'));
+    }
 
     li.appendChild(card);
     return li;

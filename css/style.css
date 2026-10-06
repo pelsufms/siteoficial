@@ -391,7 +391,7 @@ html[data-theme="dark"] .theme-icon-moon { display: inline; }
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.ticker-item { flex-shrink: 0; width: clamp(300px, 82vw, 480px); margin-right: 22px; }
+.ticker-item { flex-shrink: 0; width: clamp(320px, 88vw, 620px); margin-right: 26px; }
 .ticker-card {
   display: flex;
   flex-direction: column;
@@ -400,7 +400,8 @@ html[data-theme="dark"] .theme-icon-moon { display: inline; }
   color: var(--ink);
   white-space: normal;
 }
-a.ticker-card:hover .ticker-text { color: var(--red); }
+a.ticker-card:hover .ticker-deadline { font-size: 0.76rem; font-weight: 700; color: var(--red); }
+.ticker-text { color: var(--red); }
 a.ticker-card:hover .ticker-poster { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
 .ticker-poster {
   position: relative;
@@ -457,8 +458,9 @@ a.ticker-card:hover .ticker-poster { transform: translateY(-4px); box-shadow: 0 
   border-color: transparent;
   color: var(--red);
 }
+.ticker-deadline { font-size: 0.76rem; font-weight: 700; color: var(--red); }
 .ticker-text {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.35;
   transition: color 0.2s;
@@ -472,7 +474,8 @@ a.ticker-card:hover .ticker-poster { transform: translateY(-4px); box-shadow: 0 
 @media (max-width: 640px) {
   .ticker { padding: 20px 0 24px; }
   .ticker-item { margin-right: 16px; }
-  .ticker-text { font-size: 0.84rem; }
+  .ticker-deadline { font-size: 0.76rem; font-weight: 700; color: var(--red); }
+.ticker-text { font-size: 0.84rem; }
 }
 
 /* ---------- Hero ---------- */
@@ -1986,7 +1989,7 @@ html[lang="en"] .i18n-pt { display: none; }
 }
 
 .lembrete-poster-preview {
-  width: 160px;
+  width: 280px;
   aspect-ratio: 1583 / 507;
   object-fit: cover;
   border-radius: 8px;
@@ -2014,7 +2017,7 @@ html[lang="en"] .i18n-pt { display: none; }
   border-top: 1px solid var(--border);
 }
 .lembrete-row-thumb {
-  width: 120px;
+  width: 190px;
   aspect-ratio: 1583 / 507;
   object-fit: cover;
   border-radius: 6px;
