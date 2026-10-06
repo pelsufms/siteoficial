@@ -672,3 +672,12 @@ function getAvisos(nomeAtual) {
     return [];
   }
 }
+
+// Rode UMA vez no editor (menu de funções -> autorizarDrive -> Executar) para
+// o Google pedir a permissão de acesso ao Drive, necessária para salvar
+// pôsteres e fotos de perfil. Depois, publique uma Nova versão da implantação.
+function autorizarDrive() {
+  var posters = DriveApp.getFolderById(POSTERS_FOLDER_ID).getName();
+  var fotos = DriveApp.getFolderById(FOTOS_FOLDER_ID).getName();
+  Logger.log('Drive autorizado. Pastas: ' + posters + ' | ' + fotos);
+}
