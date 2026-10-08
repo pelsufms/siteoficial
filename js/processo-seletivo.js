@@ -2,9 +2,9 @@
 // Mostra o estado das inscrições conforme a data (fuso de Campo Grande/MS) e
 // marca no cronograma o que já passou e o que está acontecendo agora.
 (function () {
-  // Cole aqui o link do formulário de inscrição quando for divulgado.
-  // Enquanto estiver vazio, a página manda o candidato para os canais oficiais.
-  var FORM_URL = '';
+  // Link do formulário de inscrição (o botão só aparece de 09/10 a 16/10).
+  // Se ficar vazio, a página manda o candidato para os canais oficiais.
+  var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf7sE4O8BIFI-bNcd5wF2F4kDhrqqg0klQHYyzUNWu9Jqkx-A/viewform';
 
   var INSCRICAO_ABRE = '2026-10-09';
   var INSCRICAO_FECHA = '2026-10-16'; // vale até 23h59 desse dia

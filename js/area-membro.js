@@ -372,8 +372,10 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     if (!editingLembreteId) document.getElementById('lembretePublicado').checked = podePublicarAtual;
   }
 
-  // Ajusta qualquer imagem ao banner 1600x512 (recorte central, "cover"),
-  // como os destaques do site da UFMS. Avisa se foi cortada ou está pequena.
+  // Prepara o banner sem cortar nada: reduz para no máximo 1600 px de largura
+  // e mantém a proporção original (a página inicial mostra a imagem inteira,
+  // com faixas claras se não for 1600x512). Avisa se a proporção é diferente
+  // ou se a imagem é pequena.
   function ajustarBanner(file) {
     var W = 1600, H = 512;
     return new Promise(function (resolve, reject) {
@@ -381,12 +383,11 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
       reader.onload = function (e) {
         var img = new Image();
         img.onload = function () {
+          var scale = Math.min(1, W / img.width);
           var canvas = document.createElement('canvas');
-          canvas.width = W;
-          canvas.height = H;
-          var scale = Math.max(W / img.width, H / img.height);
-          var sw = W / scale, sh = H / scale;
-          canvas.getContext('2d').drawImage(img, (img.width - sw) / 2, (img.height - sh) / 2, sw, sh, 0, 0, W, H);
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
           resolve({
             dataUrl: canvas.toDataURL('image/jpeg', 0.88),
             cortada: Math.abs(img.width / img.height - W / H) > 0.05 * (W / H),
@@ -482,7 +483,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         preview.style.display = 'block';
         var notas = [];
         if (r.pequena) notas.push(t('A imagem (' + r.original + ') é menor que 1600 px de largura e pode ficar borrada.', 'The image (' + r.original + ') is narrower than 1600 px and may look blurry.'));
-        if (r.cortada) notas.push(t('A proporção não é 1600×512: a imagem foi cortada no centro.', 'The aspect ratio is not 1600×512: the image was cropped at the center.'));
+        if (r.cortada) notas.push(t('A proporção é diferente de 1600×512: a imagem aparece inteira no site, com faixas claras nas bordas se sobrar espaço.', 'The aspect ratio differs from 1600×512: the image is shown whole on the site, with light bands at the edges if there is space left.'));
         if (!notas.length) notas.push(t('Banner 1600×512 pronto.', 'Banner 1600×512 ready.'));
         posterNota.textContent = notas.join(' ');
       }).catch(function () {
