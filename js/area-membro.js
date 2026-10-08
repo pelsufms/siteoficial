@@ -567,6 +567,13 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
         .catch(erroConexao);
     });
 
+    document.getElementById('lembreteSeedPs').addEventListener('click', function () {
+      setStatus('...', false);
+      callBackend({ action: 'seedProcessoSeletivo' })
+        .then(function (data) { handleResult(data, t('Lembretes do Processo Seletivo adicionados: cada etapa aparece na página inicial só nas datas dela.', 'Selection Process reminders added: each step shows on the homepage only on its dates.')); })
+        .catch(erroConexao);
+    });
+
     lista.addEventListener('change', function (ev) {
       var toggle = ev.target.closest('.lembrete-publicar');
       if (!toggle) return;

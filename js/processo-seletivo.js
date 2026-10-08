@@ -41,4 +41,13 @@
     if (ate < hoje) li.classList.add('is-done');
     else if (de <= hoje) li.classList.add('is-now');
   });
+
+  // Setas do carrossel de divulgação.
+  var galeria = document.getElementById('psGallery');
+  Array.prototype.forEach.call(document.querySelectorAll('.ps-gallery-nav'), function (btn) {
+    btn.addEventListener('click', function () {
+      var dir = parseInt(btn.getAttribute('data-dir'), 10);
+      galeria.scrollBy({ left: dir * galeria.clientWidth * 0.8, behavior: 'smooth' });
+    });
+  });
 })();

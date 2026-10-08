@@ -146,6 +146,7 @@ function doPost(e) {
       else if (action === 'deleteLembrete') result = handleDeleteLembrete(body);
       else if (action === 'setLembretePublicado') result = handleSetLembretePublicado(body);
       else if (action === 'seedLembretes') result = handleSeedLembretes(body);
+      else if (action === 'seedProcessoSeletivo') result = handleSeedProcessoSeletivo(body);
       else result = { error: 'unknown_action' };
     }
   } catch (err) {
@@ -391,9 +392,17 @@ function abaLembretes(criar) {
   return aba;
 }
 
+var _planilhaTz = null;
+function planilhaTz() {
+  if (!_planilhaTz) _planilhaTz = SpreadsheetApp.openById(SHEET_ID).getSpreadsheetTimeZone() || 'GMT-4';
+  return _planilhaTz;
+}
+
+// A planilha converte "2026-10-08" em data; formata no fuso da própria
+// planilha para não deslocar um dia.
 function normalizarData(valor) {
   if (valor && typeof valor.getTime === 'function') {
-    return Utilities.formatDate(valor, 'GMT-4', 'yyyy-MM-dd');
+    return Utilities.formatDate(valor, planilhaTz(), 'yyyy-MM-dd');
   }
   return String(valor || '').trim();
 }
@@ -403,7 +412,7 @@ function normalizarData(valor) {
 // href na página pública.
 function linkSeguro(link) {
   link = String(link || '').trim();
-  if (/^https?:\/\//i.test(link) || /^projetos\/[\w.\-]+$/.test(link) || /^#[\w\-]+$/.test(link)) return link;
+  if (/^https?:\/\//i.test(link) || /^projetos\/[\w.\-]+$/.test(link) || /^[\w\-]+\.html(#[\w\-]+)?$/.test(link) || /^#[\w\-]+$/.test(link)) return link;
   return '';
 }
 
@@ -598,6 +607,40 @@ function handleSeedLembretes(body) {
     var p = LEMBRETES_PADRAO[i];
     if (existentes[p.titulo]) continue;
     aba.appendRow([String(base + i), p.titulo, p.tituloEn, p.selo, p.seloEn, linkSeguro(p.link), '', p.destaque ? 'SIM' : 'NAO', '', 'SIM']);
+  }
+  return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
+}
+
+// Um lembrete por etapa do Processo Seletivo 2026.2 (Edital nº 02/2026), com
+// o banner 1600x512 de cada etapa, hospedado no próprio site. Cada um só
+// aparece na página inicial entre "inicio" e "validade" (inclusive).
+var BASE_SITE = 'https://pelsufms.github.io/siteoficial/';
+var LEMBRETES_PS = [
+  { titulo: 'Processo Seletivo 2026.2: edital publicado', tituloEn: '2026.2 Selection Process: call published', selo: 'Edital nº 02/2026', seloEn: 'Call no. 02/2026', poster: 'ps-01-edital.jpg', inicio: '2026-10-07', validade: '2026-10-08' },
+  { titulo: 'Inscrições abertas: 09 a 16/10, até 23h59', tituloEn: 'Enrollment open: Oct 9 to 16, until 11:59 pm', selo: 'Inscrições abertas', seloEn: 'Enrollment open', poster: 'ps-02-inscricoes.jpg', inicio: '2026-10-09', validade: '2026-10-16', destaque: true },
+  { titulo: 'Lista de inscritos, ordem de apresentação e local da sessão', tituloEn: 'List of candidates, presentation order and session venue', selo: '18/10', seloEn: 'Oct 18', poster: 'ps-03-lista.jpg', inicio: '2026-10-17', validade: '2026-10-18' },
+  { titulo: 'Sessão única de apresentação e entrevista, a partir das 13h30', tituloEn: 'Single presentation and interview session, from 1:30 pm', selo: '23/10', seloEn: 'Oct 23', poster: 'ps-04-sessao.jpg', inicio: '2026-10-19', validade: '2026-10-23', destaque: true },
+  { titulo: 'Resultado preliminar do Processo Seletivo', tituloEn: 'Selection Process preliminary result', selo: '25/10', seloEn: 'Oct 25', poster: 'ps-05-preliminar.jpg', inicio: '2026-10-24', validade: '2026-10-25' },
+  { titulo: 'Recurso até 23h59', tituloEn: 'Appeals until 11:59 pm', selo: '26/10', seloEn: 'Oct 26', poster: 'ps-06-recurso.jpg', inicio: '2026-10-26', validade: '2026-10-26' },
+  { titulo: 'Resultado final do Processo Seletivo', tituloEn: 'Selection Process final result', selo: '28/10', seloEn: 'Oct 28', poster: 'ps-07-final.jpg', inicio: '2026-10-27', validade: '2026-10-28' },
+  { titulo: 'Reunião de boas-vindas e início do apadrinhamento', tituloEn: 'Welcome meeting and start of the mentoring', selo: '30/10', seloEn: 'Oct 30', poster: 'ps-08-boas-vindas.jpg', inicio: '2026-10-29', validade: '2026-10-30' }
+];
+
+function handleSeedProcessoSeletivo(body) {
+  var ctx = autenticarPublicador(body);
+  if (ctx.erro) return ctx.erro;
+
+  var aba = abaLembretes(true);
+  var existentes = {};
+  lerLembretes().forEach(function (l) { existentes[l.titulo] = true; });
+
+  var base = new Date().getTime();
+  // De trás pra frente: a leitura mostra o mais recente primeiro.
+  for (var i = LEMBRETES_PS.length - 1; i >= 0; i--) {
+    var p = LEMBRETES_PS[i];
+    if (existentes[p.titulo]) continue;
+    aba.appendRow([String(base + i), p.titulo, p.tituloEn, p.selo, p.seloEn, 'processo-seletivo.html#cronograma',
+      BASE_SITE + 'assets/img/lembretes/' + p.poster, p.destaque ? 'SIM' : 'NAO', p.validade, 'SIM', p.inicio]);
   }
   return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
 }
