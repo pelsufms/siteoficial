@@ -2090,3 +2090,64 @@ html[lang="en"] .i18n-pt { display: none; }
   resize: vertical;
 }
 .member-aviso-form button { align-self: flex-start; }
+
+/* ---------- Processo seletivo ---------- */
+.ps-status { margin-top: 22px; }
+.ps-status-pill {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.ps-status-pill.is-open { background: var(--red); border-color: var(--red); color: #fff; }
+.ps-actions { margin-top: 22px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.ps-schedule { list-style: none; padding: 0; margin: 18px 0 0; max-width: 760px; }
+.ps-schedule li {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 16px;
+  border-left: 3px solid var(--border);
+  background: var(--surface);
+  margin-bottom: 10px;
+  border-radius: 0 10px 10px 0;
+}
+.ps-schedule .ps-date { font-weight: 700; color: var(--red); font-size: 0.92rem; }
+.ps-schedule .ps-step { color: var(--ink-soft); font-size: 0.93rem; line-height: 1.5; }
+.ps-schedule li.is-done { opacity: 0.55; }
+.ps-schedule li.is-now { border-left-color: var(--red); background: var(--red-tint); }
+.ps-schedule li.is-now .ps-step { color: var(--ink); }
+.ps-cta .ps-channels { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 16px; }
+.ps-table-wrap { overflow-x: auto; margin: 18px 0; }
+.ps-table { width: 100%; max-width: 820px; border-collapse: collapse; font-size: 0.92rem; }
+.ps-table th, .ps-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--ink-soft); }
+.ps-table th { color: var(--ink); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.4px; }
+.ps-table td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+.ps-table th:last-child, .ps-table td:last-child { text-align: right; width: 80px; }
+.ps-table tfoot td { color: var(--ink); font-weight: 700; border-bottom: none; }
+.ps-signature { margin-top: 26px; font-size: 0.85rem; color: var(--ink-faint); }
+.ps-strip {
+  background: var(--red);
+  color: #fff;
+  padding: 12px 0;
+}
+.ps-strip .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; text-align: center; }
+.ps-strip strong { font-size: 0.95rem; }
+.ps-strip span { font-size: 0.88rem; opacity: 0.95; }
+.ps-strip a {
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--red-darker);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+@media (max-width: 640px) {
+  .ps-schedule li { grid-template-columns: 1fr; gap: 4px; }
+  .ps-table td:first-child { white-space: normal; }
+}

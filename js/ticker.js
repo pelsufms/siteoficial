@@ -7,6 +7,12 @@
 (function () {
   var API_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmMUO34QOCciGgpZ65YxnuijNvtWz5YfxFhFg9BlmW-IPCZxWvDU7fQ/exec?action=lembretes';
 
+  // Faixas avisos com data-until (ex.: Processo Seletivo) somem depois da data.
+  var hojeIso = new Date().toISOString().slice(0, 10);
+  Array.prototype.forEach.call(document.querySelectorAll('.ps-strip[data-until]'), function (el) {
+    if (el.getAttribute('data-until') < hojeIso) el.remove();
+  });
+
   var ticker = document.getElementById('ticker');
   var track = document.getElementById('tickerTrack');
   if (!ticker || !track) return;
