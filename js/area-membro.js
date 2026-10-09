@@ -233,6 +233,41 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     renderAvisos(currentAvisos);
   }
 
+
+  // ---------- Aviso fixo: Eleição da Diretoria 2027 (Edital nº 01/2026) ----------
+  // Mostra a etapa de hoje (fuso de Campo Grande/MS) e some depois da posse.
+  var ELEICAO_ETAPAS = [
+    { de: '2026-10-07', ate: '2026-10-08', pt: 'Edital publicado. As candidaturas abrem em 09/10.', en: 'Call published. Candidacies open on Oct 9.' },
+    { de: '2026-10-09', ate: '2026-10-15', pt: 'Candidaturas abertas até 16/10, 23h59, pelo Formulário de Candidatura. Pode concorrer quem tem membresia IEEE e PELS ativa e participou de pelo menos 3 reuniões gerais no ano.', en: 'Candidacies open until Oct 16, 11:59 pm, through the Candidacy Form. You can run if you have active IEEE and PELS membership and attended at least 3 general meetings this year.' },
+    { de: '2026-10-16', ate: '2026-10-17', pt: 'O último dia de candidaturas é 16/10 (até 23h59). Contestação de candidaturas e da lista de eleitores até 17/10, 23h59: confira se o seu nome está na lista.', en: 'The last day for candidacies is Oct 16 (until 11:59 pm). Challenges to candidacies and to the voter list until Oct 17, 11:59 pm: check that your name is on the list.' },
+    { de: '2026-10-18', ate: '2026-10-22', pt: 'Candidatos sendo divulgados no grupo do Capítulo (19 a 22/10), com foto e proposta. A votação começa em 23/10, às 8h.', en: 'Candidates are being presented in the Chapter group (Oct 19 to 22), with photo and platform. Voting starts on Oct 23 at 8 am.' },
+    { de: '2026-10-23', ate: '2026-10-26', pt: 'Votação online aberta até 26/10, 23h59. O código de votação foi enviado ao seu e-mail em 23/10, às 8h. Não recebeu até 12h do dia 23? Peça o reenvio à Diretoria.', en: 'Online voting open until Oct 26, 11:59 pm. Your voting code was e-mailed on Oct 23 at 8 am. Did not get it by noon on the 23rd? Ask the Board to resend it.' },
+    { de: '2026-10-27', ate: '2026-10-29', pt: 'Resultado preliminar publicado em 27/10, com todos os votos e a planilha de apuração. Contestação até 29/10, 23h59.', en: 'Preliminary result published on Oct 27, with all votes and the counting spreadsheet. Challenges until Oct 29, 11:59 pm.' },
+    { de: '2026-10-30', ate: '2026-11-02', pt: 'Resultado final publicado em 30/10. A transição de gestão começa em 03/11.', en: 'Final result published on Oct 30. The management transition starts on Nov 3.' },
+    { de: '2026-11-03', ate: '2027-01-03', pt: 'Transição de gestão e treinamento dos eleitos até dezembro. A posse é em 04/01/2027.', en: 'Management transition and training of those elected until December. Inauguration is on Jan 4, 2027.' },
+    { de: '2027-01-04', ate: '2027-01-04', pt: 'Posse da Diretoria 2027 hoje.', en: 'Inauguration of the 2027 Board today.' }
+  ];
+
+  function renderElectionNotice() {
+    var box = document.getElementById('electionNotice');
+    if (!box) return;
+    var hoje;
+    try {
+      hoje = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Campo_Grande' }).format(new Date());
+    } catch (e) {
+      hoje = new Date().toISOString().slice(0, 10);
+    }
+    if (hoje > box.getAttribute('data-until')) return;
+    var etapa = null;
+    for (var i = 0; i < ELEICAO_ETAPAS.length; i++) {
+      if (hoje >= ELEICAO_ETAPAS[i].de && hoje <= ELEICAO_ETAPAS[i].ate) { etapa = ELEICAO_ETAPAS[i]; break; }
+    }
+    if (!etapa) return;
+    document.getElementById('electionNoticePt').textContent = etapa.pt;
+    document.getElementById('electionNoticeEn').textContent = etapa.en;
+    box.style.display = 'flex';
+  }
+
   function setupPlaceholders() {
     var fields = document.querySelectorAll('[data-placeholder-pt]');
     function update() {
@@ -787,6 +822,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
   document.getElementById('memberSignOut').addEventListener('click', signOut);
   document.getElementById('memberSignOutNotFound').addEventListener('click', signOut);
   setupPlaceholders();
+  renderElectionNotice();
   setupXploreSearch();
   setupProfileForm();
   setupAvisoForm();

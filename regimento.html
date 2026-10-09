@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regimento Interno — IEEE PELS UFMS Chapter</title>
+<meta name="description" content="Regimento Interno do Capítulo Estudantil IEEE PELS UFMS: normas de organização, gestão, membresia, eleições e engajamento dos membros. Texto completo e PDF.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  (function () {
+    var stored = localStorage.getItem('pels-theme');
+    var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+
+    var storedLang = localStorage.getItem('pels-lang');
+    if (storedLang === 'en') document.documentElement.setAttribute('lang', 'en');
+  })();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="Logo IEEE PELS UFMS Chapter">
+      <span class="brand-text">
+        <strong>IEEE PELS UFMS</strong>
+        <span>Student Chapter</span>
+      </span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <a href="index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+      <a href="index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+      <a href="index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+      <a href="index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+      <a href="index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+      <a href="index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+      <a href="index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+      <a href="index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+    </nav>
+
+    <div class="lang-toggle" role="group" aria-label="Idioma do site / Site language">
+      <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+      <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+      <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+      <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+      <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    </button>
+
+    <a href="area-membro.html" class="member-area-link" aria-label="Área do Membro / Member Area" title="Área do Membro">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.5 3.5-7 8-7s8 2.5 8 7"/></svg>
+    </a>
+
+    <a href="index.html#membros" class="btn btn-outline"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="navMobile" aria-label="Navegação mobile">
+  <a href="index.html#inicio"><span class="i18n-pt">Início</span><span class="i18n-en" lang="en">Home</span></a>
+  <a href="index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a>
+  <a href="index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a>
+  <a href="index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a>
+  <a href="index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a>
+  <a href="index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a>
+  <a href="index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a>
+  <a href="index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a>
+  <a href="area-membro.html"><span class="i18n-pt">Área do Membro</span><span class="i18n-en" lang="en">Member Area</span></a>
+  <a href="ouvidoria.html"><span class="i18n-pt">Ouvidoria</span><span class="i18n-en" lang="en">Ombudsman</span></a>
+  <a href="processo-seletivo.html"><span class="i18n-pt">Processo Seletivo</span><span class="i18n-en" lang="en">Selection Process</span></a>
+  <a href="editais.html" class="is-active"><span class="i18n-pt">Editais</span><span class="i18n-en" lang="en">Public calls</span></a>
+  <a href="index.html#membros" class="btn btn-primary"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a>
+  <div class="lang-toggle lang-toggle-mobile" role="group" aria-label="Idioma do site / Site language">
+    <span class="lang-toggle-icon" aria-hidden="true">🌐</span>
+    <button type="button" class="lang-btn" data-lang-btn="pt" aria-pressed="true">PT</button>
+    <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="false">EN</button>
+  </div>
+  <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+    <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+    <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+    <span class="theme-toggle-label" id="themeToggleLabel">Tema escuro</span>
+  </button>
+</nav>
+
+<main id="conteudo">
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="kicker i18n-pt">Documento oficial · 2026</span>
+      <span class="kicker i18n-en" lang="en">Official document · 2026</span>
+      <h1 class="i18n-pt">Regimento Interno</h1>
+      <h1 class="i18n-en" lang="en">Bylaws</h1>
+      <p class="page-lead i18n-pt">Normas de organização, gestão, membresia e engajamento dos membros do Capítulo Estudantil IEEE PELS UFMS. Leia o texto completo, pesquise por artigo ou baixe o PDF.</p>
+      <p class="page-lead i18n-en" lang="en">Rules on the organization, management, membership and engagement of the IEEE PELS UFMS Student Chapter members. Read the full text, search by article or download the PDF.</p>
+      <div class="ps-actions">
+        <a href="#texto" class="btn btn-primary"><span class="i18n-pt">Ler o regimento</span><span class="i18n-en" lang="en">Read the bylaws</span></a>
+        <a href="assets/docs/Regimento_Interno_PELS.pdf" class="btn btn-outline" target="_blank" rel="noopener"><span class="i18n-pt">Baixar o PDF</span><span class="i18n-en" lang="en">Download the PDF</span></a>
+        <a href="editais.html" class="btn btn-outline"><span class="i18n-pt">Editais</span><span class="i18n-en" lang="en">Public calls</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" id="resumo">
+    <div class="container">
+      <h2 class="i18n-pt">Resumo</h2>
+      <h2 class="i18n-en" lang="en">Summary</h2>
+      <p class="i18n-pt">Este documento estabelece o Regimento Interno do Capítulo Estudantil IEEE Power Electronics Society (PELS) da Universidade Federal de Mato Grosso do Sul (UFMS), unidade vinculada ao Ramo Estudantil IEEE UFMS. O objetivo deste Regimento é regulamentar a base normativa, a estrutura organizacional, a membresia, o processo seletivo de ingresso de novos integrantes, o processo de eleição e transição de cargos da Diretoria, a assiduidade e os mecanismos de retenção e desligamento de membros. Adicionalmente, consolida-se o Sistema de Apadrinhamento, o programa mensal de atualização científica via plataforma IEEE Xplore, o Sistema de Ouvidoria, os recursos financeiros e a documentação institucional do Capítulo, visando a contínua capacitação técnica, o engajamento em projetos e a preparação acadêmica dos discentes na área de eletrônica de potência.</p>
+      <p class="i18n-en" lang="en">The Bylaws are the Chapter's official document and are written in Portuguese; the full text below is the same as the PDF. Key points:</p>
+      <ul class="i18n-en" lang="en">
+        <li><strong>Mission:</strong> a non-profit Student Chapter attached to the IEEE UFMS Student Branch, focused on recruiting and retaining members in Power Electronics and on technical, scientific and integration activities for the UFMS community (Arts. 1 to 5).</li>
+        <li><strong>Membership:</strong> PELS Members are UFMS students with active IEEE and PELS membership; Volunteers have no PELS membership, can collaborate and vote, but cannot hold Board positions (Arts. 13 to 16).</li>
+        <li><strong>Admission:</strong> open selection process with no cap on openings, through a presentation and interview in a single session; everyone approved joins (Arts. 18-A to 18-H).</li>
+        <li><strong>Board:</strong> 10 members across 7 positions (Chair, Vice-Chair, Secretary, Treasurer, Director Project, Director Events and Webmaster), for a 1-year term from January to December (Arts. 19 to 25).</li>
+        <li><strong>Elections:</strong> held every October, direct, online and secret, with open counting and a published spreadsheet; up to 3 positions per candidate, by priority (Arts. 26 to 31).</li>
+        <li><strong>Meetings and engagement:</strong> monthly general meetings, a participation tracking matrix, and at least one academic activity per semester (Arts. 32 to 40 and 45).</li>
+        <li><strong>Mentoring:</strong> every new member gets a mentor (Padrinho/Madrinha) for 3 months (Arts. 41 to 44).</li>
+        <li><strong>Ombudsman and conduct:</strong> a fully anonymous form, access shared by at least 2 Board members, plus zero tolerance for harassment and discrimination (Arts. 8 to 11 and 47 to 51).</li>
+        <li><strong>Finance and records:</strong> resources managed through the IEEE Section, a mandatory digital archive and a formal management transition (Arts. 52 to 61).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="page-section" id="texto">
+    <div class="container">
+      <h2 class="i18n-pt">Texto completo</h2>
+      <h2 class="i18n-en" lang="en">Full text</h2>
+
+      <div class="rg-tools">
+        <input type="search" id="rgSearch" class="rg-search" data-placeholder-pt="Pesquisar no regimento (ex.: ouvidoria, voto, art. 27)" data-placeholder-en="Search the bylaws (e.g. ombudsman, vote, art. 27)" aria-label="Pesquisar no regimento">
+        <button type="button" class="btn btn-outline btn-sm" id="rgExpand"><span class="i18n-pt">Abrir tudo</span><span class="i18n-en" lang="en">Expand all</span></button>
+        <button type="button" class="btn btn-outline btn-sm" id="rgCollapse"><span class="i18n-pt">Fechar tudo</span><span class="i18n-en" lang="en">Collapse all</span></button>
+        <span class="rg-count" id="rgCount" aria-live="polite"></span>
+      </div>
+
+      <ul class="rg-toc">
+        <li><a href="#cap-preambulo"><span class="i18n-pt">Preâmbulo</span><span class="i18n-en" lang="en">Preamble</span></a></li>
+        <li><a href="#cap-i"><span class="i18n-pt">Capítulo I – Disposições preliminares</span><span class="i18n-en" lang="en">Chapter I – Preliminary Provisions</span></a></li>
+        <li><a href="#cap-ii"><span class="i18n-pt">Capítulo II – Dos princípios de convivência e da não discriminação</span><span class="i18n-en" lang="en">Chapter II – Principles of Coexistence and Non-Discrimination</span></a></li>
+        <li><a href="#cap-iii"><span class="i18n-pt">Capítulo III – Das definições</span><span class="i18n-en" lang="en">Chapter III – Definitions</span></a></li>
+        <li><a href="#cap-iv"><span class="i18n-pt">Capítulo IV – Da membresia</span><span class="i18n-en" lang="en">Chapter IV – Membership</span></a></li>
+        <li><a href="#cap-v"><span class="i18n-pt">Capítulo V – Da estrutura organizacional</span><span class="i18n-en" lang="en">Chapter V – Organizational Structure</span></a></li>
+        <li><a href="#cap-vi"><span class="i18n-pt">Capítulo VI – Dos cargos e responsabilidades</span><span class="i18n-en" lang="en">Chapter VI – Roles and Responsibilities</span></a></li>
+        <li><a href="#cap-vii"><span class="i18n-pt">Capítulo VII – Da eleição e nomeação</span><span class="i18n-en" lang="en">Chapter VII – Elections and Appointment</span></a></li>
+        <li><a href="#cap-viii"><span class="i18n-pt">Capítulo VIII – Das reuniões e da assiduidade</span><span class="i18n-en" lang="en">Chapter VIII – Meetings and Attendance</span></a></li>
+        <li><a href="#cap-ix"><span class="i18n-pt">Capítulo IX – Do engajamento e avaliação de membros</span><span class="i18n-en" lang="en">Chapter IX – Member Engagement and Evaluation</span></a></li>
+        <li><a href="#cap-x"><span class="i18n-pt">Capítulo X – Do sistema de apadrinhamento (mentoria interna)</span><span class="i18n-en" lang="en">Chapter X – Mentoring System (Internal Mentorship)</span></a></li>
+        <li><a href="#cap-xi"><span class="i18n-pt">Capítulo XI – Da atualização científica e atividades acadêmicas</span><span class="i18n-en" lang="en">Chapter XI – Scientific Updates and Academic Activities</span></a></li>
+        <li><a href="#cap-xii"><span class="i18n-pt">Capítulo XII – Do sistema de ouvidoria e advertências</span><span class="i18n-en" lang="en">Chapter XII – Ombudsman System and Warnings</span></a></li>
+        <li><a href="#cap-xiii"><span class="i18n-pt">Capítulo XIII – Das licenças, afastamentos e desligamento</span><span class="i18n-en" lang="en">Chapter XIII – Leaves, Absences and Removal</span></a></li>
+        <li><a href="#cap-xiv"><span class="i18n-pt">Capítulo XIV – Dos recursos financeiros</span><span class="i18n-en" lang="en">Chapter XIV – Financial Resources</span></a></li>
+        <li><a href="#cap-xv"><span class="i18n-pt">Capítulo XV – Da documentação e comunicação</span><span class="i18n-en" lang="en">Chapter XV – Documentation and Communication</span></a></li>
+        <li><a href="#cap-xvi"><span class="i18n-pt">Capítulo XVI – Da transição de gestão</span><span class="i18n-en" lang="en">Chapter XVI – Management Transition</span></a></li>
+        <li><a href="#cap-xvii"><span class="i18n-pt">Capítulo XVII – Das disposições finais</span><span class="i18n-en" lang="en">Chapter XVII – Final Provisions</span></a></li>
+      </ul>
+
+      <div class="rg-chapters" id="rgChapters">
+<details class="rg-chapter" id="cap-preambulo"><summary><span class="i18n-pt">Preâmbulo</span><span class="i18n-en" lang="en">Preamble</span></summary><div class="rg-body">
+<p class="rg-p">O presente Regimento Interno estabelece as normas de organização, funcionamento e gestão do Capítulo Estudantil IEEE Power Electronics Society (PELS) da Universidade Federal de Mato Grosso do Sul (UFMS), doravante denominado “Capítulo PELS UFMS”. Este documento é elaborado em conformidade com a Constituição do IEEE, os Estatutos do IEEE (IEEE Bylaws), as Políticas do IEEE, o Manual de Operações do MGA (MGA Operations Manual), o Código de Conduta do IEEE e as diretrizes da IEEE Power Electronics Society (PELS). O Capítulo PELS UFMS é uma unidade vinculada ao Ramo Estudantil IEEE UFMS, regendo-se subsidiariamente pelo Regimento Interno do Ramo UFMS, pela legislação brasileira aplicável às entidades estudantis sem fins lucrativos e pelas normas da UFMS pertinentes à atuação de grupos estudantis.</p>
+</div></details>
+<details class="rg-chapter" id="cap-i"><summary><span class="i18n-pt">Capítulo I – Disposições preliminares</span><span class="i18n-en" lang="en">Chapter I – Preliminary Provisions</span></summary><div class="rg-body">
+<p class="rg-art" id="art-1"><strong>Art. 1º</strong> O Capítulo Estudantil IEEE Power Electronics Society da UFMS, doravante denominado simplesmente “Capítulo PELS UFMS”, é a unidade organizacional do IEEE PELS vinculada ao Ramo Estudantil IEEE UFMS.</p>
+<p class="rg-art" id="art-2"><strong>Art. 2º</strong> São denominações oficiais do Capítulo: em português, “Capítulo Estudantil IEEE PELS – UFMS”; em inglês, “IEEE PELS UFMS Student Chapter”; abreviada, “Capítulo PELS UFMS”.</p>
+<p class="rg-art" id="art-3"><strong>Art. 3º</strong> O Capítulo tem sua sede administrativa na UFMS, campus de Campo Grande, no mesmo espaço designado ao Ramo Estudantil IEEE UFMS, ou em outro local que venha a ser indicado pela universidade.</p>
+<p class="rg-art" id="art-4"><strong>Art. 4º</strong> O Capítulo PELS UFMS é uma organização sem fins lucrativos, cuja missão é facilitar o recrutamento e a retenção de membros na área de Eletrônica de Potência, contribuir com o desenvolvimento acadêmico e profissional de seus membros e promover atividades técnicas, científicas e de integração para a comunidade da UFMS. A participação no Capítulo é de caráter inteiramente voluntário, sendo o ingresso feito por processo seletivo aberto, sem limite de vagas, aos estudantes de todos os cursos da UFMS interessados na área de Eletrônica de Potência e comprometidos com as regras deste Regimento, nos termos dos Arts. 18-A a 18-H.</p>
+<p class="rg-art" id="art-5"><strong>Art. 5º</strong> São finalidades do Capítulo:</p>
+<ol class="rg-items">
+<li value="1">Promover programas que contribuam para a entrada e retenção de membros na área de eletrônica de potência;</li>
+<li value="2">Proporcionar integração com outros Capítulos PELS da região;</li>
+<li value="3">Promover visitas técnicas que aproximem teoria e prática;</li>
+<li value="4">Realizar minicursos, palestras, seminários e confraternizações voltados ao aperfeiçoamento técnico de Membros e Voluntários;</li>
+<li value="5">Incentivar liderança, responsabilidade, criatividade e trabalho em equipe.</li>
+</ol>
+<h4 class="rg-sub">Da Base Normativa</h4>
+<p class="rg-art" id="art-6"><strong>Art. 6º</strong> O Capítulo PELS UFMS rege-se pelas seguintes normas, em ordem hierárquica:</p>
+<ol class="rg-items">
+<li value="1">Constituição do IEEE (IEEE Constitution);</li>
+<li value="2">Estatutos do IEEE (IEEE Bylaws);</li>
+<li value="3">Políticas do IEEE (IEEE Policies) e diretrizes da IEEE Power Electronics Society;</li>
+<li value="4">Manual de Operações do MGA (MGA Operations Manual);</li>
+<li value="5">Código de Conduta do IEEE (IEEE Code of Conduct);</li>
+<li value="6">Regimento Interno do Ramo Estudantil IEEE UFMS;</li>
+<li value="7">Este Regimento Interno.</li>
+</ol>
+<p class="rg-art" id="art-7"><strong>Art. 7º</strong> Em caso de conflito entre este Regimento e as normas hierarquicamente superiores, prevalecem estas últimas.</p>
+</div></details>
+<details class="rg-chapter" id="cap-ii"><summary><span class="i18n-pt">Capítulo II – Dos princípios de convivência e da não discriminação</span><span class="i18n-en" lang="en">Chapter II – Principles of Coexistence and Non-Discrimination</span></summary><div class="rg-body">
+<p class="rg-art" id="art-8"><strong>Art. 8º</strong> O Capítulo PELS UFMS reafirma seu compromisso com a promoção de um ambiente acolhedor, seguro, inclusivo e respeitoso para todos os seus membros, voluntários, participantes, colaboradores e convidados, livre de qualquer forma de discriminação ou preconceito.</p>
+<p class="rg-art" id="art-9"><strong>Art. 9º</strong> Fica terminantemente proibida, em todas as atividades, reuniões, eventos e espaços de comunicação do Capítulo, qualquer prática de:</p>
+<ol class="rg-items">
+<li value="1">Assédio moral, sexual ou psicológico;</li>
+<li value="2">Discriminação ou preconceito em razão de raça, cor, etnia, nacionalidade, religião, gênero, identidade de gênero, orientação sexual, condição socioeconômica, idade ou deficiência (PcD);</li>
+<li value="3">Bullying, intimidação, difamação ou qualquer forma de violência simbólica ou física;</li>
+<li value="4">Capacitismo, LGBTfobia, racismo, misoginia ou qualquer outra manifestação de ódio ou exclusão.</li>
+</ol>
+<p class="rg-art" id="art-10"><strong>Art. 10</strong> A Diretoria e o Tutor devem zelar ativamente pelo cumprimento destes princípios, atuando com diligência na apuração de denúncias – inclusive por meio do sistema de ouvidoria previsto no Capítulo XII –, garantindo confidencialidade a vítimas e testemunhas e assegurando o devido processo nos procedimentos disciplinares.</p>
+<p class="rg-art" id="art-11"><strong>Art. 11</strong> As violações a este Capítulo sujeitam o infrator às penalidades previstas neste Regimento e no Código de Conduta do IEEE, incluindo, de forma não exaustiva, advertência, suspensão de direitos e desligamento do Capítulo, podendo o caso ser encaminhado à Diretoria do Ramo UFMS quando necessário.</p>
+</div></details>
+<details class="rg-chapter" id="cap-iii"><summary><span class="i18n-pt">Capítulo III – Das definições</span><span class="i18n-en" lang="en">Chapter III – Definitions</span></summary><div class="rg-body">
+<p class="rg-art" id="art-12"><strong>Art. 12</strong> Para os efeitos deste Regimento, aplicam-se as seguintes definições:</p>
+<ol class="rg-items">
+<li value="1">Capítulo: o Capítulo Estudantil IEEE PELS UFMS, vinculado ao Ramo Estudantil IEEE UFMS;</li>
+<li value="2">Membro: indivíduo devidamente vinculado ao IEEE por meio de membresia ativa;</li>
+<li value="3">Membro PELS: Membro do Capítulo, com matrícula ativa na UFMS e membresia ativa no IEEE e na sociedade PELS;</li>
+<li value="4">Voluntário: estudante com matrícula ativa na UFMS, sem membresia IEEE ativa, disposto a colaborar com as atividades do Capítulo;</li>
+<li value="5">Diretoria: conjunto de Membros PELS ocupando cargos eletivos do Capítulo;</li>
+<li value="6">Tutor: professor da UFMS, Membro do IEEE e da PELS, que orienta e apoia o Capítulo;</li>
+<li value="7">Gestão: período de um ano em que a Diretoria eleita permanece à frente do Capítulo;</li>
+<li value="8">Competência privativa: responsabilidade atribuída prioritariamente a um cargo específico;</li>
+<li value="9">Competência concorrente: responsabilidade atribuída igualmente a todos os envolvidos;</li>
+<li value="10">Patrimônio: conjunto de bens materiais e imateriais do Capítulo, incluindo este Regimento;</li>
+<li value="11">Processo seletivo: procedimento aberto de ingresso de novos integrantes no Capítulo, nos termos dos Arts. 18-A a 18-H;</li>
+<li value="12">Eleição: procedimento de escolha dos ocupantes dos cargos da Diretoria, nos termos do Capítulo VII;</li>
+<li value="13">Edital: ato da Diretoria, publicado nos canais oficiais do Capítulo, que regulamenta um processo seletivo ou uma eleição.</li>
+</ol>
+</div></details>
+<details class="rg-chapter" id="cap-iv"><summary><span class="i18n-pt">Capítulo IV – Da membresia</span><span class="i18n-en" lang="en">Chapter IV – Membership</span></summary><div class="rg-body">
+<p class="rg-art" id="art-13"><strong>Art. 13</strong> São considerados Membros PELS os estudantes regularmente matriculados na UFMS (graduação ou pós-graduação) que possuam membresia ativa no IEEE e na sociedade técnica PELS.</p>
+<p class="rg-art" id="art-14"><strong>Art. 14</strong> A adesão ao IEEE e à PELS é feita exclusivamente pelo site oficial da organização (https://www.ieee.org/), mediante cadastro e pagamento da anuidade correspondente.</p>
+<p class="rg-art" id="art-15"><strong>Art. 15</strong> Para a manutenção do Capítulo como unidade ativa perante o IEEE, é necessário manter o mínimo de 6 (seis) membros com membresia ativa no IEEE e na sociedade PELS, conforme determinado pelo IEEE.</p>
+<p class="rg-art" id="art-16"><strong>Art. 16</strong> Voluntários – estudantes da UFMS sem membresia PELS ativa – podem colaborar com as atividades do Capítulo, participando de projetos e eventos, e votar nas eleições da Diretoria, mas não são elegíveis para os cargos da Diretoria. O Voluntário que desejar candidatar-se deve, até o fim do prazo de inscrição das candidaturas, associar-se ao IEEE e à sociedade PELS e comprovar a membresia ativa, tornando-se Membro PELS.</p>
+<p class="rg-art" id="art-17"><strong>Art. 17</strong> São direitos dos Membros PELS:</p>
+<ol class="rg-items">
+<li value="1">Participar das atividades, eventos e reuniões do Capítulo;</li>
+<li value="2">Candidatar-se aos cargos da Diretoria e votar nas eleições, nos termos deste Regimento;</li>
+<li value="3">Propor e conduzir projetos e atividades no âmbito do Capítulo;</li>
+<li value="4">Acessar os documentos e registros do Capítulo, ressalvadas restrições de sigilo;</li>
+<li value="5">Contar com apadrinhamento, quando ingressante, conforme Capítulo X;</li>
+<li value="6">Representar o Capítulo em eventos institucionais, quando devidamente designado.</li>
+</ol>
+<p class="rg-art" id="art-18"><strong>Art. 18</strong> São deveres dos Membros PELS e Voluntários:</p>
+<ol class="rg-items">
+<li value="1">Cumprir este Regimento e as demais normas aplicáveis ao IEEE e à UFMS;</li>
+<li value="2">Atuar com ética, respeito e profissionalismo em todas as atividades;</li>
+<li value="3">Contribuir para o bom andamento das atividades e projetos do Capítulo;</li>
+<li value="4">Manter atualizados seus dados junto ao IEEE e ao Capítulo;</li>
+<li value="5">Participar, sempre que possível, das reuniões gerais e demais atividades promovidas.</li>
+</ol>
+<h4 class="rg-sub">Do Processo Seletivo de Ingresso</h4>
+<p class="rg-art" id="art-18-a"><strong>Art. 18-A</strong> O ingresso de novos integrantes no Capítulo, como Voluntários ou Membros PELS, é feito por processo seletivo aberto a estudantes de todos os cursos da UFMS, na graduação ou pós-graduação, sem limite de vagas.</p>
+<p class="rg-art" id="art-18-b"><strong>Art. 18-B</strong> Cada processo seletivo é regulamentado por edital da Diretoria, publicado nos canais oficiais do Capítulo com antecedência mínima de 2 (dois) dias do início das inscrições, contendo:</p>
+<ol class="rg-items">
+<li value="1">Os requisitos e a forma de inscrição;</li>
+<li value="2">O cronograma, com as datas de inscrição, seleção, resultado, recurso e ingresso;</li>
+<li value="3">A data, o horário e o formato da seleção;</li>
+<li value="4">Os critérios de avaliação e a nota mínima de aprovação.</li>
+</ol>
+<p class="rg-art" id="art-18-c"><strong>Art. 18-C</strong> A seleção consiste exclusivamente em apresentação e entrevista, realizadas em sessão única, conforme o edital. É vedada a exigência de prova escrita, prova técnica, análise de histórico escolar ou conhecimento técnico prévio. A avaliação considera, entre outros critérios definidos em edital, a clareza, o preparo, a motivação, a disponibilidade e o trabalho em equipe do candidato.</p>
+<p class="rg-par">Parágrafo Único: Não é exigida membresia IEEE nem PELS para a inscrição no processo seletivo.</p>
+<p class="rg-art" id="art-18-d"><strong>Art. 18-D</strong> A banca é formada por no mínimo 3 (três) integrantes da Diretoria, designados pelo Chair, podendo contar com o Tutor. Cada avaliador preenche uma ficha individual por candidato, sem consultar os demais antes do preenchimento. O avaliador com parentesco, relação de proximidade ou conflito de interesse com o candidato declara impedimento e não o avalia.</p>
+<p class="rg-art" id="art-18-e"><strong>Art. 18-E</strong> É aprovado o candidato que atingir a nota mínima fixada no edital, igual para todos os candidatos. Não há classificação entre os aprovados nem limite de vagas: ingressam todos os aprovados.</p>
+<p class="rg-art" id="art-18-f"><strong>Art. 18-F</strong> O resultado é publicado nos canais oficiais do Capítulo. Cabe recurso por escrito, no prazo do edital, apenas contra erro de soma, de enquadramento ou descumprimento do edital, não cabendo recurso contra o mérito do julgamento da banca. O recurso é decidido pela Diretoria com o Tutor, sem a participação do avaliador envolvido, em até 2 (dois) dias úteis.</p>
+<p class="rg-art" id="art-18-g"><strong>Art. 18-G</strong> Os aprovados ingressam no Capítulo como Voluntários e tornam-se Membros PELS ao comprovar membresia ativa no IEEE e na sociedade PELS, conforme o Art. 14. Todo aprovado é designado a um Padrinho ou Madrinha, nos termos do Capítulo X.</p>
+<p class="rg-art" id="art-18-h"><strong>Art. 18-H</strong> As fichas de avaliação, a ata e o resultado do processo seletivo são arquivados no acervo do Capítulo (Art. 57). Os dados pessoais dos candidatos são usados apenas no processo seletivo e no ingresso dos aprovados. Candidatos com deficiência ou necessidade específica podem pedir adaptação de tempo, formato ou local da seleção, atendida sempre que possível.</p>
+</div></details>
+<details class="rg-chapter" id="cap-v"><summary><span class="i18n-pt">Capítulo V – Da estrutura organizacional</span><span class="i18n-en" lang="en">Chapter V – Organizational Structure</span></summary><div class="rg-body">
+<p class="rg-art" id="art-19"><strong>Art. 19</strong> A estrutura organizacional do Capítulo é composta por:</p>
+<ol class="rg-items">
+<li value="1">Tutor (Counselor);</li>
+<li value="2">Diretoria, composta por 10 (dez) integrantes, nos cargos de Chair, Vice-Chair, Secretary e Treasurer (1 vaga cada) e de Director Project, Director Events e Webmaster (2 vagas cada);</li>
+<li value="3">Comitês temporários, criados para fins específicos, quando necessário.</li>
+</ol>
+<p class="rg-par">Parágrafo Único: Nos cargos com 2 (duas) vagas, os ocupantes têm as mesmas atribuições e as dividem entre si, de comum acordo, cabendo ao Chair mediar eventual divergência. Nenhum dos dois responde sozinho pelo cargo perante a Diretoria.</p>
+<p class="rg-art" id="art-20"><strong>Art. 20</strong> A Diretoria é o órgão máximo de gestão do Capítulo, responsável pela administração, planejamento estratégico e execução das atividades, em alinhamento com a Diretoria Executiva do Ramo Estudantil IEEE UFMS.</p>
+<p class="rg-art" id="art-21"><strong>Art. 21</strong> Todos os ocupantes de cargos da Diretoria devem ser Membros PELS, mantendo essa condição durante todo o período da gestão.</p>
+<p class="rg-art" id="art-22"><strong>Art. 22</strong> O Tutor é um professor da UFMS, Membro do IEEE e da PELS, que atua como orientador e apoio ao Capítulo, conforme previsto nas normas do IEEE. Suas atribuições incluem:</p>
+<ol class="rg-items">
+<li value="1">Assegurar que informações da sede do PELS sejam transmitidas à Diretoria;</li>
+<li value="2">Reunir-se com pelo menos dois membros da Diretoria uma vez ao mês, em data e hora previamente agendadas;</li>
+<li value="3">Acompanhar e orientar o planejamento estratégico da Diretoria;</li>
+<li value="4">Nutrir boas relações com grupos profissionais do PELS e incentivar contato com representantes estudantis das sociedades na Seção;</li>
+<li value="5">Divulgar prêmios, concursos e benefícios da membresia PELS;</li>
+<li value="6">Estabelecer contatos com a indústria e a academia para viabilizar seminários, palestras e visitas técnicas;</li>
+<li value="7">Apoiar a transição de gestão e a continuidade das atividades do Capítulo.</li>
+</ol>
+</div></details>
+<details class="rg-chapter" id="cap-vi"><summary><span class="i18n-pt">Capítulo VI – Dos cargos e responsabilidades</span><span class="i18n-en" lang="en">Chapter VI – Roles and Responsibilities</span></summary><div class="rg-body">
+<p class="rg-p">Este Capítulo define as responsabilidades fundamentais de cada um dos 7 (sete) cargos da Diretoria do Capítulo Estudantil IEEE PELS UFMS, ocupados por 10 (dez) integrantes, já que os cargos de Director Project, Director Events e Webmaster têm 2 (duas) vagas cada, visando o bom andamento das atividades e a divisão justa das demandas.</p>
+<h4 class="rg-role">1. Chair (Presidência)</h4>
+<ul class="rg-bullets">
+<li>Liderar o Capítulo e gerir todos os assuntos administrativos e operacionais.</li>
+<li>Convocar, presidir e preparar a pauta das reuniões da Diretoria e reuniões gerais.</li>
+<li>Representar o Capítulo oficialmente perante a UFMS, o Ramo Estudantil IEEE UFMS e a sede global do IEEE PELS.</li>
+<li>Assinar documentos oficiais e resolver os casos urgentes não previstos neste Regimento.</li>
+<li>Liderar, junto ao Secretary, a redação do Relatório Anual do Capítulo.</li>
+<li>Atuar junto ao Vice-Chair na indicação de substitutos temporários em caso de vacância de cargos.</li>
+</ul>
+<h4 class="rg-role">2. Vice-Chair (Vice-Presidência)</h4>
+<ul class="rg-bullets">
+<li>Substituir o Chair em seus impedimentos temporários ou permanentes e auxiliá-lo no cumprimento de suas atribuições.</li>
+<li>Planejar estrategicamente as atividades do Capítulo e organizar o calendário anual.</li>
+<li>Coordenar o formulário anônimo de ouvidoria e a mediação de conflitos.</li>
+<li>Monitorar mensalmente o Sistema de Apadrinhamento (Mentoria Interna).</li>
+<li>Participar do comitê de deliberação de advertências junto ao Chair e Secretary.</li>
+</ul>
+<h4 class="rg-role">3. Secretary (Secretaria)</h4>
+<ul class="rg-bullets">
+<li>Registrar e divulgar as atas das reuniões da Diretoria e reuniões gerais em até 7 (sete) dias após sua realização.</li>
+<li>Registrar as listas de presença de todas as atividades do Capítulo.</li>
+<li>Manter o registro contínuo de assiduidade e a matriz de acompanhamento de participação.</li>
+<li>Receber e avaliar justificativas de ausência e solicitações de Licença Temporária.</li>
+<li>Manter sob sua responsabilidade o acervo documental e o patrimônio não financeiro do Capítulo, em meio digital.</li>
+<li>Liderar, junto ao Chair, a redação do Relatório Anual do Capítulo e organizar a transferência ordenada de registros ao sucessor.</li>
+</ul>
+<h4 class="rg-role">4. Treasurer (Tesouraria)</h4>
+<ul class="rg-bullets">
+<li>Manter sob sua guarda e responsabilidade os recursos financeiros do Capítulo.</li>
+<li>Elaborar o balanço financeiro semestral e o balanço geral anual, mantendo registros atualizados de receitas e despesas.</li>
+<li>Buscar estratégias de captação de recursos e patrocínios.</li>
+<li>Manter contato com o Treasurer do Ramo Estudantil IEEE UFMS para viabilizar repasses financeiros (rebates).</li>
+<li>Organizar a transferência ordenada dos registros financeiros ao sucessor.</li>
+</ul>
+<h4 class="rg-role">5. Director Project (Diretoria de Projetos) – 2 vagas</h4>
+<ul class="rg-bullets">
+<li>Coordenar o andamento dos projetos técnicos e grupos de trabalho do Capítulo.</li>
+<li>Organizar capacitações, minicursos e workshops internos.</li>
+<li>Estruturar e atualizar o Repositório de Conhecimento do Capítulo.</li>
+<li>Definir o calendário semestral das apresentações de artigos científicos.</li>
+</ul>
+<h4 class="rg-role">6. Director Events (Diretoria de Eventos) – 2 vagas</h4>
+<ul class="rg-bullets">
+<li>Planejar, organizar e executar a logística dos eventos do Capítulo, elaborando relatórios operacionais após cada atividade.</li>
+<li>Realizar os trâmites de reserva de espaços na universidade.</li>
+<li>Gerenciar o contato com palestrantes convidados e parceiros externos.</li>
+<li>Auxiliar na logística de participação do Capítulo em congressos e eventos externos.</li>
+</ul>
+<h4 class="rg-role">7. Webmaster (Diretoria de TI e Comunicação Digital) – 2 vagas</h4>
+<ul class="rg-bullets">
+<li>Gerenciar e atualizar os canais oficiais de comunicação do Capítulo (redes sociais, site, e-mail).</li>
+<li>Planejar e executar a estratégia de divulgação de atividades e eventos.</li>
+<li>Zelar pela identidade visual e produção de materiais gráficos.</li>
+<li>Manter atualizadas as plataformas digitais, o acervo em nuvem e os acessos institucionais dos membros.</li>
+</ul>
+<p class="rg-art" id="art-23"><strong>Art. 23</strong> Não há obrigatoriedade de preenchimento simultâneo de todos os cargos, desde que haja pelo menos um Chair em exercício; havendo vacância de cargo não essencial, suas atribuições poderão ser temporariamente absorvidas pela Diretoria até nova indicação.</p>
+<p class="rg-art" id="art-24"><strong>Art. 24</strong> Todos os ocupantes de cargos devem atuar com ética, transparência e em conformidade com o Código de Conduta do IEEE.</p>
+</div></details>
+<details class="rg-chapter" id="cap-vii"><summary><span class="i18n-pt">Capítulo VII – Da eleição e nomeação</span><span class="i18n-en" lang="en">Chapter VII – Elections and Appointment</span></summary><div class="rg-body">
+<p class="rg-art" id="art-25"><strong>Art. 25</strong> O período de gestão da Diretoria é de 1 (um) ano, com início na primeira semana de janeiro e término na última semana de dezembro, podendo ser prorrogado conforme autorização do Ramo Estudantil IEEE UFMS.</p>
+<p class="rg-art" id="art-26"><strong>Art. 26</strong> A eleição de todos os integrantes da Diretoria é realizada em outubro, para a gestão que se inicia em janeiro do ano seguinte, por votação direta, online e secreta, conforme edital da Diretoria.</p>
+<p class="rg-art" id="art-26-a"><strong>Art. 26-A</strong> Votam os Membros PELS e os Voluntários constantes da lista de eleitores aptos, publicada pela Diretoria nos canais oficiais do Capítulo. Quem não constar da lista pode pedir a inclusão no prazo de contestação previsto no edital.</p>
+<p class="rg-par">§ 1º Os cargos de Chair, Vice-Chair, Secretary, Treasurer e Webmaster, ligados diretamente ao IEEE (representação perante o Ramo e a sociedade, vTools, finanças e contas institucionais), são votados apenas pelos Membros PELS.</p>
+<p class="rg-par">§ 2º Os cargos de Director Project e Director Events são votados por todos os eleitores aptos, Membros PELS e Voluntários.</p>
+<p class="rg-art" id="art-26-b"><strong>Art. 26-B</strong> A eleição é conduzida pela Diretoria, de forma aberta e sem comissão eleitoral, com listas, regras e cálculos acessíveis aos membros. Quem for candidato não participa das decisões sobre contestações que envolvam a própria candidatura.</p>
+<p class="rg-par">§ 1º A inscrição das candidaturas é feita por formulário, com foto do candidato, cargos pretendidos em ordem de prioridade e proposta de trabalho.</p>
+<p class="rg-par">§ 2º O Secretary confere os requisitos do Art. 27 com base nas listas de presença, e a Diretoria publica as candidaturas, com o número de reuniões gerais de cada candidato, apenas no grupo oficial do Capítulo, assegurado o prazo de contestação.</p>
+<p class="rg-art" id="art-26-c"><strong>Art. 26-C</strong> O voto é secreto e dado por meio de código aleatório, de uso único, enviado a cada eleitor apto por meio automatizado, cujo código-fonte é publicado junto com o edital.</p>
+<ol class="rg-items">
+<li value="1">É vedado registrar ou guardar qualquer relação entre o eleitor e o código recebido;</li>
+<li value="2">Os códigos são de dois tipos, de Membro PELS e de Voluntário, que definem apenas quais cargos aparecem na cédula (Art. 26-A); o tipo do código não identifica o eleitor, e o voto dado com código de Voluntário em cargo restrito a Membros é anulado nesse cargo;</li>
+<li value="3">A lista de códigos e as respostas permanecem fechadas até o fim da votação, sem divulgação de resultados parciais;</li>
+<li value="4">Conta apenas a primeira resposta enviada com cada código válido, e são anuladas as respostas com código inexistente ou repetido;</li>
+<li value="5">Havendo pedido de reenvio de código, o meio automatizado gera um código novo, e o nome de quem pediu e o total de reenvios são publicados com o resultado.</li>
+</ol>
+<p class="rg-art" id="art-26-d"><strong>Art. 26-D</strong> Encerrada a votação, a Diretoria publica, em modo somente leitura, todas as respostas (código e escolhas, sem horário nem identificação do eleitor), a lista de códigos emitidos, a planilha de apuração com suas fórmulas e o resultado preliminar. Cada eleitor pode conferir o próprio voto pelo código recebido, e qualquer membro pode refazer a contagem.</p>
+<p class="rg-art" id="art-26-e"><strong>Art. 26-E</strong> A apuração obedece às seguintes regras:</p>
+<ol class="rg-items">
+<li value="1">Em cada cargo, vencem os candidatos mais votados, até o número de vagas do cargo; nos cargos de 2 (duas) vagas, cada eleitor pode votar em até 2 (dois) candidatos, um voto por candidato; o voto em branco não conta para nenhum candidato;</li>
+<li value="2">Quando, para um cargo, o número de candidatos for igual ou menor que o de vagas, os candidatos são eleitos sem votação, o cargo não consta da cédula e as vagas que sobrarem seguem o Art. 29; o candidato eleito sem votação deixa de constar, na cédula, dos cargos de prioridade inferior à daquele;</li>
+<li value="3">Para aplicar o Art. 28, cada candidato começa disputando o cargo de sua primeira prioridade; em cada cargo, ficam com as vagas os mais votados entre os que o disputam naquele momento, e o candidato eleito sem votação mantém a vaga; quem não ficou com a vaga passa a disputar a prioridade seguinte, com os votos que recebeu nesse cargo; repete-se o procedimento até não haver mudança; a vaga que o candidato eleito sem votação deixar, por ser eleito por voto em cargo de prioridade superior, segue o Art. 29;</li>
+<li value="4">O empate é resolvido, nesta ordem, pela maior pontuação na matriz de acompanhamento de participação (Art. 38), pelo maior número de reuniões gerais no ano, pelo maior tempo como Membro PELS no Capítulo e, por último, por sorteio em transmissão aberta aos membros.</li>
+</ol>
+<p class="rg-art" id="art-26-f"><strong>Art. 26-F</strong> Qualquer eleitor pode contestar, por escrito à Diretoria, a lista de candidaturas, a lista de eleitores ou o resultado, nos prazos do edital. A Diretoria decide com o Tutor em até 2 (dois) dias úteis, sem a participação de quem for parte interessada, e publica a decisão. Decididas as contestações, a Diretoria publica o resultado final.</p>
+<p class="rg-art" id="art-27"><strong>Art. 27</strong> Poderão concorrer aos cargos da Diretoria os Membros PELS que:</p>
+<ol class="rg-items">
+<li value="1">Estejam com a membresia PELS ativa e permaneçam nessa condição durante toda a gestão;</li>
+<li value="2">Estejam regularmente matriculados na UFMS (graduação ou pós-graduação);</li>
+<li value="3">Tenham participado de pelo menos 3 (três) reuniões gerais do Capítulo ao longo do ano da eleição, conforme as listas de presença;</li>
+<li value="4">Não estejam impedidos por qualquer motivo previsto neste Regimento;</li>
+<li value="5">Não tenham previsão de afastamento contínuo das atividades da UFMS por período superior a 60 dias durante a gestão.</li>
+</ol>
+<p class="rg-par">Parágrafo Único: O Voluntário que desejar candidatar-se deve cumprir o disposto no Art. 16 e demais requisitos deste artigo até o fim do prazo de inscrição das candidaturas.</p>
+<p class="rg-art" id="art-28"><strong>Art. 28</strong> Cada candidato poderá concorrer a até três cargos distintos, indicando a ordem de prioridade no ato da inscrição, sendo selecionado para apenas um cargo.</p>
+<p class="rg-art" id="art-29"><strong>Art. 29</strong> Caso não haja candidato para determinado cargo, ou restem vagas não preenchidas em cargo de 2 (duas) vagas, o ocupante anterior poderá indicar um Membro PELS para assumi-lo, inclusive a si mesmo, mediante aprovação por maioria simples da Diretoria; na ausência de indicação aceita, o Chair ou o Vice-Chair poderão acumular o cargo em caráter temporário.</p>
+<p class="rg-art" id="art-30"><strong>Art. 30</strong> Os eleitos serão treinados por seus antecessores durante o período de transição, entre a homologação do resultado da eleição e o término da gestão anterior, garantindo a continuidade das atividades.</p>
+<p class="rg-art" id="art-31"><strong>Art. 31</strong> Em caso de vacância de cargo antes do término do mandato, aplica-se o seguinte:</p>
+<ol class="rg-items">
+<li value="1">O sucessor natural do Chair é obrigatoriamente o Vice-Chair;</li>
+<li value="2">Para os demais cargos, o Chair e o Vice-Chair indicarão um substituto temporário, cuja efetivação depende da aprovação por maioria simples dos membros presentes na reunião geral subsequente;</li>
+<li value="3">Em caso de vacância simultânea de Chair e Vice-Chair, os demais membros da Diretoria poderão indicar substitutos ou promover nova eleição, com apoio do Tutor.</li>
+</ol>
+</div></details>
+<details class="rg-chapter" id="cap-viii"><summary><span class="i18n-pt">Capítulo VIII – Das reuniões e da assiduidade</span><span class="i18n-en" lang="en">Chapter VIII – Meetings and Attendance</span></summary><div class="rg-body">
+<p class="rg-art" id="art-32"><strong>Art. 32</strong> O Capítulo realizará, no mínimo, 1 (uma) reunião geral mensal, aberta a todos os Membros e Voluntários, para alinhamento das atividades, projetos e andamento das diretorias.</p>
+<p class="rg-art" id="art-33"><strong>Art. 33</strong> A Diretoria deve reunir-se ordinariamente ao menos uma vez por mês, além das reuniões mensais com o Tutor previstas no Capítulo V.</p>
+<p class="rg-art" id="art-34"><strong>Art. 34</strong> A presença na reunião geral é obrigatória para todos os membros ativos.</p>
+<p class="rg-art" id="art-35"><strong>Art. 35</strong> Caso o membro não possa comparecer, é seu dever comunicar e justificar a ausência ao Secretary com, no mínimo, 24 (vinte e quatro) horas de antecedência.</p>
+<p class="rg-art" id="art-36"><strong>Art. 36</strong> Todas as reuniões devem ser registradas em ata e divulgadas aos membros em até 7 (sete) dias.</p>
+</div></details>
+<details class="rg-chapter" id="cap-ix"><summary><span class="i18n-pt">Capítulo IX – Do engajamento e avaliação de membros</span><span class="i18n-en" lang="en">Chapter IX – Member Engagement and Evaluation</span></summary><div class="rg-body">
+<p class="rg-art" id="art-37"><strong>Art. 37</strong> É considerada “participação ativa” a presença, o auxílio na organização ou a execução de atividades relacionadas a eventos, palestras, pesquisas, cursos e encontros oficiais do Capítulo.</p>
+<p class="rg-art" id="art-38"><strong>Art. 38</strong> O Capítulo manterá um registro contínuo (matriz de acompanhamento) contendo todas as atividades realizadas e as respectivas participações individuais.</p>
+<p class="rg-par">Parágrafo Único: Para garantir a equidade nas avaliações, o Secretary estabelecerá uma classificação com pesos diferentes para atividades de baixa, média e alta complexidade, diferenciando tarefas logísticas pontuais do desenvolvimento técnico contínuo.</p>
+<p class="rg-art" id="art-39"><strong>Art. 39</strong> Com base no acompanhamento de assiduidade, os membros que apresentarem engajamento exemplar serão homenageados pelo Capítulo.</p>
+<p class="rg-art" id="art-40"><strong>Art. 40</strong> Os membros com maior índice de participação ativa (pontuação) terão preferência na alocação de vagas e eventuais subsídios para a participação em congressos, simpósios e eventos externos.</p>
+</div></details>
+<details class="rg-chapter" id="cap-x"><summary><span class="i18n-pt">Capítulo X – Do sistema de apadrinhamento (mentoria interna)</span><span class="i18n-en" lang="en">Chapter X – Mentoring System (Internal Mentorship)</span></summary><div class="rg-body">
+<p class="rg-art" id="art-41"><strong>Art. 41</strong> Visando a rápida integração e o nivelamento técnico, todo novo integrante aprovado no processo seletivo (Afilhado) será designado a um membro veterano ou membro da Diretoria (Padrinho/Madrinha).</p>
+<p class="rg-art" id="art-42"><strong>Art. 42</strong> O período oficial de apadrinhamento terá a duração de 3 (três) meses a partir da data de ingresso do novo integrante.</p>
+<p class="rg-art" id="art-43"><strong>Art. 43</strong> São deveres do Padrinho/Madrinha: apresentar o funcionamento interno, auxiliar nas dúvidas acadêmicas iniciais e inserir o afilhado nos projetos. O Afilhado deve manter postura proativa e cumprir as tarefas propostas de integração.</p>
+<p class="rg-art" id="art-44"><strong>Art. 44</strong> Cabe ao Vice-Chair monitorar mensalmente o andamento das mentorias, podendo substituir o padrinho caso este não cumpra suas obrigações.</p>
+</div></details>
+<details class="rg-chapter" id="cap-xi"><summary><span class="i18n-pt">Capítulo XI – Da atualização científica e atividades acadêmicas</span><span class="i18n-en" lang="en">Chapter XI – Scientific Updates and Academic Activities</span></summary><div class="rg-body">
+<p class="rg-art" id="art-45"><strong>Art. 45</strong> É requisito para a manutenção do status de membro a participação na execução de ao menos uma atividade acadêmica promovida pelo Capítulo por semestre.</p>
+<p class="rg-art" id="art-46"><strong>Art. 46</strong> Uma vez ao mês, preferencialmente durante a reunião geral, uma dupla de membros ficará responsável por apresentar um artigo científico (retirado da plataforma IEEE Xplore) para o restante do Capítulo, focado em inovações de eletrônica de potência, visando a imersão no idioma inglês e a preparação para o ambiente acadêmico e profissional internacional.</p>
+<p class="rg-par">Parágrafo Único: Visando reduzir a barreira do idioma, os membros ingressantes em seu primeiro semestre poderão realizar suas apresentações em conjunto com seus respectivos Padrinhos/Madrinhas (que darão suporte no preparo e tradução) ou utilizar, excepcionalmente, artigos de anais de congressos nacionais equivalentes.</p>
+</div></details>
+<details class="rg-chapter" id="cap-xii"><summary><span class="i18n-pt">Capítulo XII – Do sistema de ouvidoria e advertências</span><span class="i18n-en" lang="en">Chapter XII – Ombudsman System and Warnings</span></summary><div class="rg-body">
+<p class="rg-art" id="art-47"><strong>Art. 47</strong> Fica instituído um formulário padronizado, de caráter totalmente anônimo, para o recebimento de críticas, reclamações ou sugestões por parte de qualquer membro, inclusive denúncias relacionadas ao Capítulo II deste Regimento.</p>
+<p class="rg-par">Parágrafo Único: O acesso às respostas do formulário será compartilhado obrigatoriamente por pelo menos 2 (dois) membros distintos da Diretoria (ex: Vice-Chair e Secretary), garantindo transparência e evitando conflitos de interesse caso a denúncia envolva a própria gestão.</p>
+<p class="rg-art" id="art-48"><strong>Art. 48</strong> A função de mediar conflitos será coordenada pelo Vice-Chair. A decisão final para a emissão de advertências e sanções deverá ser validada por maioria simples entre Chair, Vice-Chair e Secretary, garantindo a imparcialidade do processo, podendo o caso ser levado ao Tutor ou ao Ramo UFMS quando necessário.</p>
+</div></details>
+<details class="rg-chapter" id="cap-xiii"><summary><span class="i18n-pt">Capítulo XIII – Das licenças, afastamentos e desligamento</span><span class="i18n-en" lang="en">Chapter XIII – Leaves, Absences and Removal</span></summary><div class="rg-body">
+<p class="rg-art" id="art-49"><strong>Art. 49</strong> O desligamento (expulsão) de um membro ocorrerá automaticamente caso se enquadre em um dos seguintes critérios:</p>
+<ol class="rg-items">
+<li value="1">Não participar de nenhuma das atividades do Capítulo (projetos, eventos, etc.) por um período ininterrupto de 1 (um) mês;</li>
+<li value="2">Acumular 2 (duas) faltas consecutivas nas reuniões gerais mensais sem a devida justificativa prévia ao Secretary.</li>
+</ol>
+<p class="rg-art" id="art-50"><strong>Art. 50</strong> Das Exceções e Licenças Acadêmicas: A regra de desligamento por tempo de inatividade (Art. 49, Inciso 1) fica automaticamente suspensa durante os períodos de recesso e férias do calendário acadêmico oficial da universidade.</p>
+<p class="rg-par">Parágrafo Único: O membro ativo poderá solicitar formalmente ao Secretary uma “Licença Temporária” (de 15 a 30 dias), congelando a contagem de inatividade. Este recurso é destinado exclusivamente para períodos de sobrecarga acadêmica (semanas de provas, entregas de projetos de extensão) ou motivos de saúde e força maior, não podendo ser utilizado de forma consecutiva.</p>
+<p class="rg-art" id="art-51"><strong>Art. 51</strong> Haverá o desligamento sumário e imediato do membro em casos comprovados de desrespeito a outros integrantes, episódios de assédio ou cometimento de qualquer ato ilícito (crime), observado o disposto no Capítulo II.</p>
+</div></details>
+<details class="rg-chapter" id="cap-xiv"><summary><span class="i18n-pt">Capítulo XIV – Dos recursos financeiros</span><span class="i18n-en" lang="en">Chapter XIV – Financial Resources</span></summary><div class="rg-body">
+<p class="rg-art" id="art-52"><strong>Art. 52</strong> O Capítulo é uma organização sem fins lucrativos. Seus recursos financeiros provêm de:</p>
+<ol class="rg-items">
+<li value="1">Rebates do IEEE/PELS, decorrentes da submissão do Relatório Anual e do Plano Anual de Atividades, intermediados pelo Ramo Estudantil IEEE UFMS;</li>
+<li value="2">Valores simbólicos de inscrição em eventos, quando aplicável;</li>
+<li value="3">Financiamentos e editais da UFMS, da PELS ou de outras instituições de fomento;</li>
+<li value="4">Doações e parcerias com empresas e instituições.</li>
+</ol>
+<p class="rg-art" id="art-53"><strong>Art. 53</strong> Os recursos financeiros do Capítulo são depositados e geridos por meio da Seção IEEE responsável pelo Ramo UFMS, que realiza pagamentos por ressarcimento ou diretamente a fornecedores, mediante apresentação de notas fiscais e comprovantes.</p>
+<p class="rg-art" id="art-54"><strong>Art. 54</strong> A utilização dos recursos financeiros deve ser exclusiva para as atividades coletivas do Capítulo, respeitando as diretrizes financeiras do Ramo Estudantil IEEE UFMS.</p>
+<p class="rg-art" id="art-55"><strong>Art. 55</strong> O Treasurer deve manter registros contábeis atualizados e apresentar balanços sempre que solicitado pela Diretoria, pelos membros ou pela Diretoria do Ramo UFMS.</p>
+</div></details>
+<details class="rg-chapter" id="cap-xv"><summary><span class="i18n-pt">Capítulo XV – Da documentação e comunicação</span><span class="i18n-en" lang="en">Chapter XV – Documentation and Communication</span></summary><div class="rg-body">
+<p class="rg-art" id="art-56"><strong>Art. 56</strong> O Capítulo deve manter todos os seus documentos organizados e disponíveis em meio digital (Google Drive ou similar), acessível às gestões atuais e futuras.</p>
+<p class="rg-art" id="art-57"><strong>Art. 57</strong> São documentos obrigatórios do Capítulo:</p>
+<ol class="rg-items">
+<li value="1">Este Regimento Interno e suas atualizações;</li>
+<li value="2">Atas de reuniões e listas de presença;</li>
+<li value="3">Matriz de acompanhamento de participação;</li>
+<li value="4">Relatórios Anuais de Atividades e Relatórios Financeiros;</li>
+<li value="5">Termos de Compromisso da Diretoria, quando adotados;</li>
+<li value="6">Documentos de transição de gestão;</li>
+<li value="7">Editais, listas, fichas de avaliação, atas e resultados dos processos seletivos e das eleições, incluindo as respostas e as planilhas de apuração publicadas.</li>
+</ol>
+<p class="rg-art" id="art-58"><strong>Art. 58</strong> É responsabilidade de todos os membros e voluntários zelar pela ética, respeito e profissionalismo em todas as comunicações e divulgações realizadas em nome do Capítulo, as quais devem conter a identificação visual do Capítulo e, quando aplicável, do Ramo Estudantil IEEE UFMS.</p>
+</div></details>
+<details class="rg-chapter" id="cap-xvi"><summary><span class="i18n-pt">Capítulo XVI – Da transição de gestão</span><span class="i18n-en" lang="en">Chapter XVI – Management Transition</span></summary><div class="rg-body">
+<p class="rg-art" id="art-59"><strong>Art. 59</strong> O processo de transição de gestão tem início com a homologação do resultado da eleição e se estende até o término do mandato, em dezembro.</p>
+<p class="rg-art" id="art-60"><strong>Art. 60</strong> A transição de gestão compreende:</p>
+<ol class="rg-items">
+<li value="1">A entrega formal de todos os documentos, registros e materiais do Capítulo pela gestão cessante à gestão eleita;</li>
+<li value="2">A atualização do Officer Reporting no sistema vTools do IEEE;</li>
+<li value="3">A realização de reuniões de alinhamento entre as gestões, com apoio do Tutor, para garantir a continuidade das atividades;</li>
+<li value="4">A comunicação oficial da nova gestão aos membros, ao Ramo Estudantil IEEE UFMS e à UFMS.</li>
+</ol>
+<p class="rg-art" id="art-61"><strong>Art. 61</strong> A gestão cessante é responsável por assegurar que todas as informações e materiais sejam transmitidos de forma clara e organizada à nova gestão.</p>
+</div></details>
+<details class="rg-chapter" id="cap-xvii"><summary><span class="i18n-pt">Capítulo XVII – Das disposições finais</span><span class="i18n-en" lang="en">Chapter XVII – Final Provisions</span></summary><div class="rg-body">
+<p class="rg-art" id="art-62"><strong>Art. 62</strong> Este Regimento Interno entra em vigor na data de sua aprovação pela maioria simples dos Membros PELS presentes em reunião geral convocada para este fim.</p>
+<p class="rg-art" id="art-63"><strong>Art. 63</strong> Este Regimento poderá ser alterado por deliberação da maioria absoluta dos Membros PELS em reunião geral, observado o quórum mínimo de 50% dos membros ativos, devendo as alterações ser:</p>
+<ol class="rg-items">
+<li value="1">Previamente discutidas com a Diretoria e o Tutor;</li>
+<li value="2">Comunicadas a todos os membros com antecedência mínima de 7 (sete) dias;</li>
+<li value="3">Registradas em ata e consolidadas em nova versão do documento;</li>
+<li value="4">Mantidas no acervo digital do Capítulo e comunicadas ao Ramo Estudantil IEEE UFMS.</li>
+</ol>
+<p class="rg-art" id="art-64"><strong>Art. 64</strong> Os casos omissos neste Regimento serão resolvidos pela Diretoria, em consulta ao Tutor e, quando necessário, à Diretoria do Ramo Estudantil IEEE UFMS.</p>
+<p class="rg-art" id="art-65"><strong>Art. 65</strong> A primeira eleição realizada nos termos do Art. 26 ocorre em outubro de 2026, para a gestão 2027, permanecendo a Diretoria atual em exercício até o término do mandato, na última semana de dezembro de 2026. O processo seletivo de ingresso aberto em outubro de 2026 rege-se por este Regimento.</p>
+</div></details>
+      </div>
+
+      <p class="ps-signature">Documento aprovado em reunião geral do Capítulo Estudantil IEEE PELS UFMS.</p>
+
+      <div class="page-cta">
+        <p class="i18n-pt">Os editais de processo seletivo e de eleição seguem este Regimento.</p>
+        <p class="i18n-en" lang="en">Selection process and election calls follow these Bylaws.</p>
+        <a href="editais.html" class="btn btn-primary"><span class="i18n-pt">Ver os editais</span><span class="i18n-en" lang="en">See the calls</span></a>
+        <a href="assets/docs/Regimento_Interno_PELS.pdf" class="btn btn-outline" target="_blank" rel="noopener"><span class="i18n-pt">Baixar o PDF</span><span class="i18n-en" lang="en">Download the PDF</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="Logo IEEE PELS UFMS">
+        <strong>IEEE PELS UFMS Chapter</strong>
+      </div>
+      <p class="i18n-pt">Capítulo Estudantil IEEE Power Electronics Society da Universidade Federal de Mato Grosso do
+        Sul. Vinculado ao Ramo Estudantil IEEE UFMS.</p>
+      <p class="i18n-en" lang="en">IEEE Power Electronics Society Student Chapter at the Federal University of
+        Mato Grosso do Sul. Affiliated with the IEEE UFMS Student Branch.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/pels_ufms/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="https://youtube.com/@pelsufms8757" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21 12c0 3.5-.4 5.7-1.1 6.7-.7.9-2.2 1.3-4.8 1.3H8.9c-2.6 0-4.1-.4-4.8-1.3C3.4 17.7 3 15.5 3 12s.4-5.7 1.1-6.7C4.8 4.4 6.3 4 8.9 4h6.2c2.6 0 4.1.4 4.8 1.3.7 1 1.1 3.2 1.1 6.7Z"/><path d="m10 8.8 5.3 3.2-5.3 3.2Z" class="fill"/></svg></a>
+        <a href="https://chat.whatsapp.com/J5uKCY3uAXA0diFgOtXQ81" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20 11.8a8 8 0 0 1-11.8 7L4 20l1.3-4.1A8 8 0 1 1 20 11.8Z"/><path d="M9.1 8.3c.2-.4.3-.4.6-.4h.5c.1 0 .3 0 .4.3l.8 1.9c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.4.9 1.4 2 1.9.3.2.5.2.7 0l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.3.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.2.6-1.5.6-.4 0-1.5-.1-3.1-.8a10.7 10.7 0 0 1-3.5-3.1c-.9-1.2-1.2-2.3-1.2-3.1 0-.8.4-1.3.7-1.7Z" class="fill"/></svg></a>
+        <a href="mailto:pelsufms@gmail.com" aria-label="E-mail"><svg viewBox="0 0 24 24"><path d="M3.5 5.5h17v13h-17zM4 6l8 6 8-6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Navegação</span><span class="i18n-en" lang="en">Navigation</span></h4>
+      <ul>
+        <li><a href="index.html#sobre"><span class="i18n-pt">Sobre</span><span class="i18n-en" lang="en">About</span></a></li>
+        <li><a href="index.html#diretoria"><span class="i18n-pt">Diretoria</span><span class="i18n-en" lang="en">Board</span></a></li>
+        <li><a href="index.html#oportunidades"><span class="i18n-pt">Oportunidades</span><span class="i18n-en" lang="en">Opportunities</span></a></li>
+        <li><a href="index.html#projetos"><span class="i18n-pt">Projetos &amp; Eventos</span><span class="i18n-en" lang="en">Projects &amp; Events</span></a></li>
+        <li><a href="index.html#loja"><span class="i18n-pt">Lojinha</span><span class="i18n-en" lang="en">Shop</span></a></li>
+        <li><a href="index.html#galeria"><span class="i18n-pt">Galeria</span><span class="i18n-en" lang="en">Gallery</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4><span class="i18n-pt">Capítulo</span><span class="i18n-en" lang="en">Chapter</span></h4>
+      <ul>
+        <li><a href="area-membro.html"><span class="i18n-pt">Área do Membro</span><span class="i18n-en" lang="en">Member Area</span></a></li>
+        <li><a href="ouvidoria.html"><span class="i18n-pt">Ouvidoria</span><span class="i18n-en" lang="en">Ombudsman</span></a></li>
+        <li><a href="processo-seletivo.html"><span class="i18n-pt">Processo Seletivo</span><span class="i18n-en" lang="en">Selection Process</span></a></li>
+        <li><a href="editais.html"><span class="i18n-pt">Editais</span><span class="i18n-en" lang="en">Public calls</span></a></li>
+        <li><a href="index.html#membros"><span class="i18n-pt">Torne-se membro</span><span class="i18n-en" lang="en">Become a member</span></a></li>
+        <li><a href="index.html#contato"><span class="i18n-pt">Contato</span><span class="i18n-en" lang="en">Contact</span></a></li>
+        <li><a href="https://www.ieee-pels.org" target="_blank" rel="noopener"><span class="i18n-pt">IEEE PELS Internacional</span><span class="i18n-en" lang="en">IEEE PELS International</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>IEEE</h4>
+      <ul>
+        <li><a href="https://www.ieee.org" target="_blank" rel="noopener">IEEE.org</a></li>
+        <li><a href="https://r9.ieee.org/sac" target="_blank" rel="noopener">IEEE Region 9 SAC</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span><span class="i18n-pt">© <span id="year"></span> IEEE PELS UFMS Chapter. Site estudantil, sem fins lucrativos.</span><span class="i18n-en" lang="en">© <span id="yearEn"></span> IEEE PELS UFMS Chapter. Student-run, non-profit website.</span></span>
+    <span class="footer-updated"><span class="i18n-pt">Última atualização em <span id="lastUpdated">—</span></span><span class="i18n-en" lang="en">Last updated on <span id="lastUpdatedEn">—</span></span></span>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/regimento.js"></script>
+</body>
+</html>

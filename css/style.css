@@ -2203,3 +2203,102 @@ html[lang="en"] .i18n-pt { display: none; }
 .ps-poster-section { padding-top: 0; }
 .ps-poster { margin: 0 auto; max-width: 980px; }
 .ps-poster img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 14px 34px rgba(0,0,0,0.22); }
+
+/* ---------- Regimento, Editais e Eleição ---------- */
+.rg-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 18px 0; }
+.rg-search {
+  flex: 1 1 280px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+.rg-count { font-size: 0.82rem; color: var(--ink-soft); }
+.rg-toc {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px 18px;
+  max-width: none;
+}
+.rg-toc li { margin: 0; }
+.rg-toc a { font-size: 0.85rem; color: var(--ink-soft); }
+.rg-toc a:hover { color: var(--red); }
+.rg-chapter {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  scroll-margin-top: 100px;
+}
+.rg-chapter > summary {
+  cursor: pointer;
+  padding: 16px 20px;
+  font-weight: 700;
+  color: var(--ink);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.rg-chapter > summary::-webkit-details-marker { display: none; }
+.rg-chapter > summary::after { content: "+"; color: var(--red); font-size: 1.3rem; font-weight: 700; }
+.rg-chapter[open] > summary::after { content: "−"; }
+.rg-body { padding: 0 20px 18px; border-top: 1px solid var(--border); }
+.rg-body p, .rg-body li { max-width: none; }
+.rg-art { margin: 16px 0 6px; scroll-margin-top: 100px; color: var(--ink-soft); line-height: 1.75; }
+.rg-art strong { color: var(--ink); }
+.rg-art:target { background: var(--red-tint); border-radius: 8px; padding: 6px 10px; }
+.rg-par { margin: 6px 0; color: var(--ink-soft); line-height: 1.7; padding-left: 14px; border-left: 3px solid var(--border); }
+.rg-p { margin: 14px 0; color: var(--ink-soft); line-height: 1.75; }
+.rg-sub { margin: 20px 0 4px; color: var(--red); font-size: 1rem; }
+.rg-role { margin: 18px 0 4px; color: var(--ink); font-size: 1rem; }
+.rg-items, .rg-bullets { margin: 4px 0 8px; }
+.ed-list { display: grid; gap: 20px; margin-top: 22px; }
+.ed-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+.ed-card.is-live { border-left-color: var(--red); }
+.ed-card.is-done { opacity: 0.8; }
+.ed-card h3 { font-size: 1.15rem; margin: 6px 0 8px; color: var(--ink); }
+.ed-card p { max-width: none; }
+.ed-card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ed-number { font-weight: 700; color: var(--red); font-size: 0.85rem; letter-spacing: 0.4px; }
+.ed-status {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.ed-status.is-live { background: var(--red); border-color: var(--red); color: #fff; }
+.ed-dates { margin: 6px 0 4px; padding-left: 20px; color: var(--ink-soft); font-size: 0.9rem; line-height: 1.7; }
+.ed-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.member-notice {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--red-tint);
+  border: 1px solid var(--red);
+}
+.member-notice-text { flex: 1 1 320px; min-width: 0; }
+.member-notice h3 { margin: 0 0 4px; font-size: 1rem; color: var(--ink); }
+.member-notice p { margin: 0; font-size: 0.88rem; color: var(--ink-soft); max-width: none; }
+.member-notice-actions { display: flex; flex-wrap: wrap; gap: 10px; }
