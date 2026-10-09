@@ -606,7 +606,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     document.getElementById('lembreteSeedPs').addEventListener('click', function () {
       setStatus('...', false);
       callBackend({ action: 'seedProcessoSeletivo' })
-        .then(function (data) { handleResult(data, t('Lembretes do Processo Seletivo adicionados: cada etapa aparece na página inicial só nas datas dela.', 'Selection Process reminders added: each step shows on the homepage only on its dates.')); })
+        .then(function (data) { handleResult(data, t('Lembretes do Processo Seletivo e das Eleições adicionados: cada um aparece na página inicial só nas datas dele.', 'Selection Process and Election reminders added: each one shows on the homepage only on its dates.')); })
         .catch(erroConexao);
     });
 

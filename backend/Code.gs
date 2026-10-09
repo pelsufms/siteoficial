@@ -611,11 +611,13 @@ function handleSeedLembretes(body) {
   return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
 }
 
-// Um lembrete por etapa do Processo Seletivo 2026.2 (Edital nº 02/2026), com
-// o banner 1600x512 de cada etapa, hospedado no próprio site. Cada um só
+// Um lembrete por etapa do Processo Seletivo 2026.2 (Edital nº 02/2026) e um
+// para as Eleições 2027 (Edital nº 01/2026), com o banner 1600x512 de cada
+// um, hospedado no próprio site. Cada um só
 // aparece na página inicial entre "inicio" e "validade" (inclusive).
 var BASE_SITE = 'https://pelsufms.github.io/siteoficial/';
 var LEMBRETES_PS = [
+  { titulo: 'Eleições do Capítulo: candidaturas de 09 a 16/10 e votação online de 23 a 26/10', tituloEn: 'Chapter elections: candidacies Oct 9 to 16 and online voting Oct 23 to 26', selo: 'Eleição 2027', seloEn: '2027 Election', poster: 'eleicoes-2027.jpg', link: 'eleicoes.html', inicio: '2026-10-09', validade: '2026-10-26', destaque: true },
   { titulo: 'Processo Seletivo 2026.2: edital publicado', tituloEn: '2026.2 Selection Process: call published', selo: 'Edital nº 02/2026', seloEn: 'Call no. 02/2026', poster: 'ps-01-edital.jpg', inicio: '2026-10-07', validade: '2026-10-08' },
   { titulo: 'Inscrições abertas: 09 a 16/10, até 23h59', tituloEn: 'Enrollment open: Oct 9 to 16, until 11:59 pm', selo: 'Inscrições abertas', seloEn: 'Enrollment open', poster: 'ps-02-inscricoes.jpg', inicio: '2026-10-09', validade: '2026-10-16', destaque: true },
   { titulo: 'Lista de inscritos, ordem de apresentação e local da sessão', tituloEn: 'List of candidates, presentation order and session venue', selo: '18/10', seloEn: 'Oct 18', poster: 'ps-03-lista.jpg', inicio: '2026-10-17', validade: '2026-10-18' },
@@ -639,7 +641,7 @@ function handleSeedProcessoSeletivo(body) {
   for (var i = LEMBRETES_PS.length - 1; i >= 0; i--) {
     var p = LEMBRETES_PS[i];
     if (existentes[p.titulo]) continue;
-    aba.appendRow([String(base + i), p.titulo, p.tituloEn, p.selo, p.seloEn, 'processo-seletivo.html#cronograma',
+    aba.appendRow([String(base + i), p.titulo, p.tituloEn, p.selo, p.seloEn, linkSeguro(p.link || 'processo-seletivo.html#cronograma'),
       BASE_SITE + 'assets/img/lembretes/' + p.poster, p.destaque ? 'SIM' : 'NAO', p.validade, 'SIM', p.inicio]);
   }
   return montarPerfil(ctx.dados[ctx.idx], ctx.auth.fotoGoogle);
