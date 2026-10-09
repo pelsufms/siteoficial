@@ -236,6 +236,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
 
   // ---------- Aviso fixo: Eleição da Diretoria 2027 (Edital nº 01/2026) ----------
   // Mostra a etapa de hoje (fuso de Campo Grande/MS) e some depois da posse.
+  var ELEICAO_FORM_URL = 'https://forms.gle/U6RorK7dFiysohRZ7';
   var ELEICAO_ETAPAS = [
     { de: '2026-10-07', ate: '2026-10-08', pt: 'Edital publicado. As candidaturas abrem em 09/10.', en: 'Call published. Candidacies open on Oct 9.' },
     { de: '2026-10-09', ate: '2026-10-15', pt: 'Candidaturas abertas até 16/10, 23h59, pelo Formulário de Candidatura. Pode concorrer quem tem membresia IEEE e PELS ativa e participou de pelo menos 3 reuniões gerais no ano.', en: 'Candidacies open until Oct 16, 11:59 pm, through the Candidacy Form. You can run if you have active IEEE and PELS membership and attended at least 3 general meetings this year.' },
@@ -265,6 +266,11 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_PFJdHZWq77_cmM
     if (!etapa) return;
     document.getElementById('electionNoticePt').textContent = etapa.pt;
     document.getElementById('electionNoticeEn').textContent = etapa.en;
+    var formBtn = document.getElementById('electionNoticeForm');
+    if (formBtn && hoje >= '2026-10-09' && hoje <= '2026-10-16') {
+      formBtn.href = ELEICAO_FORM_URL;
+      formBtn.style.display = '';
+    }
     box.style.display = 'flex';
   }
 

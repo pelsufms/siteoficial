@@ -2,9 +2,9 @@
 // Mostra a fase atual da eleição conforme a data (fuso de Campo Grande/MS) e
 // marca no cronograma o que já passou e o que está acontecendo agora.
 (function () {
-  // Cole aqui o link do Formulário de Candidatura quando for divulgado.
-  // Enquanto estiver vazio, a página manda o candidato para os canais oficiais.
-  var FORM_URL = '';
+  // Link do Formulário de Candidatura (o botão só aparece de 09/10 a 16/10).
+  // Se ficar vazio, a página manda o candidato para os canais oficiais.
+  var FORM_URL = 'https://forms.gle/U6RorK7dFiysohRZ7';
 
   function hojeEmCampoGrande() {
     try {
